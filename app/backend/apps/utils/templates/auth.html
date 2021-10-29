@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="container col-4">
+        <h1>Sign-In</h1>
+        <form action="javascript:login()" method="post">
+            <label for="username">Username</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="username">Password</label><br>
+            <input type="password" id="password" name="Password"><br>
+            <input type="submit" value="Sign-in"></form>
+    </div>
+    <div class="container col-4">
+        <h1>Sign-Up</h1>
+        <form action="javascript:register()" method="post">
+            <label for="username">Username</label><br>
+            <input type="text" id="new_username" name="new_username"><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="new_password" name="password"><br>
+            <input type="submit" value="Sign-up"></form>
+    </div>
+    <div class="container col-4">
+        <h1>Create brand</h1>
+        <form action="javascript:create_brand()" method="post">
+            <label for="username">Brand name</label><br>
+            <input type="text" id="brand_name" name="brand_name"><br>
+            <label for="nit">NIT</label><br>
+            <input type="text" id="nit" name="nit"><br>
+            <input type="submit" value="Create"></form>
+    </div>
+</div>
+<button onclick="logout()">Log-out</button>
+<script>
+    function login() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        fetch("../auth/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({username: username, password: password}),
+            redirect: "follow",
+        }).then((response) => {
+            if (response.status == 200) {
+                alert("Login success");
+            } else {
+                alert("Login failed");
+            }
+        });
+    }
+
+    function logout() {
+        fetch("../auth/logout/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": get_cookie("csrftoken"),
+            },
+        }).then((response) => {
+            if (response.status == 200) {
+                alert("Success");
+            } else {
+                alert("Something went wrong");
+            }
+        });
+    }
+
+    function register() {
+        let username = document.getElementById("new_username").value;
+        let password = document.getElementById("new_password").value;
+        fetch("../api/v1/user/register/create_user/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({username: username, password: password}),
+            redirect: "follow",
+        }).then((response) => {
+            if (response.status == 200) {
+                alert("Successfully created\n" + response);
+            } else {
+                alert("Registration failed");
+            }
+        });
+    }
+
+    function create_brand() {
+        let brand_name = document.getElementById("brand_name").value;
+        let nit = document.getElementById("nit").value;
+        fetch("../api/v1/user/brand/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": get_cookie("csrftoken"),
+            },
+            body: JSON.stringify({name: brand_name, nit: nit}),
+            redirect: "follow",
+        }).then((response) => {
+            if (response.status == 201) {
+                alert("Successfully created");
+            } else {
+                alert("Registration failed");
+                console.log(response)
+            }
+        });
+    }
+</script>
+{% endblock content %}

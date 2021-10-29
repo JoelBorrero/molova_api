@@ -1,0 +1,12 @@
+db.sqlite3
+*.py[cod]
+app/client
+.env
+env
+__pycache__
+db-data
+redis-data
+.idea
+.DS_Store
+.vscode/
+app/media

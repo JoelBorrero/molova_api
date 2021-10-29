@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Crawling</h1>
+<div class="row">
+    <div class="col-4">
+        <form action="javascript:post('/api/v1/crawler/process/start_bershka/')">
+            <label>Bershka</label><br>
+            <input type="submit" value="Start">
+        </form>
+    </div>
+    <div class="col-4">
+        <form action="javascript:post('/api/v1/crawler/process/start_stradivarius/')">
+            <label>Stradivarius</label><br>
+            <input type="submit" value="Start">
+        </form>
+    </div>
+</div>
+
+<script>
+    function post(endpoint) {
+        fetch(endpoint, {
+            method: 'POST', headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": get_cookie("csrftoken"),
+            }
+        }).then((result) => {
+            alert('Process started');
+        })
+    }
+</script>
+{% endblock content %}

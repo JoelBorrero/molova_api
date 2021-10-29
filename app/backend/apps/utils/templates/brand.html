@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Brands</h1>
+<h3>{{ brand }}</h3>
+{{brands}}
+{% for brand in brands %}
+<div class="row">
+    <div class="col-4">
+        <h1>{{brand.name}}</h1>
+        <h3>Nit: {{brand.nit}}</h3>
+    </div>
+    <div class="col-8">
+        <form action="javascript:massive_upload({{brand.id}})">
+            <div class="row">
+                <div class="col-8">
+                    <label for="excel">Excel</label>
+                    <input id="excel" type="file" name="excel">
+                    <label for="photos">Photos</label>
+                    <input id="photos" type="file" name="photos" placeholder="Photos">
+                </div>
+                <div class="col-4">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+<script>
+    function post(endpoint) {
+        fetch(endpoint, {method: 'POST'})
+    }
+
+    function massive_upload(id) {
+        let data = new FormData()
+        const excel = document.getElementById("excel").files[0];
+        const photos = document.getElementById("photos").files[0];
+        data.append('excel', excel)
+        data.append('photos', photos)
+        data.append('brand_id', id)
+        fetch("/api/v1/user/brand/massive_upload/", {
+            method: 'POST',
+            body: data,
+            headers: {
+                "X-CSRFToken": get_cookie("csrftoken"),
+            }
+        })
+    }
+</script>
+{% endblock content %}

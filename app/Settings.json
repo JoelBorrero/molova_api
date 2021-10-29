@@ -1,0 +1,2135 @@
+{
+	"Bershka": {
+		"endpoints": [
+			[
+				"https://www.bershka.com/co/mujer/ropa/lo-m%C3%A1s-vendido-c1010261502.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010261502/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/varsity-c1010508188.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010508188/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/efecto-piel-c1010446008.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010446008/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/bombers-c1010512004.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010512004/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/blazers-c1010205537.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010205537/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/cazadoras-y-abrigos-c1010193212.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193212/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/chalecos-c1010469010.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010469010/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/sudaderas-c1010193222.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193222/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/jers%C3%A9is-y-c%C3%A1rdigans-c1010193223.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193223/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/camisetas-y-tops-c1010193217.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193217/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/camisas-c1010193221.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193221/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/vestidos-c1010193213.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193213/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/pantalones-c1010193216.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193216/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/jeans-c1010276029.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010276029/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/faldas-c1010193224.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193224/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/shorts-y-bermudas-c1010194517.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010194517/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/ropa/twin-sets-c1010429555.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010429555/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/zapatos/colaboraciones%C2%AE-c1010442006.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010442006/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/zapatos-c1010193192.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193192/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/zapatos/new-c1010391508.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010391508/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/zapatos/zapatillas-c1010205525.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010205525/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/zapatos/botas-y-botines-c1010205534.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010205534/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/zapatos/sandalia-tac%C3%B3n-c1010205529.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010205529/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/zapatos/sandalia-plana-c1010205533.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010205533/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/zapatos/special-prices-c1010372580.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010372580/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios-c1010193134.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193134/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/bolsos-c1010193138.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193138/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/gorros-c1010193144.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193144/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/bisuter%C3%ADa-c1010193140.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193140/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/gafas-c1010193149.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193149/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/bufandas-c1010193145.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193145/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/accesorios-pelo-c1010193147.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193147/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/accesorios-de-m%C3%B3vil-c1010193148.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193148/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/calcetines-c1010194004.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010194004/product?languageId=-5"
+			],
+			[
+				"https://www.bershka.com/co/mujer/accesorios/cinturones-c1010193146.html",
+				"https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010193146/product?languageId=-5"
+			]
+		],
+		"endpoint": "https://www.bershka.com/itxrest/2/catalog/store/45109565/40259535/category/1010261502/product?languageId=-5"
+	},
+	"Mango": {
+		"endpoints": [
+			[
+				"https://shop.mango.com/co/mujer/destacados/nuevo_d18713172",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.nuevo/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/key-trends_d21332319",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.keytrends_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/accessories-edition_d12759120",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accessoriesedition_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/essential-prices_d13453711",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.essentials_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/best-sellers_d20382381",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.best_sellers_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/special-sale_d13205468",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.SpecialSaleCO_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/abrigos_c67886633",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=abrigos_she&menu=familia;15,402&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/chaquetas-y-americanas_c16573202",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=chaquetas_she&menu=familia;16,304,404&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/cardigans-y-jerseis_c18200786",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=cardigans_she&menu=familia;55,355,810,455&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/vestidos-y-monos_c20249297",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=vestidos_she&menu=familia;32,34,432,460&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/camisas_c78920337",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=camisas_she&menu=familia;14,414&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/camisetas-y-tops_c66796663",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=camisetas_she&menu=familia;18,318,320,46,418&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/sudaderas_c12454089",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=sudaderas_she&menu=familia;610,611&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/pantalones_c52748027",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=pantalones_she&menu=familia;26,326,22,322,426&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/vaqueros_c12563337",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=vaqueros_she&menu=familia;28,428&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/faldas_c20673898",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=faldas_she&menu=familia;20,420&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/shorts_c13128150",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=shorts_she&menu=familia;25,422&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/ropa-deportiva_c19503847",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=sport_she&menu=familia;88,68&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/ropa-interior-y-lenceria_c11690027",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.prendas_she/?idSubSection=bodies_she&menu=familia;38,438&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/zapatos_c10336952",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=zapatos_she&menu=accesorio;42,342,442&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/bolsos_c18162733",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=bolsos_she&menu=accesorio;40,340,440&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/bisuteria_c23394502",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=bisuteria_she&menu=accesorio;48,448&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/marroquineria_c13680885",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=marroquineria_she&menu=accesorio;56,620&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/cinturones_c13182505",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=cinturones_she&menu=accesorio;44,444&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/gafas-de-sol_c98638283",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=gafas_she&menu=accesorio;50,777&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/bufandas-y-panuelos_c12854318",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=bufandasypanuelos_she&menu=accesorio;53,452&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/gorros-y-guantes_c49645124",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=gorrosyguantes_she&menu=accesorio;49,45&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/mas-accesorios_c10140832",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=masaccesorios_she&menu=accesorio;41,58,59,457,436,57&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/mascarillas_c11122295",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.accesorios_she/?idSubSection=mascarillasygeles_she&menu=accesorio;800,801,805&saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/weddings-parties_d21021774",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.weddings_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/looks-de-oficina_d11977841",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.office_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/comfy-collection_d68477392",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.comfycollection_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/exclusivo-online_d19236523",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.ExclusivoOnline_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/punto_d20999951",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.punto_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/total-look_d73805904",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.TotalLook_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/leather-and-more_d48730744",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.piel_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/denim_d11224484",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.denim_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/sneakers-collection_d17210055",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.sneakers_she/?saleSeasons=5,4,3"
+			],
+			[
+				"https://shop.mango.com/co/mujer/destacados/sport-collection_d10608630",
+				"https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.ActiveWear_she/?saleSeasons=5,4,3"
+			]
+		],
+		"endpoint": "https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_SpecialNight.nuevo/?saleSeasons=5,4,3"
+	},
+	"Mercedes Campuzano": {
+		"endpoints": [
+			[
+				"https://www.mercedescampuzano.com/zapatos/baletas/",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbaletas%2F&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/botas-y-botines",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbotas-y-botines&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/mocasines",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fmocasines&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/oxford",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Foxford&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/tenis",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Ftenis&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/zuecos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fzuecos&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/sandalias-de-tacon",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-de-tacon&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/sandalias-planas",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-planas&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/sandalias-plataforma",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-plataforma&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/bolsos-y-carteras",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbolsos-y-carteras&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/morrales",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fmorrales&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/bandoleras",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbandoleras&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/sobres",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fsobres&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/vestidos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fvestidos&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/faldas",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Ffaldas&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/pantalones",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fpantalones&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/enterizos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fenterizos&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/kimonos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fkimonos&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/shorts",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fshorts&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/blusas-y-t-shirts",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fblusas-y-t-shirts&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/buzos-y-chaquetas",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fbuzos-y-chaquetas&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/bolsos-y-carteras",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbolsos-y-carteras&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/morrales",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fmorrales&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/bandoleras",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbandoleras&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/sobres",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fsobres&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/vestidos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fvestidos&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/faldas",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Ffaldas&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/pantalones",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fpantalones&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/enterizos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fenterizos&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/kimonos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fkimonos&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/shorts",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fshorts&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/blusas-y-t-shirts",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fblusas-y-t-shirts&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/buzos-y-chaquetas",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fbuzos-y-chaquetas&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/bolsos-y-carteras",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbolsos-y-carteras&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/morrales",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fmorrales&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/bandoleras",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbandoleras&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/bolsos/sobres",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fsobres&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/vestidos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fvestidos&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/faldas",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Ffaldas&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/pantalones",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fpantalones&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/enterizos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fenterizos&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/kimonos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fkimonos&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/shorts",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fshorts&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/blusas-y-t-shirts",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fblusas-y-t-shirts&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/vestuario/buzos-y-chaquetas",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fbuzos-y-chaquetas&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/baletas/",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbaletas%2F&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/botas-y-botines",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbotas-y-botines&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/mocasines",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fmocasines&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/oxford",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Foxford&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/tenis",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Ftenis&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/zuecos",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fzuecos&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/sandalias-de-tacon",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-de-tacon&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/sandalias-planas",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-planas&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			],
+			[
+				"https://www.mercedescampuzano.com/zapatos/sandalias-plataforma",
+				"https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-plataforma&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+			]
+		],
+		"endpoint": "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbaletas%2F&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+	},
+	"Pull & Bear": {
+		"endpoints": [
+			[
+				"https://www.pullandbear.com/co/mujer/novedades-n6491?celement=1030017536",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030017536/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/tendencias/efecto-piel-n6992?celement=1030291510",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030291510/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/jeans-n6581",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204692/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/camisetas-n6541",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204631/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/cazadoras-y-chaquetas-n6555",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204607/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/abrigos-n6504",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204600/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/pantalones-n6600",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207189/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/sudaderas-n6636",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204660/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/tops-n6644",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207187/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/vestidos-n6646",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204616/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/punto-n6618",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204669/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/chalecos-n7146",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030319538/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/blusas-y-camisas-n6525",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204645/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/monos-y-petos-n6599",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204628/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/shorts-n6629",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204685/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/faldas-n6571",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204678/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/cazadoras-y-chaquetas/blazers-y-americanas-n6558",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204605/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/banadores-y-bikinis-n6513?celement=1030204707",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204707/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/comfy-n6897",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030272390/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/intimates-n7128",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030291005/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/limited-edition-mexico-n6817",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030070509/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/nfl-n7165",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030362062/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/zapatos/ver-todo-n6685?celement=1030207001",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207001/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/novedades/zapatos-n6836?celement=739503",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/739503/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/zapatos/botas-n6922",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207017/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/zapatos/zapatillas-n6686",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207009/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/bolsos-n6878",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207021/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/bolsos/mochilas-n6885",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207023/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/bolsos/bolsos-de-hombro-n6881",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030291008/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/bolsos/shoppers-n6889",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207024/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/carteras-n6453",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204879/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/bolsos/licencias-n6976",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030313518/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/bolsos/exclusivo-online-n6446",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207033/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/bolsos-y-accesorios/ver-todo-n6826?celement=1030204877",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204877/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/gorros-y-sombreros-n6457",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207068/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/bisuteria-n6435",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204885/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/fundas-movil-n6455",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207063/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/accesorios-pelo-n6419",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204881/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/cinturones-n6454",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207049/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/medias-y-calcetines-n6458",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207069/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/gafas-de-sol-n6456",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207065/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/accesorios/bufandas-y-fulares-n6452",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204883/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/ropa/teen-collection-n6643?celement=1030118503",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030118503/product?languageId=-5&showProducts=false&appId=1"
+			],
+			[
+				"https://www.pullandbear.com/co/mujer/join-life/coleccion-n6490?celement=1030210504",
+				"https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030210504/product?languageId=-5&showProducts=false&appId=1"
+			]
+		],
+		"endpoint": "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/739503/product?languageId=-5&showProducts=true&appId=1"
+	},
+	"Stradivarius": {
+		"endpoints": [
+			[
+				"https://www.stradivarius.com/co/mujer/nuevo-c1020093507.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020093507/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/d%C3%ADa-de-muertos-c1020393174.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020393174/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/chaquetas/ver-todo-c1020192003.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020192003/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/blazers-c1695505.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1695505/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/leggings-c1020385314.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020385314/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/faldas/ver-todo-c1718525.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1718525/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/camisas/ver-todo-c1718502.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1718502/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/punto/ver-todo-c1718564.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1718564/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/buzos-c1390587.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1390587/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/conjuntos-combinados-c1020241016.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020241016/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/shorts/ver-todo-c1020377546.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020377546/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/packs-c1020371005.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020371005/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/pijamas-c1020371003.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367659/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/sport/compra-por-producto/leggings/ver-todo-c1020367559.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367559/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/sport/compra-por-producto/shorts-c1020391178.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020391178/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/sport/compra-por-producto/tops-c1020390679.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020390679/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/sport/compra-por-producto/camisetas-c1020390680.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020390680/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/sport/compra-por-producto/conjuntos-combinados/ver-todo-c1020391180.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020391180/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/sport/compra-por-producto/shoes-%26-accesories-c1020367561.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367561/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/todos/todos-c1020178528.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020178528/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/botas-y-botines-c1399019.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1399019/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/cowboy-c1020109001.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020109001/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/tenis-c1399023.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1399023/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/tacones-c1399025.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1399025/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/baletas-c1399024.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1399024/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/sandalias-c1020001528.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020001528/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/ver-todo/ver-todo-c1020303541.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020303541/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/bolsos-y-morrales/ver-todo-c1718540.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1718540/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/monederos-c1695503.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1695503/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/correas-c1393011.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1393011/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/accesorios-de-pelo-c1393013.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1393013/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/gorros-y-sombreros-c1393015.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1393015/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/gafas-c1393014.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1393014/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/medias-y-pantimedias-c1393010.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1393010/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/lencer%C3%ADa-c1020381007.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020381007/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/pijamas-c1020367657.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367659/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/ver-todo/ver-todo-c1020367651.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367651/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/decoraci%C3%B3n-c1020367623.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367623/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/pets-c1020393184.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020393184/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/papeler%C3%ADa-c1020367598.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367598/product?languageId=-48&appId=1"
+			],
+			[
+				"https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/fragancias-c1020367631.html",
+				"https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367631/product?languageId=-48&appId=1"
+			]
+		],
+		"endpoint": "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020093507/product?languageId=-48&appId=1"
+	},
+	"Zara": {
+		"endpoints": [
+			[
+				"https://www.zara.com/co/es/mujer-blazers-l1055.html",
+				"https://www.zara.com/co/es/category/1882224/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-chaquetas-l1114.html",
+				"https://www.zara.com/co/es/category/1882207/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-prendas-exterior-l1184.html",
+				"https://www.zara.com/co/es/category/1882188/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-prendas-exterior-acolchado-l1195.html",
+				"https://www.zara.com/co/es/category/1946313/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-vestidos-l1066.html",
+				"https://www.zara.com/co/es/category/1882775/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-tops-l1322.html",
+				"https://www.zara.com/co/es/category/1902529/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-camisas-l1217.html",
+				"https://www.zara.com/co/es/category/1882795/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-camisetas-l1362.html",
+				"https://www.zara.com/co/es/category/1882929/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-punto-l1152.html",
+				"https://www.zara.com/co/es/category/1882810/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-sudaderas-l1320.html",
+				"https://www.zara.com/co/es/category/1882974/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-pantalones-l1335.html",
+				"https://www.zara.com/co/es/category/1882848/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-faldas-l1299.html",
+				"https://www.zara.com/co/es/category/1882900/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-trajes-l1437.html",
+				"https://www.zara.com/co/es/category/1883520/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-conjuntos-l1061.html",
+				"https://www.zara.com/co/es/category/1883588/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-zapatos-l1251.html",
+				"https://www.zara.com/co/es/category/1883093/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-bolsos-l1024.html",
+				"https://www.zara.com/co/es/category/1883235/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/woman-shoes-bags-yoga-l4709.html",
+				"https://www.zara.com/co/es/category/1947319/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-accesorios-l1003.html",
+				"https://www.zara.com/co/es/category/1883491/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-beauty-l1414.html",
+				"https://www.zara.com/co/es/category/1884004/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/mujer-precios-especiales-l1314.html",
+				"https://www.zara.com/co/es/category/1883601/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/join-life-woman-new-in-l2975.html",
+				"https://www.zara.com/co/es/category/1883905/products?ajax=true"
+			],
+			[
+				"https://www.zara.com/co/es/origins-collection-l4661.html",
+				"https://www.zara.com/co/es/category/1937316/products?ajax=true"
+			]
+		],
+		"endpoint": "https://www.zara.com/co/es/category/1882224/products?ajax=true"
+	},
+	"brands_categories": {
+		"Bershka": [
+			["camisas", "camiseta", "camisetas", "jerséis", "blusas", "tops"],
+			["pantalones", "jeans", "bermudas"],
+			["vestidos", "petos"],
+			["faldas", "shorts", "short"],
+			[
+				"cazadoras",
+				"abrigos",
+				"chalecos",
+				"chaleco",
+				"sobrecamisas",
+				"chaquetas",
+				"blazers",
+				"cardigans",
+				"cárdigans",
+				"blasier"
+			],
+			["sudaderas", "joggers", "chándal", "sport", "legging", "leggings"],
+			[
+				"cosmetiquera",
+				"zapatos",
+				"baletas",
+				"botas",
+				"tacones",
+				"sandalias",
+				"tennis",
+				"tenis",
+				"mocasines",
+				"oxford",
+				"zuecos",
+				"spadrillas",
+				"spadrilla",
+				"shoes",
+				"zapatillas"
+			],
+			[
+				"bolso",
+				"bolsos",
+				"bandoleras",
+				"carteras",
+				"mochila",
+				"mochilas",
+				"monedero",
+				"riñonera",
+				"riñoneras",
+				"tarjetero"
+			],
+			[
+				"accesorios",
+				"bisutería",
+				"bufandas",
+				"calcetines",
+				"cinturones",
+				"correas",
+				"decoración",
+				"fundas",
+				"gafas",
+				"gorros",
+				"medias",
+				"socks"
+			]
+		],
+		"Mango": [
+			["camisas", "camisetas", "jerséis", "blusas", "tops"],
+			["pantalones", "jeans", "bermudas"],
+			["vestidos", "petos"],
+			["faldas", "shorts", "short"],
+			[
+				"cazadoras",
+				"abrigos",
+				"chalecos",
+				"chaleco",
+				"americana",
+				"sobrecamisas",
+				"chaquetas",
+				"blazers",
+				"cardigans",
+				"cárdigans",
+				"blasier"
+			],
+			["sudaderas", "joggers", "chándal", "sport", "legging", "leggings"],
+			[
+				"zapatos",
+				"baletas",
+				"botas",
+				"tacones",
+				"sandalias",
+				"tennis",
+				"tenis",
+				"mocasines",
+				"oxford",
+				"zuecos",
+				"spadrilla",
+				"spadrillas",
+				"shoes",
+				"zapatillas"
+			],
+			[
+				"bolso",
+				"bolsos",
+				"bandoleras",
+				"carteras",
+				"cosmetiquera",
+				"mochilas",
+				"riñoneras",
+				"tarjetero"
+			],
+			[
+				"accesorios",
+				"bisuteria",
+				"bisutería",
+				"bufandas",
+				"calcetines",
+				"cinturones",
+				"correas",
+				"decoración",
+				"fundas",
+				"gafas",
+				"gorros",
+				"medias",
+				"socks"
+			]
+		],
+		"Mercedes Campuzano": [
+			["camisas", "camisetas", "jerséis", "blusas", "tops"],
+			["pantalones", "jeans", "bermudas"],
+			["vestidos", "petos"],
+			["faldas", "shorts", "short"],
+			[
+				"cazadoras",
+				"abrigos",
+				"chalecos",
+				"chaleco",
+				"sobrecamisas",
+				"chaquetas",
+				"blazers",
+				"cardigans",
+				"cárdigans",
+				"blasier"
+			],
+			["sudaderas", "joggers", "chándal", "sport", "legging", "leggings"],
+			[
+				"zapatos",
+				"baletas",
+				"botas",
+				"tacones",
+				"sandalias",
+				"tennis",
+				"tenis",
+				"mocasines",
+				"oxford",
+				"zuecos",
+				"spadrilla",
+				"spadrillas",
+				"shoes",
+				"zapatillas"
+			],
+			[
+				"bolsos",
+				"bandoleras",
+				"billetera",
+				"carteras",
+				"cosmetiquera",
+				"monedero",
+				"mochilas",
+				"riñoneras"
+			],
+			[
+				"accesorios",
+				"bisuteria",
+				"bisutería",
+				"bufandas",
+				"calcetines",
+				"cinturones",
+				"correas",
+				"decoración",
+				"fundas",
+				"gafas",
+				"gorros",
+				"medias",
+				"socks"
+			]
+		],
+		"Pull & Bear": [
+			["camisas", "camisetas", "jerséis", "blusas", "tops"],
+			["pantalones", "jeans", "bermudas"],
+			["petos", "vestidos"],
+			["bicicletero", "ciclista", "falda", "faldas", "short", "shorts"],
+			[
+				"cazadoras",
+				"abrigos",
+				"chalecos",
+				"chaleco",
+				"sobrecamisas",
+				"chaquetas",
+				"blazers",
+				"cardigans",
+				"cárdigans",
+				"blasier"
+			],
+			["sudaderas", "joggers", "chándal", "sport", "legging", "leggings"],
+			[
+				"zapatos",
+				"baletas",
+				"botas",
+				"tacones",
+				"sandalias",
+				"tennis",
+				"tenis",
+				"mocasines",
+				"oxford",
+				"zuecos",
+				"spadrilla",
+				"spadrillas",
+				"shoes",
+				"zapatillas"
+			],
+			["bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
+			[
+				"accesorios",
+				"bisuteria",
+				"bisutería",
+				"bufandas",
+				"calcetines",
+				"cinturones",
+				"correas",
+				"decoración",
+				"fundas",
+				"gafas",
+				"gorros",
+				"medias",
+				"socks"
+			]
+		],
+		"Stradivarius": [
+			["camisas", "camisetas", "jerséis", "blusas", "tops"],
+			["pantalones", "jeans", "bermudas"],
+			["vestidos", "petos"],
+			["faldas", "shorts", "short"],
+			[
+				"jackets",
+				"gilet",
+				"waistcoat",
+				"cazadoras",
+				"abrigos",
+				"chalecos",
+				"chaleco",
+				"sobrecamisas",
+				"chaquetas",
+				"blazers",
+				"cardigans",
+				"cárdigans",
+				"blasier"
+			],
+			["sudaderas", "joggers", "chándal", "sport", "legging", "leggings"],
+			[
+				"zapatos",
+				"baletas",
+				"botas",
+				"tacones",
+				"sandalias",
+				"tennis",
+				"tenis",
+				"mocasines",
+				"oxford",
+				"zuecos",
+				"spadrilla",
+				"spadrillas",
+				"shoes",
+				"zapatillas"
+			],
+			[
+				"bag",
+				"bags",
+				"bolsos",
+				"bandoleras",
+				"carteras",
+				"mochilas",
+				"riñoneras"
+			],
+			[
+				"accesorios",
+				"belts",
+				"bisuteria",
+				"bisutería",
+				"bufandas",
+				"calcetines",
+				"cinturones",
+				"decoración",
+				"correas",
+				"fashion jewellery",
+				"fundas",
+				"gafas",
+				"gorros",
+				"medias",
+				"socks"
+			]
+		],
+		"Zara": [
+			["camisas", "camisetas", "jerséis", "blusas", "tops"],
+			["pantalones", "jeans", "bermudas"],
+			["vestidos", "petos"],
+			["faldas", "shorts", "short"],
+			[
+				"cazadoras",
+				"abrigos",
+				"chalecos",
+				"chaleco",
+				"sobrecamisas",
+				"chaquetas",
+				"blazers",
+				"cardigans",
+				"cárdigans",
+				"blasier"
+			],
+			["sudaderas", "joggers", "chándal", "sport", "legging", "leggings"],
+			[
+				"zapatos",
+				"baletas",
+				"botas",
+				"tacones",
+				"sandalias",
+				"tennis",
+				"tenis",
+				"mocasines",
+				"oxford",
+				"zuecos",
+				"spadrilla",
+				"spadrillas",
+				"shoes",
+				"zapatillas"
+			],
+			["bolso", "bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
+			[
+				"accesorios",
+				"bisuteria",
+				"bisutería",
+				"bufandas",
+				"calcetines",
+				"cinturones",
+				"correas",
+				"decoración",
+				"fundas",
+				"gafas",
+				"gorros",
+				"medias",
+				"socks"
+			]
+		]
+	},
+	"brands_subcategories": {
+		"Bershka": [
+			[
+				["camisa", "shirt", "blusa", "blouse", "bluson", "blusón"],
+				[
+					"camiseta",
+					"shirt",
+					"t-shirt",
+					"tshirt",
+					"license",
+					"licencia",
+					"manga",
+					"jacket",
+					"jersey",
+					"jersei",
+					"jerséi",
+					"polo",
+					"suéter",
+					"sueter",
+					"sweater"
+				],
+				["top", "bandeau", "bralette"],
+				["body", "bodies", "cuerpo"]
+			],
+			[
+				[
+					"pantalon",
+					"pantalón",
+					"bermuda",
+					"bermudas",
+					"capris",
+					"trousers",
+					"legging"
+				],
+				["jeans", "jean", "jeggings"]
+			],
+			[
+				["vestido", "peto", "pichi", "chaleco", "túnica"],
+				["enterizo", "kimono", "mono"]
+			],
+			[
+				["falda", "minifalda", "skirt", "skort"],
+				["shorts", "short", "bermuda"]
+			],
+			[
+				[
+					"abrigo",
+					"chaqueta",
+					"gabardina",
+					"chaleco",
+					"parka",
+					"buzo",
+					"capa",
+					"cárdigan",
+					"saco",
+					"cazadora",
+					"saco",
+					"chubasquero",
+					"parka",
+					"manguitos",
+					"plumíferos",
+					"plumiferos",
+					"cardigan",
+					"rompevientos",
+					"jersey",
+					"sudadera"
+				],
+				["sobrecamisa", "buzo", "blazer"]
+			],
+			[
+				["sudadera", "jogger", "chándal"],
+				["leggings", "leggins", "bicicletero", "capri", "cycling", "ciclista"],
+				["sport", "sporty"]
+			],
+			[
+				["tenis", "tennis", "deportivas", "deportivos", "zapatillas"],
+				["oxford", "clásico", "clasico", "zuecos"],
+				[
+					"sandalia",
+					"sandalias",
+					"trespuntada",
+					"trespuntadas",
+					"spadrilla",
+					"spadrillas"
+				],
+				["baletas", "bamba"],
+				["tacones", "tacón", "zapatos"],
+				["botas", "botínes"]
+			],
+			[
+				["bandolera", "bolso", "cartera", "clutch", "riñonera"],
+				["maletin", "maletín", "mochila", "morral"],
+				["shopper", "tote"],
+				["billetera", "cosmetiquera", "estuche", "monedero", "tarjetero"]
+			],
+			[
+				["cadena", "cadenas", "collar", "collares"],
+				["brazalete", "pulsera", "pulseras"],
+				["aretes", "pendiente", "pendientes"],
+				["anillo", "anillos"],
+				[
+					"bandana",
+					"beanie",
+					"boina",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+				],
+				["gafas"],
+				["bufanda"],
+				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
+				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
+			],
+			[[]]
+		],
+		"Mango": [
+			[
+				["camisa", "shirt", "blusa", "blouse", "bluson", "blusón"],
+				[
+					"camiseta",
+					"shirt",
+					"t-shirt",
+					"tshirt",
+					"license",
+					"licencia",
+					"manga",
+					"jacket",
+					"jersey",
+					"jersei",
+					"jerséi",
+					"polo",
+					"suéter",
+					"sueter",
+					"sweater"
+				],
+				["top", "bandeau", "bralette"],
+				["body", "bodies", "cuerpo"]
+			],
+			[
+				["pantalon", "pantalón", "bermuda", "bermudas", "capris", "trousers"],
+				["jeans", "jean", "jeggings"]
+			],
+			[
+				["vestido", "peto", "pichi", "chaleco", "túnica"],
+				["enterizo", "kimono", "mono"]
+			],
+			[
+				["falda", "minifalda", "skirt", "skort"],
+				["shorts", "short", "bermuda"]
+			],
+			[
+				[
+					"abrigo",
+					"chaqueta",
+					"americana",
+					"gabardina",
+					"chaleco",
+					"parka",
+					"buzo",
+					"capa",
+					"cárdigan",
+					"cazadora",
+					"saco",
+					"chubasquero",
+					"parka",
+					"manguitos",
+					"plumíferos",
+					"plumiferos",
+					"cardigan",
+					"rompevientos",
+					"jersey",
+					"sudadera"
+				],
+				["sobrecamisa", "buzo", "blazer"]
+			],
+			[
+				["sudadera", "jogger", "chándal"],
+				["leggings", "leggins", "bicicletero", "capri", "cycling", "ciclista"],
+				["sport", "sporty"]
+			],
+			[
+				["deportiva", "deportivas", "deportivos", "tenis", "tennis"],
+				["oxford", "clásico", "clasico", "zuecos", "mocasin"],
+				[
+					"sandalia",
+					"sandalias",
+					"trespuntada",
+					"trespuntadas",
+					"spadrilla",
+					"spadrillas"
+				],
+				["baletas", "bamba", "bailarina"],
+				["tacones", "tacón", "zapatillas"],
+				["botas", "botin", "botín", "botínes"]
+			],
+			[
+				["bandolera", "bolso", "capazo", "cartera", "clutch", "riñonera"],
+				["maletin", "maletín", "mochila", "morral"],
+				["shopper", "tote"],
+				["billetera", "cosmetiquera", "estuche", "monedero", "tarjetero"]
+			],
+			[
+				["cadena", "colgante", "collar", "collares"],
+				["brazalete", "pulsera", "pulseras"],
+				["aretes", "pendiente", "pendientes"],
+				["anillo", "anillos"],
+				[
+					"bandana",
+					"beanie",
+					"boina",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+				],
+				["gafas"],
+				["bufanda"],
+				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
+				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
+			],
+			[[]]
+		],
+		"Mercedes Campuzano": [
+			[
+				["camisa", "blusa", "blouse", "bluson", "blusón"],
+				[
+					"camiseta",
+					"shirt",
+					"t-shirt",
+					"tshirt",
+					"license",
+					"licencia",
+					"manga",
+					"jacket",
+					"jersey",
+					"jersei",
+					"jerséi",
+					"polo",
+					"suéter",
+					"sueter",
+					"sweater"
+				],
+				["top", "bandeau", "bralette"],
+				["body", "bodies", "cuerpo"]
+			],
+			[
+				["pantalon", "pantalón", "bermuda", "bermudas", "capris", "trousers"],
+				["jeans", "jean", "jeggings"]
+			],
+			[
+				["vestido", "peto", "pichi", "chaleco", "túnica"],
+				["enterizo", "kimono", "mono"]
+			],
+			[
+				["falda", "minifalda", "skirt", "skort"],
+				["shorts", "short", "bermuda"]
+			],
+			[
+				[
+					"abrigo",
+					"chaqueta",
+					"gabardina",
+					"chaleco",
+					"parka",
+					"buzo",
+					"capa",
+					"cárdigan",
+					"saco",
+					"cazadora",
+					"saco",
+					"chubasquero",
+					"parka",
+					"manguitos",
+					"plumíferos",
+					"plumiferos",
+					"cardigan",
+					"rompevientos",
+					"jersey",
+					"sudadera"
+				],
+				["sobrecamisa", "buzo", "blazer"]
+			],
+			[
+				["sudadera", "jogger", "chándal"],
+				["leggings", "leggins", "bicicletero", "capri", "cycling", "ciclista"],
+				["sport", "sporty"]
+			],
+			[
+				["tenis", "tennis", "deportivas", "deportivos"],
+				["oxford", "clásico", "clasico", "zuecos"],
+				[
+					"alpargata",
+					"sandalia",
+					"sandalias",
+					"trespuntada",
+					"trespuntadas",
+					"pantufla",
+					"spadrilla",
+					"spadrillas"
+				],
+				["baleta", "baletas", "ballerina"],
+				["tacones", "tacón", "tacon", "zapatillas"],
+				["bota", "botas", "botínes", "botin"]
+			],
+			[
+				["bandolera", "bolso", "cartera", "clutch", "riñonera"],
+				["maletin", "maletín", "mochila", "morral"],
+				["shopper", "tote"],
+				[
+					"billetera",
+					"cosmetiquera",
+					"estuche",
+					"cosmetiqueras",
+					"monedero",
+					"tarjetero"
+				]
+			],
+			[
+				["cadena", "collar", "collares"],
+				["brazalete", "pulsera", "pulseras"],
+				["aretes", "pendiente", "pendientes"],
+				["anillo", "anillos"],
+				[
+					"bamba",
+					"bandana",
+					"beanie",
+					"boina",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+				],
+				["gafas"],
+				["bufanda"],
+				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
+				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
+			],
+			[[]]
+		],
+		"Pull & Bear": [
+			[
+				["camisa", "shirt", "blusa", "blouse", "bluson", "blusón"],
+				[
+					"camiseta",
+					"shirt",
+					"t-shirt",
+					"tshirt",
+					"license",
+					"licencia",
+					"manga",
+					"jacket",
+					"jersey",
+					"jersei",
+					"jerséi",
+					"polo",
+					"suéter",
+					"sueter",
+					"sweater"
+				],
+				["top", "bandeau", "bralette"],
+				["body", "bodies", "cuerpo"]
+			],
+			[
+				[
+					"pantalon",
+					"pantalón",
+					"bermuda",
+					"bermudas",
+					"capris",
+					"trousers",
+					"legging"
+				],
+				["jeans", "jean", "jeggings"]
+			],
+			[
+				["vestido", "pichi", "chaleco", "túnica"],
+				["enterizo", "kimono", "mono", "peto"]
+			],
+			[
+				["falda", "minifalda", "skirt", "skort"],
+				["shorts", "short", "bermuda", "bicicletero", "ciclista"]
+			],
+			[
+				[
+					"abrigo",
+					"chaqueta",
+					"gabardina",
+					"chaleco",
+					"parka",
+					"buzo",
+					"capa",
+					"cárdigan",
+					"saco",
+					"cazadora",
+					"saco",
+					"chubasquero",
+					"parka",
+					"manguitos",
+					"plumíferos",
+					"plumiferos",
+					"cardigan",
+					"rompevientos",
+					"jersey",
+					"sudadera"
+				],
+				["sobrecamisa", "buzo", "blazer"]
+			],
+			[
+				["sudadera", "jogger", "chándal"],
+				["leggings", "leggins", "bicicletero", "capri", "cycling", "ciclista"],
+				["sport", "sporty"]
+			],
+			[
+				[
+					"bamba",
+					"deportivas",
+					"deportivo",
+					"tenis",
+					"tennis",
+					"zapatilla",
+					"zapatillas"
+				],
+				["oxford", "clásico", "clasico", "zuecos"],
+				[
+					"alpargata",
+					"cuña",
+					"sandalia",
+					"sandalias",
+					"trespuntada",
+					"trespuntadas",
+					"spadrilla",
+					"spadrillas"
+				],
+				["baletas", "bailarina"],
+				["tacon", "tacones", "tacón"],
+				["bota", "botas", "botin", "botín", "botínes"]
+			],
+			[
+				["bandolera", "bolso", "cartera", "clutch", "riñonera"],
+				["maletin", "maletín", "mochila", "morral"],
+				["shopper", "tote"],
+				[
+					"billetera",
+					"cosmetiquera",
+					"estuche",
+					"monedero",
+					"neceser",
+					"portamovil",
+					"tarjetero"
+				]
+			],
+			[
+				["cadena", "collar", "collares"],
+				["brazalete", "pulsera", "pulseras"],
+				["aretes", "aros", "pendiente", "pendientes"],
+				["anillo", "anillos"],
+				[
+					"bandana",
+					"beanie",
+					"boina",
+					"cinta",
+					"cintas",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"moños",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+				],
+				["gafas"],
+				["bufanda"],
+				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
+				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
+			],
+			[[]]
+		],
+		"Stradivarius": [
+			[
+				["camisa", "shirt", "blusa", "blouse", "bluson", "blusón"],
+				[
+					"camiseta",
+					"t-shirt",
+					"tshirt",
+					"license",
+					"licencia",
+					"manga",
+					"jacket",
+					"jersey",
+					"jersei",
+					"jerséi",
+					"polo",
+					"suéter",
+					"sueter",
+					"sweater"
+				],
+				["top", "bandeau", "bralette"],
+				["body", "bodies", "cuerpo", "bodysuit"]
+			],
+			[
+				["pantalon", "pantalón", "bermuda", "bermudas", "capris", "trousers"],
+				["jeans", "jean", "jeggings"]
+			],
+			[
+				["vestido", "peto", "pichi", "túnica"],
+				["enterizo", "kimono", "mono"]
+			],
+			[
+				["falda", "minifalda", "skirt", "skort"],
+				["shorts", "short", "bermuda"]
+			],
+			[
+				[
+					"gilet",
+					"waistcoat",
+					"jacket",
+					"abrigo",
+					"chaqueta",
+					"gabardina",
+					"chaleco",
+					"parka",
+					"buzo",
+					"capa",
+					"cárdigan",
+					"saco",
+					"cazadora",
+					"saco",
+					"chubasquero",
+					"parka",
+					"manguitos",
+					"plumíferos",
+					"plumiferos",
+					"cardigan",
+					"rompevientos",
+					"jersey",
+					"sudadera"
+				],
+				["sobrecamisa", "buzo", "blazer"]
+			],
+			[
+				["sudadera", "jogger", "chándal"],
+				["leggings", "leggins", "bicicletero", "capri", "cycling", "ciclista"],
+				["sport", "sporty"]
+			],
+			[
+				["tenis", "tennis", "deportivas", "deportivos"],
+				["oxford", "clásico", "clasico", "zuecos"],
+				[
+					"sandalia",
+					"sandalias",
+					"trespuntada",
+					"trespuntadas",
+					"sandals",
+					"spadrilla",
+					"spadrillas"
+				],
+				["baletas", "ballet"],
+				[
+					"tacones",
+					"tacón",
+					"zapatos",
+					"zapatillas",
+					"stiletto",
+					"high-heel",
+					"heels"
+				],
+				["botas", "botínes", "botines"]
+			],
+			[
+				[
+					"bandolera",
+					"bag",
+					"backpack",
+					"bolso",
+					"cartera",
+					"clutch",
+					"libres",
+					"riñonera"
+				],
+				["maletin", "maletín", "mochila", "morral"],
+				["shopper", "tote"],
+				["billetera", "cosmetiquera", "estuche", "monedero", "tarjetero"]
+			],
+			[
+				[
+					"cadena",
+					"cadenas",
+					"chains",
+					"chokers",
+					"collar",
+					"collares",
+					"necklaces"
+				],
+				["brazalete", "bracelets", "pulsera", "pulseras"],
+				["aretes", "earrings", "pendiente", "pendientes"],
+				["anillo", "anillos", "rings"],
+				[
+					"bamba",
+					"bambas",
+					"bandana",
+					"bandanas",
+					"bandannas",
+					"beanie",
+					"boina",
+					"clip",
+					"clips",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"diademas",
+					"gorra",
+					"gorro",
+					"grips",
+					"hairclip",
+					"hat",
+					"moñas",
+					"neckerchief",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"scarf",
+					"scrunchies",
+					"sombrero"
+				],
+				["gafas"],
+				["bufanda"],
+				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
+				["belt", "cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
+			],
+			[[]]
+		],
+		"Zara": [
+			[
+				["camisa", "shirt", "blusa", "blouse", "bluson", "blusón"],
+				[
+					"camiseta",
+					"shirt",
+					"t-shirt",
+					"tshirt",
+					"license",
+					"licencia",
+					"manga",
+					"jacket",
+					"jersey",
+					"jersei",
+					"jerséi",
+					"polo",
+					"suéter",
+					"sueter",
+					"sweater"
+				],
+				["top", "bandeau", "bralette"],
+				["body", "bodies", "cuerpo"]
+			],
+			[
+				["pantalon", "pantalón", "bermuda", "bermudas", "capris", "trousers"],
+				["jeans", "jean", "jeggings"]
+			],
+			[
+				["vestido", "peto", "pichi", "chaleco", "túnica"],
+				["enterizo", "kimono", "mono"]
+			],
+			[
+				["falda", "minifalda", "skirt", "skort"],
+				["shorts", "short", "bermuda"]
+			],
+			[
+				[
+					"abrigo",
+					"chaqueta",
+					"gabardina",
+					"chaleco",
+					"parka",
+					"buzo",
+					"capa",
+					"cárdigan",
+					"saco",
+					"cazadora",
+					"saco",
+					"chubasquero",
+					"parka",
+					"manguitos",
+					"plumíferos",
+					"plumiferos",
+					"cardigan",
+					"rompevientos",
+					"jersey",
+					"sudadera"
+				],
+				["sobrecamisa", "buzo", "blazer"]
+			],
+			[
+				["sudadera", "jogger", "chándal"],
+				["leggings", "leggins", "bicicletero", "capri", "cycling", "ciclista"],
+				["sport", "sporty"]
+			],
+			[
+				["tenis", "tennis", "deportivas", "deportivos", "deportivo"],
+				["oxford", "clásico", "clasico", "zuecos"],
+				["sandalia", "sandalias", "trespuntada", "trespuntadas", "cangrejera"],
+				["baletas", "spadrillas", "bamba"],
+				["tacones", "tacón", "tacon", "zapatos", "zapatillas"],
+				["botas", "botínes"]
+			],
+			[
+				[
+					"bandolera",
+					"bolsa",
+					"bolso",
+					"cartera",
+					"cesta",
+					"clutch",
+					"city",
+					"riñonera",
+					"saca"
+				],
+				["maletin", "maletín", "mochila", "morral"],
+				["shopper", "tote"],
+				[
+					"billetera",
+					"bowling",
+					"caja",
+					"cosmetiquera",
+					"estuche",
+					"monedero",
+					"porta",
+					"tarjetero"
+				]
+			],
+			[
+				["cadena", "cadenas", "choker", "collar", "collares"],
+				["brazalete", "pulsera", "pulseras"],
+				["aretes", "pendiente", "pendientes", "piercings"],
+				["anillo", "anillos"],
+				[
+					"bandana",
+					"beanie",
+					"boina",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+				],
+				["gafa", "gafas"],
+				["bufanda"],
+				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["media", "medias", "tobillera", "tobilleras", "calcetines", "socks"],
+				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
+			],
+			[[]]
+		]
+	},
+	"categories_exceptions": [
+		[],
+		["cadena", "baleta", "spadrilla", "bicicletero", "ciclista", "falda"],
+		["cadena", "camiseta", "chaleco"],
+		[],
+		[],
+		[],
+		["socks", "calcetines", "medias"],
+		[],
+		[],
+		["tarjetero"]
+	],
+	"speed": 1
+}
