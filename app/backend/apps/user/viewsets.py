@@ -6,6 +6,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from ..crawler.models import Debug
+from ..item.models import Product
+from ..item.serializers import ProductSerializer
 from ..item.services import read_from_excel, generate_prefix
 from ..user.models import Brand
 from ..user.serializers import BrandSerializer, UserSerializer
@@ -39,6 +41,14 @@ class BrandViewSet(viewsets.ModelViewSet):
         data = request.data
         result = read_from_excel(data['excel'], data['photos'], data['brand_id'])
         return Response({'response': result}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['POST'])
+    def get_my_products(self, request):
+        items = Product.objects.all()
+        serializer = ProductSerializer(items, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 
 
 class Registration(viewsets.ModelViewSet):

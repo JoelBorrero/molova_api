@@ -1,9 +1,12 @@
 import math
+import os
 
+import boto3
+import numpy as np
 import pandas as pd
 from zipfile import ZipFile
 
-from django.db.models import Q
+import requests
 
 from ..crawler.models import Debug
 from ..crawler.services import delete_from_remote, check_images_urls
@@ -372,9 +375,7 @@ def normalize_url(url):
         return url
 
 
-def product_from_dict(product, brand_id):
-    Debug.objects.create(name='376', text=str(product))
-    brand = Brand.objects.get(id=brand_id)
+def product_from_dict(product, brand):
     name = product['name']
     if type(product['ref']) is float and math.isnan(product['ref']):
         product['ref'] = generate_ref(brand)
@@ -385,39 +386,62 @@ def product_from_dict(product, brand_id):
     product['discount'] = 100 - int(product['price_now'] / product['price_before'] * 100)
     category = get_category('Mango', name, product['category'])
     subcategory = get_subcategory('Mango', name, category, product['subcategory'])
-    Debug.objects.create(name='387', text=str(product))
+    colors = [str(product[f'color{c}']).title() for c in range(1, 7) if not str(product[f'color{c}']) is 'Nan']
     defaults = {'reference': product['ref'], 'description': product.get('description', ''),
                 'url': product.get('url', generate_url(brand, product['ref'])), 'price': product['price_now'],
                 'price_before': product['price_before'], 'discount': product['discount'],
                 'sale': bool(product['discount']),
-                'images': '[]', 'sizes': '[]', 'colors': product['colors'].title().split(','), 'category': category,
+                'images': '[]', 'sizes': '[]', 'colors': colors, 'category': category,
                 'original_category': product['category'], 'subcategory': subcategory,
                 'original_subcategory': product['subcategory'], 'gender': 'm'}
-    return Product.objects.update_or_create(
-        brand=brand.name,
-        name=name,
-        defaults=defaults)
+    return Product.objects.update_or_create(brand=brand.name, name=name, defaults=defaults)
 
 
-def read_from_excel(excel, zip_images, brand):
-    keys = ('ref', 'name', 'description', 'price_before', 'price_now', 'category', 'subcategory', 'url', 'colors', 'sizes')
+def read_from_excel(excel, zip_images, brand_id):
+    brand = Brand.objects.get(id=brand_id)
+    keys = ('ref', 'name', 'description', 'price_before', 'price_now', 'category', 'subcategory', 'url', 'color1',
+            'color2', 'color3', 'color4', 'color5', 'color6')
+    bucket = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
+    s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID', ''),
+                             aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY', ''))
     data = pd.read_excel(excel, engine='openpyxl', sheet_name='Productos')
     for i in range(len(data)):
         row = data.iloc[i]
-        product = {}
+        product_data = {}
         for index, key in enumerate(keys):
-            product[key] = row[index]
-        output = product_from_dict(product, brand)
-        if not output:
-            Debug.objects.create(name='out', text=product)
-            yield product['name']
-        else:
-            Debug.objects.create(name='output', text=output)
-        # images = open(zip_images, 'r').read()
+            product_data[key] = row[index]
+        product, created = product_from_dict(product_data, brand)
+        if created:
+            folder_name = product.name
+            images = []
+            for bf, af in (('ó', 'o╠ü'),):
+                folder_name = folder_name.replace(bf, af)
+            with ZipFile(zip_images, 'r') as zip:
+                main_folder = zip.filelist[0].filename
+                folder = f'{main_folder}{folder_name}/'
+                for f in zip.filelist:
+                    if folder in f.filename and not f.filename.endswith('/') and '/.' not in f.filename:
+                        filename = f.filename[f.filename.rindex('/') + 1:]
+                        upload_key = f'Products_images/{brand.name}/{product.name}/{filename}'.replace(' ', '+')
+                        response = s3_client.generate_presigned_post(Bucket=bucket, Key=upload_key, ExpiresIn=10)
+                        files = {'file': zip.read(f.filename)}
+                        requests.post(response['url'], data=response['fields'], files=files)
+                        images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
+            set_product_images(images, product)
+
+
+def set_product_images(images, product):
+    new_images = []
+    for color in product.colors:
+        for index in range(len(images) - len(new_images) + 1):
+            for image in images:
+                if f'{color.lower()}{index}' in image:
+                    new_images.append(image)
+    product.images = str(new_images)
+    product.save()
 
 
 def to_int(s):
-    import numpy as np
     if type(s) is float or type(s) is np.float64 and not math.isnan(s):
         s = int(s)
     if not type(s) is int:
