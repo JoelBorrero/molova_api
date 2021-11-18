@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.db.models import Q
 from rest_framework import viewsets, status
@@ -13,33 +14,30 @@ from ..user.models import Brand
 from ..user.serializers import BrandSerializer, UserSerializer
 
 
-class BrandViewSet(viewsets.ModelViewSet):
+class BrandViewSet(viewsets.ViewSet):
     model = Brand
     queryset = model.objects.all()
     serializer_class = BrandSerializer
+    permission_classes = (AllowAny,)
 
     def create(self, request):
+        """
+        {nit: 123, name: name}
+        """
         data = request.data
-        if Brand.objects.filter(Q(name=data['name']) | Q(nit=data['nit'])):
-            return Response({'status': 'Brand already exist'}, status=status.HTTP_400_BAD_REQUEST)
-        brand = Brand.objects.create(owner=request.user, name=data['name'], nit=data['nit'],
-                                     prefix=generate_prefix(data['name']))
+        brand = Brand.objects.create(username=data['nit'], password=make_password(data['nit']), first_name=data['name'],
+                                     name=data['name'], nit=data['nit'], prefix=generate_prefix(data['name']))
         serializer = BrandSerializer(brand)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def list(self, request):
-        queryset = Brand.objects.filter(owner=request.user)
-        page = self.paginate_queryset(queryset)
-        if page:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
-
     @action(detail=False, methods=['POST'])
     def massive_upload(self, request):
+        """
+        {excel: file}
+        """
         data = request.data
-        result = read_from_excel(data['excel'], data['photos'], data['brand_id'])
+        result = read_from_excel(data['excel'],  # data['photos'],
+                                 request.user.id)
         return Response({'response': result}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['POST'])
@@ -49,18 +47,16 @@ class BrandViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
-
-class Registration(viewsets.ModelViewSet):
-    model = Brand
-    queryset = model.objects.all()
-    serializer_class = BrandSerializer
-    permission_classes = [AllowAny]
-
-    @action(detail=False, methods=['POST'])
-    def create_user(self, request):
-        data = request.data
-        user = User.objects.create_user(username=data['username'], password=data['password'],
-                                        first_name=data.get('name', ''))
-        serializer = UserSerializer(user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+# class Registration(viewsets.ModelViewSet):
+#     model = Brand
+#     queryset = model.objects.all()
+#     serializer_class = BrandSerializer
+#     permission_classes = [AllowAny]
+#
+#     @action(detail=False, methods=['POST'])
+#     def create_user(self, request):
+#         data = request.data
+#         user = User.objects.create_user(username=data['username'], password=data['password'],
+#                                         first_name=data.get('name', ''))
+#         serializer = UserSerializer(user)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)

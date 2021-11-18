@@ -15,15 +15,20 @@ from ..user.models import Brand
 from ..utils.constants import CATEGORIES, SETTINGS
 
 
-def create_or_update_item(item, fields, optional_images, session):
+def calculate_discount(price_before, price_now):
+    return int(100 - price_now / price_before * 100)
+
+
+def create_or_update_item(item, fields, session, optional_images='', all_images=''):
     if item:
-        if not item.url == fields['url']:
+        if not item.url == fields['url'] or not item.active:
             delete_from_remote(item.url)
         for key in fields.keys():
             exec(f'item.{key} = fields[key]')
         item.save()
     else:
-        all_images = check_images_urls(optional_images, session)
+        if not all_images:
+            all_images = check_images_urls(optional_images, session)
         item = Product.objects.create(brand=fields['brand'], name=fields['name'], reference=fields['reference'],
                                       description=fields['description'], url=fields['url'], price=fields['price_now'],
                                       price_before=fields['price_before'], discount=fields['discount'],
@@ -49,7 +54,7 @@ def find_product(url: str, images: list):
 
 
 def generate_prefix(brand):
-    brand = brand.lower()
+    brand = brand.lower().replace(' ', '-')
     while len(brand) <= 4:
         brand += brand
     prefix = brand[:3]
@@ -397,13 +402,14 @@ def product_from_dict(product, brand):
     return Product.objects.update_or_create(brand=brand.name, name=name, defaults=defaults)
 
 
-def read_from_excel(excel, zip_images, brand_id):
-    brand = Brand.objects.get(id=brand_id)
+def read_from_excel(excel,  # zip_images,
+                    user):
+    brand = Brand.objects.get(id=user)
     keys = ('ref', 'name', 'description', 'price_before', 'price_now', 'category', 'subcategory', 'url', 'color1',
             'color2', 'color3', 'color4', 'color5', 'color6')
-    bucket = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
-    s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID', ''),
-                             aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY', ''))
+    # bucket = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
+    # s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID', ''),
+    #                          aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY', ''))
     data = pd.read_excel(excel, engine='openpyxl', sheet_name='Productos')
     for i in range(len(data)):
         row = data.iloc[i]
@@ -411,23 +417,23 @@ def read_from_excel(excel, zip_images, brand_id):
         for index, key in enumerate(keys):
             product_data[key] = row[index]
         product, created = product_from_dict(product_data, brand)
-        if created:
-            folder_name = product.name
-            images = []
-            for bf, af in (('ó', 'o╠ü'),):
-                folder_name = folder_name.replace(bf, af)
-            with ZipFile(zip_images, 'r') as zip:
-                main_folder = zip.filelist[0].filename
-                folder = f'{main_folder}{folder_name}/'
-                for f in zip.filelist:
-                    if folder in f.filename and not f.filename.endswith('/') and '/.' not in f.filename:
-                        filename = f.filename[f.filename.rindex('/') + 1:]
-                        upload_key = f'Products_images/{brand.name}/{product.name}/{filename}'.replace(' ', '+')
-                        response = s3_client.generate_presigned_post(Bucket=bucket, Key=upload_key, ExpiresIn=10)
-                        files = {'file': zip.read(f.filename)}
-                        requests.post(response['url'], data=response['fields'], files=files)
-                        images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
-            set_product_images(images, product)
+        # if created:
+        #     folder_name = product.name
+        #     images = []
+        #     for bf, af in (('ó', 'o╠ü'),):
+        #         folder_name = folder_name.replace(bf, af)
+        #     with ZipFile(zip_images, 'r') as zip:
+        #         main_folder = zip.filelist[0].filename
+        #         folder = f'{main_folder}{folder_name}/'
+        #         for f in zip.filelist:
+        #             if folder in f.filename and not f.filename.endswith('/') and '/.' not in f.filename:
+        #                 filename = f.filename[f.filename.rindex('/') + 1:]
+        #                 upload_key = f'Products Images/{brand.name}/{product.name}/{filename}'.title().replace(' ', '')
+        #                 response = s3_client.generate_presigned_post(Bucket=bucket, Key=upload_key, ExpiresIn=10)
+        #                 files = {'file': zip.read(f.filename)}
+        #                 requests.post(response['url'], data=response['fields'], files=files)
+        #                 images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
+        #     set_product_images(images, product)
 
 
 def set_product_images(images, product):

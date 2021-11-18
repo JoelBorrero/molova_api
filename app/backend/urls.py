@@ -18,8 +18,9 @@ urlpatterns = [
       url(r'^{}api/'.format(PREFIX_URL), include(router.urls)),
       url(r'^{}api/v1/crawler/'.format(PREFIX_URL), include('backend.apps.crawler.urls')),
       url(r'^{}api/v1/user/'.format(PREFIX_URL), include('backend.apps.user.urls')),
+      path('views/brand', brand, name='brand'),
+      path('views/crawl', crawl, name='crawl'),
       path('views/login', login, name='login'),
-      path('views/crawl', crawl, name='login'),
-      path('views/brand', brand, name='brand')
+      path('views/products', product_list, name='products')
 ]
 

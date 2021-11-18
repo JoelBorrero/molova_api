@@ -1,13 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Brands</h1>
-<h3>{{ brand }}</h3>
-{{brands}}
-{% for brand in brands %}
-<div class="row">
+<div class="row mt-4">
     <div class="col-4">
-        <h1>{{brand.name}}</h1>
-        <h3>Nit: {{brand.nit}}</h3>
+        <h2>{{brand.name}}</h2>
+        <h6>Nit: {{brand.nit}}</h6>
     </div>
     <div class="col-8">
         <form action="javascript:massive_upload({{brand.id}})">
@@ -15,6 +11,7 @@
                 <div class="col-8">
                     <label for="excel">Excel</label>
                     <input id="excel" type="file" name="excel">
+                    <br>
                     <label for="photos">Photos</label>
                     <input id="photos" type="file" name="photos" placeholder="Photos">
                 </div>
@@ -25,7 +22,6 @@
         </form>
     </div>
 </div>
-{% endfor %}
 
 <script>
     function post(endpoint) {

@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 from random import randint
 from time import sleep
@@ -9,7 +10,8 @@ from celery import shared_task
 from .models import Process, Debug  # , Settings
 from .services import get_random_agent, post_item, check_images_urls, check_inactive_items, delete_from_remote
 from ..item.models import Product
-from ..item.services import find_product, get_category, get_subcategory, get_colors_src, create_or_update_item
+from ..item.services import find_product, get_category, get_subcategory, get_colors_src, create_or_update_item, to_int, \
+    calculate_discount
 from ..utils.constants import SETTINGS
 
 
@@ -37,7 +39,7 @@ def crawl_bershka():
         'sec-fetch-site': 'same-origin',
         'user-agent': get_random_agent()}
     session.headers.update(headers)
-    for endpoint in SETTINGS[brand]['endpoints'][-5:-4]:
+    for endpoint in SETTINGS[brand]['endpoints'][-6:-5]:
         products = session.get(endpoint[1]).json()['products']
         self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(products)} productos  -  {endpoint[0]}\n'
         for product in products:
@@ -67,7 +69,7 @@ def crawl_bershka():
                     price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
                 except TypeError:
                     price_before = price_now
-                discount = 100 - int(price_now / price_before * 100)
+                discount = calculate_discount(price_before, price_now)
                 optional_images = []
                 for media in product['xmedia']:
                     color = []
@@ -79,12 +81,12 @@ def crawl_bershka():
                     optional_images.append(color)
                 item = find_product(url, optional_images)
                 active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
-                fields = {'name': name, 'reference': ref, 'description': description, 'url': url,
+                fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
                           'price_now': price_now, 'price_before': price_before, 'discount': discount,
                           'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
                           'category': category, 'original_category': original_category, 'subcategory': subcategory,
                           'original_subcategory': original_subcategory, 'gender': 'm', 'active': active}
-                item = create_or_update_item(item, fields, optional_images, session)
+                item = create_or_update_item(item, fields, session, optional_images=optional_images)
                 self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                 if item.active:
                     post_item(item)
@@ -96,6 +98,176 @@ def crawl_bershka():
         session = requests.session()
         session.headers.update(headers)
     check_inactive_items(brand, self.started)
+
+
+@shared_task
+def crawl_mango():
+    brand = 'Mango'
+    self = Process.objects.update_or_create(name=brand, defaults={
+        'started': datetime.now(),
+        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
+    session = requests.session()
+    headers = {
+        'accept': 'application/json, text/plain, */*',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en;q=0.9',
+        'referer': 'https://www.shop.mango.com/',
+        'sec-ch-ua-mobile': '?0',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': get_random_agent()}
+    session.headers.update(headers)
+    for endpoint in SETTINGS[brand]['endpoints'][-5:-4]:
+        page_num = 1
+        # try:
+        while page_num:
+            response = session.get(endpoint[1] + str(page_num))
+            if response.status_code == 200:
+                response = response.json()
+                if response['lastPage'] or page_num >= 5:
+                    page_num = 0
+                else:
+                    page_num += 1
+                garments = response['groups'][0]['garments']
+                self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(garments)} productos  -  {endpoint[0]}\n'
+                self.save()
+                for item in garments:
+                    it = garments[item]
+                    name = it['shortDescription']
+                    original_category = response['titleh1']
+                    category = get_category(brand, name, original_category)
+                    original_subcategory = category
+                    subcategory = get_subcategory(brand, name, category, original_subcategory)
+                    all_images, all_sizes, colors = [], [], []
+                    for color in it['colors']:
+                        images = []
+                        sizes = []
+                        for image in color['images']:
+                            images.append(image['img1Src'])
+                        for size in color['sizes']:
+                            sizes.append(size['label'] + ('(AGOTADO)' if size['stock'] == 0 else ''))
+                        all_images.append(images)
+                        all_sizes.append(sizes)
+                        colors.append(color['iconUrl'].replace(' ', ''))
+                    all_images.reverse()  # I don't know why
+                    ref = it['garmentId']
+                    price_before = to_int(it['price']['crossedOutPrices'][0])
+                    price_now = to_int(it['price']['salePrice'])
+                    discount = it['price']['discountRate']
+                    url = 'https://shop.mango.com' + it['colors'][0]['linkAnchor']
+                    active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                    fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name, 'url': url,
+                              'price_now': price_now, 'price_before': price_before, 'discount': discount,
+                              'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
+                              'category': category, 'original_category': original_category, 'subcategory': subcategory,
+                              'original_subcategory': original_subcategory, 'gender': 'm', 'active': active}
+                    item = create_or_update_item(item, fields, session, all_images=all_images)
+                    self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
+                    if item.active:
+                        # post_item(item)
+                        pass
+                    else:
+                        Debug.objects.create(name='no_stock', text=item)
+                self.save()
+                headers = session.headers
+                sleep(randint(30, 120) / 1)
+                session = requests.session()
+                session.headers.update(headers)
+                check_inactive_items(brand, self.started)
+
+
+@shared_task
+def crawl_pull():
+    brand = 'Pull & Bear'
+    self = Process.objects.update_or_create(name=brand, defaults={
+        'started': datetime.now(),
+        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
+    session = requests.session()
+    headers = {
+        'accept': '*/*',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en;q=0.9,es-US;q=0.8,es;q=0.7',
+        'content-type': 'application/json',
+        'referer': 'https://www.pullandbear.com/',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': get_random_agent()}
+    session.headers.update(headers)
+    page_size = 25
+    for endpoint in SETTINGS[brand]['endpoints'][-5:-4]:
+        category_id = endpoint[1][endpoint[1].index('/category/') + 10: endpoint[1].rindex('/')]
+        response = session.get(endpoint[1]).json()['productIds']
+        self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(response)} productos  -  {endpoint[0]}\n'
+        for page in range(len(response) // page_size):
+            ids = [prod_id for prod_id in response[page * page_size: (page + 1) * page_size]]
+            page_endpoint = f'https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/productsArray?productIds={str(ids)[1:-1].replace(", ", "%2C")}&languageId=-5&categoryId={category_id}&appId=1'
+            products = session.get(page_endpoint).json()['products']
+            for product in products:
+                try:
+                    if 'productUrl' in product:
+                        name = product['name']
+                        param = f'&pelement={product["bundleProductSummaries"][0]["productUrlParam"]}' if product[
+                                                                                                              'bundleProductSummaries'] and 'productUrlParam' in \
+                                                                                                          product[
+                                                                                                              'bundleProductSummaries'][
+                                                                                                              0] else ''
+                        url = f'https://www.pullandbear.com/co/{product["productUrl"]}?cS={product["mainColorid"]}{param}'
+                        if product['bundleProductSummaries']:
+                            product = product['bundleProductSummaries'][0]['detail']
+                        else:
+                            product = product['detail']
+                        description = product['description'] if product['description'] else product['longDescription']
+                        ref = product['displayReference']
+                        category = product['familyInfo']['familyName']
+                        subcategory = product['subfamilyInfo']['subFamilyName']
+                        colors, all_images, all_sizes = [], [], []
+                        for color in product['colors']:
+                            colors.append(
+                                f'https://static.pullandbear.net/2/photos/{color["image"]["url"]}_1_1_8.jpg?t={color["image"]["timestamp"]}&imwidth=90')
+                            sizes = []
+                            for size in color['sizes']:
+                                stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
+                                sizes.append(size['name'] + stock)
+                            all_sizes.append(sizes)
+                        if product['xmedia']:
+                            price_now = int(product['colors'][0]['sizes'][0]['price']) / 100
+                            try:
+                                price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
+                            except TypeError:
+                                price_before = price_now[0]
+                            for media in product['xmedia']:
+                                images = []
+                                for i in media['xmediaItems'][0]['medias']:
+                                    if not '_3_1_' in i['idMedia']:
+                                        images.append(
+                                            f'https://static.pullandbear.net/2/photos/{media["path"]}/{i["idMedia"]}8.jpg?ts={i["timestamp"]}')
+                                all_images.append(images)
+                            active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                            fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name, 'url': url,
+                                      'price_now': price_now, 'price_before': price_before, 'discount': discount,
+                                      'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
+                                      'category': category, 'original_category': original_category,
+                                      'subcategory': subcategory, 'original_subcategory': original_subcategory,
+                                      'gender': 'm', 'active': active}
+                            item = create_or_update_item(item, fields, session, all_images=all_images)
+                            self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
+                            if item.active:
+                                # post_item(item)
+                                pass
+                            else:
+                                Debug.objects.create(name='no_stock', text=item)
+                except Exception as e:
+                    Debug.objects.create(name='Error in Pull', text=str(e))
+                self.save()
+                headers = session.headers
+                sleep(randint(30, 120) / 1)
+                session = requests.session()
+                session.headers.update(headers)
+        check_inactive_items(brand, self.started)
 
 
 @shared_task
@@ -154,7 +326,7 @@ def crawl_stradivarius():
                 price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
             except TypeError:
                 price_before = price_now
-            discount = int(100 - price_now / price_before * 100)
+            discount = calculate_discount(price_before, price_now)
             url = f'{endpoint[0][:endpoint[0].index("-c")]}/{quote(name.lower().replace(" ", "-"))}-c{cat_id}p{prod_id}.html'
             all_images, all_sizes, colors = [], [], []
             for color in product['colors']:
@@ -184,7 +356,7 @@ def crawl_stradivarius():
                       'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
                       'category': category, 'original_category': original_category, 'subcategory': subcategory,
                       'original_subcategory': original_subcategory, 'gender': 'm', 'active': active}
-            item = create_or_update_item(item, fields, optional_images, session)
+            item = create_or_update_item(item, fields, session, optional_images=optional_images)
             self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
             if item.active:
                 post_item(item)
@@ -199,3 +371,31 @@ def crawl_stradivarius():
         session = requests.session()
         session.headers.update(headers)
     check_inactive_items(brand, self.started)
+
+
+@shared_task
+def crawl_solua():
+    session = requests.session()
+    session.headers = {'X-Shopify-Access-Token': os.environ.get('SHOPIFY_SOLUA')}
+    session.headers = {'X-Shopify-Access-Token': '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'}
+    url = 'https://solua-accesorios.myshopify.com/admin/api/2021-10/products.json'
+    products = session.get(url).json()['products']
+    brand = 'Solua Accesorios'
+    for p in products:
+        name = p['title']
+        price_now = to_int(p['variants'][0]['price'])/100
+        price_before = to_int(p['variants'][0]['compare_at_price'])/100
+        if not price_before:
+            price_before = price_now
+        discount = calculate_discount(price_before, price_now)
+        images = str([i['src'] for i in p['images']])
+        original_category = p['product_type']
+        category = get_category('Stradivarius', name, original_category)
+        original_subcategory = original_category
+        subcategory = get_subcategory('Stradivarius', name, category, original_subcategory)
+        defaults = {'brand': brand, 'name': name, 'description': p['body_html'],
+                    'url': f'https://soluaccesorios.com/products/{p["handle"]}', 'price': price_now,
+                    'price_before': price_before, 'discount': discount, 'sale': bool(discount), 'images': images,
+                    'category': category, 'original_category': original_category, 'subcategory': subcategory,
+                    'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
+        Product.objects.update_or_create(reference=p['id'], defaults=defaults)

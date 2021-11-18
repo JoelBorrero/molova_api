@@ -3,26 +3,46 @@
 <h1>Crawling</h1>
 <div class="row">
     <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_bershka/')">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Bershka')" method="post">
             <label>Bershka</label><br>
             <input type="submit" value="Start">
         </form>
     </div>
     <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_stradivarius/')">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Mango')">
+            <label>Mango</label><br>
+            <input type="submit" value="Start">
+        </form>
+    </div>
+    <div class="col-4">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Pull & Bear')">
+            <label>Pull & Bear</label><br>
+            <input type="submit" value="Start">
+        </form>
+    </div>
+    <div class="col-4">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Stradivarius')">
             <label>Stradivarius</label><br>
+            <input type="submit" value="Start">
+        </form>
+    </div>
+    <div class="col-4">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Solua Accesorios')">
+            <label>Solua Accesorios</label><br>
             <input type="submit" value="Start">
         </form>
     </div>
 </div>
 
 <script>
-    function post(endpoint) {
+    function post(endpoint, brand) {
         fetch(endpoint, {
-            method: 'POST', headers: {
+            method: 'POST',
+            headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": get_cookie("csrftoken"),
-            }
+            },
+            body: JSON.stringify({'brand': brand})
         }).then((result) => {
             alert('Process started');
         })

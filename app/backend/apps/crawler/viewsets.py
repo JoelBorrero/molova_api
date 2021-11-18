@@ -2,9 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Process, Debug
 from .serializers import ProcessSerializer
-from .tasks import crawl_bershka, crawl_stradivarius
+from .tasks import *
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
 
@@ -15,14 +14,21 @@ class ProcessViewSet(viewsets.ModelViewSet):
     serializer_class = ProcessSerializer
 
     @action(detail=False, methods=['POST'])
-    def start_bershka(self, request):
-        crawl_bershka.delay()
-        return Response({'status': 'Bershka started'}, status=status.HTTP_200_OK)
-
-    @action(detail=False, methods=['POST'])
-    def start_stradivarius(self, request):
-        crawl_stradivarius.delay()
-        return Response({'status': 'Stradivarius started'}, status=status.HTTP_200_OK)
+    def start_crawling(self, request):
+        brand = request.data['brand']
+        if brand == 'Bershka':
+            crawl_bershka.delay()
+        elif brand == 'Mango':
+            crawl_mango.delay()
+        elif brand == 'Pull & Bear':
+            crawl_pull.delay()
+        elif brand == 'Stradivarius':
+            crawl_stradivarius.delay()
+        elif brand == 'Solua Accesorios':
+            crawl_solua.delay()
+        else:
+            brand += ' not found. Not'
+        return Response({'status': brand + ' started'}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['GET'])
     def broken(self, request):

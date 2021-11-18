@@ -4,8 +4,9 @@ from django.db import models
 from ..utils.models import ModelBase
 
 
-class Brand(ModelBase):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+class Brand(User):
+    # id = models.PositiveIntegerField(primary_key=True)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     prefix = models.CharField(max_length=3)
     nit = models.CharField(max_length=30)
@@ -15,3 +16,7 @@ class Brand(ModelBase):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Marca'
+        verbose_name_plural = 'Marcas'
