@@ -210,7 +210,10 @@ def get_colors_src(colors: list):
 def get_subcategory(brand, name, category, original_subcategory):
     index = CATEGORIES.index(category)
     brands_subcategories = SETTINGS['brands_subcategories']
-    sub = original_subcategory.lower().split(' ')
+    try:
+        sub = original_subcategory.lower().split(' ')
+    except AttributeError:
+        return category
     name = name.lower().split(' ')
     subcategories_list = brands_subcategories[brand]
     subs = subcategories_list[index] if index < 9 else ''
@@ -395,21 +398,16 @@ def product_from_dict(product, brand):
     defaults = {'reference': product['ref'], 'description': product.get('description', ''),
                 'url': product.get('url', generate_url(brand, product['ref'])), 'price': product['price_now'],
                 'price_before': product['price_before'], 'discount': product['discount'],
-                'sale': bool(product['discount']),
-                'images': '[]', 'sizes': '[]', 'colors': colors, 'category': category,
-                'original_category': product['category'], 'subcategory': subcategory,
-                'original_subcategory': product['subcategory'], 'gender': 'm'}
+                'sale': bool(product['discount']), 'images': str(product.get('images', [])), 'sizes': '[]',
+                'colors': colors, 'category': category, 'original_category': product['category'], 'national': True,
+                'subcategory': subcategory, 'original_subcategory': product['subcategory'], 'gender': 'm'}
     return Product.objects.update_or_create(brand=brand.name, name=name, defaults=defaults)
 
 
-def read_from_excel(excel,  # zip_images,
-                    user):
+def read_from_excel(excel, user):
     brand = Brand.objects.get(id=user)
     keys = ('ref', 'name', 'description', 'price_before', 'price_now', 'category', 'subcategory', 'url', 'color1',
-            'color2', 'color3', 'color4', 'color5', 'color6')
-    # bucket = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
-    # s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID', ''),
-    #                          aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY', ''))
+            'color2', 'color3', 'color4', 'color5', 'color6', 'images')
     data = pd.read_excel(excel, engine='openpyxl', sheet_name='Productos')
     for i in range(len(data)):
         row = data.iloc[i]
@@ -417,23 +415,30 @@ def read_from_excel(excel,  # zip_images,
         for index, key in enumerate(keys):
             product_data[key] = row[index]
         product, created = product_from_dict(product_data, brand)
-        # if created:
-        #     folder_name = product.name
-        #     images = []
-        #     for bf, af in (('ó', 'o╠ü'),):
-        #         folder_name = folder_name.replace(bf, af)
-        #     with ZipFile(zip_images, 'r') as zip:
-        #         main_folder = zip.filelist[0].filename
-        #         folder = f'{main_folder}{folder_name}/'
-        #         for f in zip.filelist:
-        #             if folder in f.filename and not f.filename.endswith('/') and '/.' not in f.filename:
-        #                 filename = f.filename[f.filename.rindex('/') + 1:]
-        #                 upload_key = f'Products Images/{brand.name}/{product.name}/{filename}'.title().replace(' ', '')
-        #                 response = s3_client.generate_presigned_post(Bucket=bucket, Key=upload_key, ExpiresIn=10)
-        #                 files = {'file': zip.read(f.filename)}
-        #                 requests.post(response['url'], data=response['fields'], files=files)
-        #                 images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
-        #     set_product_images(images, product)
+
+
+def read_to_add_images():
+    bucket = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
+    main_folder = './Recursos Marcas'
+    for brand in [b for b in os.listdir(main_folder) if not b.startswith('.')]:
+        brand_folder = f'{main_folder}/{brand}'
+        excel = [f'{brand_folder}/{f}' for f in os.listdir(brand_folder) if 'Plantilla Carga' in f][0]
+        data = pd.read_excel(excel, engine='openpyxl', sheet_name='Productos')
+        data = data.dropna(subset=['Nombre producto*'])
+        all_images = []
+        for i in range(len(data)):
+            row = data.iloc[i]
+            product_name = row[1].strip()
+            images = []
+            product_folder = f'{brand_folder}/{brand}/{product_name.replace("/", "-")}'
+            for filename in [f for f in os.listdir(product_folder) if not f.startswith('._')]:
+                upload_key = f'Products Images/{brand}/{product_name}/{filename}'.replace(' ', '+')
+                images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
+            all_images.append(images)
+        data['Imágenes'] = all_images
+        writer = pd.ExcelWriter(f'{brand_folder}/Plantilla modificada.xlsx', engine='xlsxwriter')
+        data.to_excel(writer, 'Productos', index=False)
+        writer.save()
 
 
 def set_product_images(images, product):

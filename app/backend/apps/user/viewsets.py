@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from ..crawler.models import Debug
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
-from ..item.services import read_from_excel, generate_prefix
+from ..item.services import generate_prefix, read_from_excel, read_to_add_images
 from ..user.models import Brand
 from ..user.serializers import BrandSerializer, UserSerializer
 
@@ -39,6 +39,14 @@ class BrandViewSet(viewsets.ViewSet):
         result = read_from_excel(data['excel'],  # data['photos'],
                                  request.user.id)
         return Response({'response': result}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['POST'])
+    def update_files(self, request):
+        """
+        Exec function to fill product images in excel files
+        """
+        read_to_add_images()
+        return Response({'status': 'Done'}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['POST'])
     def get_my_products(self, request):

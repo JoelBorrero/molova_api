@@ -21,20 +21,11 @@
             </div>
         </form>
     </div>
-    {% if is_admin %}
-    <form action="javascript:post('/api/v1/user/brand/update_files/')">
-        <input type="submit" value="Actualizar archivos">
-    </form>
-    {% endif %}
 </div>
 
 <script>
     function post(endpoint) {
-        fetch(endpoint, {
-            method: 'POST', headers: {
-                "X-CSRFToken": get_cookie("csrftoken"),
-            }
-        })
+        fetch(endpoint, {method: 'POST'})
     }
 
     function massive_upload(id) {

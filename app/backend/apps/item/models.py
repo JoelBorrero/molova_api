@@ -24,6 +24,7 @@ class Product(ModelBase):
     gender = models.CharField(max_length=1, choices=GENDERS)
     active = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
+    national = models.BooleanField()
 
     def __str__(self):
         return self.name

@@ -16,10 +16,10 @@ def brand(request):
     """
     This view simulates the brands admin dashboard.
     """
-    brand = Brand.objects.get(id=request.user.id)
-    serializer = BrandSerializer(brand)
+    brand = Brand.objects.filter(id=request.user.id).first()
+    serializer = BrandSerializer(brand).data if brand else {}
     template = loader.get_template('brand.html')
-    document = template.render({'brand': serializer.data})
+    document = template.render({'brand': serializer, 'is_admin': request.user.is_superuser})
     return HttpResponse(document, status=200)
 
 
