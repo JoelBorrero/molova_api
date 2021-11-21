@@ -20,6 +20,9 @@ def calculate_discount(price_before, price_now):
 
 
 def create_or_update_item(item, fields, session, optional_images='', all_images=''):
+    """
+    If images are trusted, all_images param will be used, else optional_images will be used and will check each one
+    """
     if item:
         if not item.url == fields['url'] or not item.active:
             delete_from_remote(item.url)
@@ -34,7 +37,7 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
                                       price_before=fields['price_before'], discount=fields['discount'],
                                       images=all_images, sizes=fields['sizes'], colors=fields['colors'],
                                       category=fields['category'], original_category=fields['original_category'],
-                                      subcategory=fields['subcategory'],
+                                      subcategory=fields['subcategory'], national=fields['national'],
                                       original_subcategory=fields['original_subcategory'], gender='m',
                                       active=fields['active'], sale=bool(fields['discount']))
     return item
@@ -390,9 +393,9 @@ def product_from_dict(product, brand):
     description = product['description'] if product['description'] != 'nan' else ''
     product['price_now'] = to_int(product['price_now'])
     product['price_before'] = to_int(product['price_before'])
-    product['price_before'] = product['price_now']  # To hide discount
     if not product['price_now']:
         product['price_now'] = product['price_before']
+    product['price_before'] = product['price_now']  # To hide discount
     product['discount'] = 100 - int(product['price_now'] / product['price_before'] * 100)
     category = get_category('Mango', name, product['category'])
     subcategory = get_subcategory('Mango', name, category, product['subcategory'])
@@ -411,6 +414,7 @@ def read_from_excel(excel, user):
     keys = ('ref', 'name', 'description', 'price_before', 'price_now', 'category', 'subcategory', 'url', 'color1',
             'color2', 'color3', 'color4', 'color5', 'color6', 'images')
     data = pd.read_excel(excel, engine='openpyxl', sheet_name='Productos')
+    data = data.dropna(how='all')
     for i in range(len(data)):
         row = data.iloc[i]
         product_data = {}

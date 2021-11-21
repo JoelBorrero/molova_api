@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from ..crawler.models import Debug
-from ..crawler.services import set_visibility
+from ..crawler.tasks import set_visibility
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
 from ..item.services import generate_prefix, read_from_excel, read_to_add_images
@@ -46,8 +46,8 @@ class BrandViewSet(viewsets.ViewSet):
         {brand: brand_id, visibility: bool}
         """
         data = request.data
-        result = set_visibility(data['brand_id'], data['visibility'])
-        return Response({'response': result}, status=status.HTTP_200_OK)
+        set_visibility.delay(data['brand_id'], data['visibility'])
+        return Response({'status': 'Working'}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['POST'])
     def update_files(self, request):
@@ -56,12 +56,6 @@ class BrandViewSet(viewsets.ViewSet):
         """
         read_to_add_images()
         return Response({'status': 'Done'}, status=status.HTTP_200_OK)
-
-    @action(detail=False, methods=['POST'])
-    def get_my_products(self, request):
-        items = Product.objects.all()
-        serializer = ProductSerializer(items, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # class Registration(viewsets.ModelViewSet):
