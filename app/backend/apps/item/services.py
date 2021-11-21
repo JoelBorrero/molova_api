@@ -384,18 +384,20 @@ def normalize_url(url):
 
 
 def product_from_dict(product, brand):
-    name = product['name']
     if type(product['ref']) is float and math.isnan(product['ref']):
         product['ref'] = generate_ref(brand)
+    name = product['name']
+    description = product['description'] if product['description'] != 'nan' else ''
     product['price_now'] = to_int(product['price_now'])
     product['price_before'] = to_int(product['price_before'])
+    product['price_before'] = product['price_now']  # To hide discount
     if not product['price_now']:
         product['price_now'] = product['price_before']
     product['discount'] = 100 - int(product['price_now'] / product['price_before'] * 100)
     category = get_category('Mango', name, product['category'])
     subcategory = get_subcategory('Mango', name, category, product['subcategory'])
-    colors = [str(product[f'color{c}']).title() for c in range(1, 7) if not str(product[f'color{c}']) is 'Nan']
-    defaults = {'reference': product['ref'], 'description': product.get('description', ''),
+    colors = [str(product[f'color{c}']).title() for c in range(1, 7) if str(product[f'color{c}']) != 'nan']
+    defaults = {'reference': product['ref'], 'description': description,
                 'url': product.get('url', generate_url(brand, product['ref'])), 'price': product['price_now'],
                 'price_before': product['price_before'], 'discount': product['discount'],
                 'sale': bool(product['discount']), 'images': str(product.get('images', [])), 'sizes': '[]',
@@ -424,7 +426,9 @@ def read_to_add_images():
         brand_folder = f'{main_folder}/{brand}'
         excel = [f'{brand_folder}/{f}' for f in os.listdir(brand_folder) if 'Plantilla Carga' in f][0]
         data = pd.read_excel(excel, engine='openpyxl', sheet_name='Productos')
-        data = data.dropna(subset=['Nombre producto*'])
+        data = data.dropna(how='all')
+        keys = data.keys()[:14]
+        data = data[keys]
         all_images = []
         for i in range(len(data)):
             row = data.iloc[i]
@@ -433,7 +437,7 @@ def read_to_add_images():
             product_folder = f'{brand_folder}/{brand}/{product_name}'
             for filename in [f for f in os.listdir(product_folder) if not f.startswith('.')]:
                 upload_key = f'Products Images/{brand}/{product_name}/{filename}'
-                for bf, af in ((' ', '+'), ('á', '%C2%A0'), ('ó', '%E0%B8%82'), ('ñ', '%E0%B8%84')):
+                for bf, af in ((' ', '+'), ('á', 'a%CC%81'), ('ó', '%E0%B8%82'), ('ñ', '%E0%B8%84')):
                     upload_key = upload_key.replace(bf, af)
                 images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
             all_images.append(images)

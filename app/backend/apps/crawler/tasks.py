@@ -394,7 +394,7 @@ def crawl_solua():
         original_subcategory = original_category
         subcategory = get_subcategory('Stradivarius', name, category, original_subcategory)
         defaults = {'brand': brand, 'name': name, 'description': p['body_html'],
-                    'url': f'https://soluaccesorios.com/products/{p["handle"]}', 'price': price_now,
+                    'url': f'https://soluaccesorios.com/products/{p["handle"]}', 'price': price_now, 'national': True,
                     'price_before': price_before, 'discount': discount, 'sale': bool(discount), 'images': images,
                     'category': category, 'original_category': original_category, 'subcategory': subcategory,
                     'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
