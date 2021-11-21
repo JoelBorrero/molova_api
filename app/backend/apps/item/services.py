@@ -428,11 +428,13 @@ def read_to_add_images():
         all_images = []
         for i in range(len(data)):
             row = data.iloc[i]
-            product_name = row[1].strip()
+            product_name = row[1].strip().replace("/", "-")
             images = []
-            product_folder = f'{brand_folder}/{brand}/{product_name.replace("/", "-")}'
-            for filename in [f for f in os.listdir(product_folder) if not f.startswith('._')]:
-                upload_key = f'Products Images/{brand}/{product_name}/{filename}'.replace(' ', '+')
+            product_folder = f'{brand_folder}/{brand}/{product_name}'
+            for filename in [f for f in os.listdir(product_folder) if not f.startswith('.')]:
+                upload_key = f'Products Images/{brand}/{product_name}/{filename}'
+                for bf, af in ((' ', '+'), ('á', '%C2%A0'), ('ó', '%E0%B8%82'), ('ñ', '%E0%B8%84')):
+                    upload_key = upload_key.replace(bf, af)
                 images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
             all_images.append(images)
         data['Imágenes'] = all_images

@@ -16,10 +16,16 @@ def brand(request):
     """
     This view simulates the brands admin dashboard.
     """
-    brand = Brand.objects.filter(id=request.user.id).first()
-    serializer = BrandSerializer(brand).data if brand else {}
-    template = loader.get_template('brand.html')
-    document = template.render({'brand': serializer, 'is_admin': request.user.is_superuser})
+    if request.user.is_superuser:
+        brands = Brand.objects.all()
+        serializer = BrandSerializer(brands, many=True)
+        template = loader.get_template('brand.html')
+        document = template.render({'brands': serializer.data, 'is_superuser': True})
+    else:
+        brand = Brand.objects.filter(id=request.user.id).first()
+        serializer = BrandSerializer(brand)
+        template = loader.get_template('brand.html')
+        document = template.render({'brands': [serializer.data]})
     return HttpResponse(document, status=200)
 
 
@@ -33,24 +39,30 @@ def crawl(request):
     return HttpResponse(document, status=200)
 
 
-# @permission_classes([permissions.IsAdminUser])
 def product_list(request):
     """
     This view shows all products.
     """
     template = loader.get_template('items.html')
-    brand = request.GET.get('q')
+    if request.user.is_superuser:
+        brand = request.GET.get('q')
+    else:
+        brand = Brand.objects.get(id=request.user.id)
     products = Product.objects.filter(brand=brand)
     products = ProductSerializer(products, many=True).data
     for product in products:
-        product['images'] = ast.literal_eval(product['images'])
+        try:
+            product['images'] = ast.literal_eval(product['images'])
+        except:
+            product['images'] = 'https://'+str(products)
         if not type(product['images'][0]) is str:
             product['images'] = product['images'][0]
     brand_names = []
     for product in Product.objects.all():
         if product.brand not in brand_names:
             brand_names.append(product.brand)
-    document = template.render({'brand_names': brand_names, 'products': products, 'count': len(products)})
+    document = template.render({'brand_names': brand_names, 'products': products, 'count': len(products),
+                                'is_superuser': request.user.is_superuser})
     return HttpResponse(document, status=200)
 
 

@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
+{% for brand in brands %}
 <div class="row mt-4">
     <div class="col-4">
         <h2>{{brand.name}}</h2>
         <h6>Nit: {{brand.nit}}</h6>
     </div>
-    <div class="col-8">
+    <div class="col-4">
         <form action="javascript:massive_upload({{brand.id}})">
             <div class="row">
                 <div class="col-8">
                     <label for="excel">Excel</label>
-                    <input id="excel" type="file" name="excel">
-                    <br>
-                    <label for="photos">Photos</label>
-                    <input id="photos" type="file" name="photos" placeholder="Photos">
+                    <input id="excel_{{brand.id}}" type="file" name="excel">
                 </div>
                 <div class="col-4">
                     <input type="submit">
@@ -21,12 +19,20 @@
             </div>
         </form>
     </div>
-    {% if is_admin %}
-    <form action="javascript:post('/api/v1/user/brand/update_files/')">
-        <input type="submit" value="Actualizar archivos">
-    </form>
-    {% endif %}
+    <div class="col-4">
+        <form action="javascript:set_brand_visibility({{brand.id}})">
+            <input type="checkbox" value="Visible" id="visibility_{{brand.id}}">
+            <input type="submit" value="Set visibility">
+        </form>
+    </div>
 </div>
+<hr>
+{% endfor %}
+{% if is_superuser %}
+<form action="javascript:post('/api/v1/user/brand/update_files/')">
+    <input type="submit" value="Actualizar archivos">
+</form>
+{% endif %}
 
 <script>
     function post(endpoint) {
@@ -34,21 +40,49 @@
             method: 'POST', headers: {
                 "X-CSRFToken": get_cookie("csrftoken"),
             }
+        }).then((response) => {
+            alert(response.status)
+        });
+    }
+
+    function set_brand_visibility(id){
+        let data = new FormData()
+        const visibility = document.getElementById("visibility_" + id).checked;
+        data.append('brand_id', id);
+        data.append('visibility', visibility);
+        fetch("/api/v1/user/brand/set_brand_visibility/", {
+            method: 'POST',
+            body: data,
+            headers: {
+                "X-CSRFToken": get_cookie("csrftoken"),
+            }
+        }).then((response) => {
+            if (response.status == 200) {
+                alert('Set successfully');
+            } else {
+                alert('Something went wrong');
+            }
         })
     }
 
     function massive_upload(id) {
         let data = new FormData()
-        const excel = document.getElementById("excel").files[0];
-        const photos = document.getElementById("photos").files[0];
-        data.append('excel', excel)
-        data.append('photos', photos)
-        data.append('brand_id', id)
+        const excel = document.getElementById("excel_" + id).files[0];
+        // const photos = document.getElementById("photos_" + id).files[0];
+        data.append('excel', excel);
+        // data.append('photos', photos);
+        data.append('brand_id', id);
         fetch("/api/v1/user/brand/massive_upload/", {
             method: 'POST',
             body: data,
             headers: {
                 "X-CSRFToken": get_cookie("csrftoken"),
+            }
+        }).then((response) => {
+            if (response.status == 200) {
+                alert('Uploaded successfully');
+            } else {
+                alert('Something went wrong');
             }
         })
     }

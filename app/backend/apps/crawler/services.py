@@ -7,6 +7,7 @@ from django.db.models import Q
 
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
+from ..user.models import Brand
 from ..utils.constants import BASE_HOST, USER_AGENTS, IMAGE_FORMATS
 
 
@@ -46,3 +47,20 @@ def post_item(item):
     """Create or update the element with the same url"""
     data = ProductSerializer(item).data
     return requests.post(f'{BASE_HOST}/find', json.dumps(data))
+
+
+def set_visibility(brand_id: int, visibility: bool):
+    brand = Brand.objects.get(id=brand_id)
+    products = Product.objects.filter(brand=brand)
+    if visibility:
+        for product in products:
+            post_item(product)
+            product.active = True
+            product.save()
+    else:
+        to_delete = []
+        for product in products:
+            to_delete.append(product.url)
+            product.active = False
+            product.save()
+        delete_from_remote(to_delete)

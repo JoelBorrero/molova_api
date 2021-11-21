@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Items</h1>
+{% if is_superuser %}
 <div class="row">
     Filtrar por marca:
     {% for brand in brand_names %}
     <a type="button" class="btn btn-primary mx-2" href="products?q={{brand}}">{{brand}}</a>
     {% endfor %}
 </div>
+{% endif %}
 <h2>{{products.0.brand}} - ({{count}})</h2>
 <div class="row">
     {% for product in products %}
@@ -54,10 +56,11 @@
 </script>
 
 <style>
-    .prices{
+    .prices {
         font-size: 20px;
         font-weight: 600;
     }
+
     .prices .price_before {
         color: #cf1800;
         border-top: 2px solid rgba(207, 24, 0, 0.99);
