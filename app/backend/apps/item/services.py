@@ -387,10 +387,11 @@ def normalize_url(url):
 
 
 def product_from_dict(product, brand):
-    if type(product['ref']) is float and math.isnan(product['ref']):
+    if (type(product['ref']) is float or type(product['ref']) is np.float64) and math.isnan(product['ref']):
         product['ref'] = generate_ref(brand)
     name = product['name']
-    description = product['description'] if product['description'] != 'nan' else ''
+    description = product['description'] if type(product['description']) is str else ''
+    url = product['url'] if type(product['url']) is str else generate_url(brand, product['ref'])
     product['price_now'] = to_int(product['price_now'])
     product['price_before'] = to_int(product['price_before'])
     if not product['price_now']:
@@ -401,7 +402,7 @@ def product_from_dict(product, brand):
     subcategory = get_subcategory('Mango', name, category, product['subcategory'])
     colors = [str(product[f'color{c}']).title() for c in range(1, 7) if str(product[f'color{c}']) != 'nan']
     defaults = {'reference': product['ref'], 'description': description,
-                'url': product.get('url', generate_url(brand, product['ref'])), 'price': product['price_now'],
+                'url': url, 'price': product['price_now'],
                 'price_before': product['price_before'], 'discount': product['discount'],
                 'sale': bool(product['discount']), 'images': str(product.get('images', [])), 'sizes': '[]',
                 'colors': colors, 'category': category, 'original_category': product['category'], 'national': True,
@@ -446,7 +447,7 @@ def read_to_add_images():
                 images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
             all_images.append(images)
         data['Imágenes'] = all_images
-        writer = pd.ExcelWriter(f'{brand_folder}/Plantilla modificada.xlsx', engine='xlsxwriter')
+        writer = pd.ExcelWriter(f'{main_folder}/{brand}.xlsx', engine='xlsxwriter')
         data.to_excel(writer, 'Productos', index=False)
         writer.save()
 

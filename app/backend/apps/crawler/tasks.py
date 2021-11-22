@@ -404,7 +404,9 @@ def crawl_solua():
                     'price_before': price_before, 'discount': discount, 'sale': bool(discount), 'images': images,
                     'category': category, 'original_category': original_category, 'subcategory': subcategory,
                     'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
-        Product.objects.update_or_create(reference=p['id'], defaults=defaults)
+        product, created = Product.objects.update_or_create(reference=p['id'], defaults=defaults)
+        if product.active:
+            post_item(product)
         self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
     self.save()
 
@@ -421,12 +423,9 @@ def set_visibility(brand_id, visibility):
             product.save()
     else:
         to_delete = []
-        # Debug.objects.update_or_create(name='to del', defaults={'text': f'{to_delete}, {len(products)}'})
         for product in products:
             to_delete.append(product.url)
             product.active = False
             product.save()
-            # Debug.objects.update_or_create(name=product.name, defaults={'text': product.url})
-        r = delete_from_remote(to_delete)
-        # Debug.objects.update_or_create(name='del remote', defaults={'text': r})
+        delete_from_remote(to_delete)
     return f'{brand} set to {visibility}'
