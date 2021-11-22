@@ -89,10 +89,9 @@ def get_category(brand, name, original_category):
     categories_list = brands_categories[brand]
     subcategories_list = brands_subcategories[brand]
     name = name.lower()
-    for c in categories_list:
+    for index, c in enumerate(categories_list):
         for cat in c:
             if cat in original_category.lower():
-                index = categories_list.index(c)
                 if index == 0:
                     # If any cardigan in shirts
                     if any(s in name for s in categories_list[4]):
@@ -219,7 +218,7 @@ def get_subcategory(brand, name, category, original_subcategory):
         return category
     name = name.lower().split(' ')
     subcategories_list = brands_subcategories[brand]
-    subs = subcategories_list[index] if index < 9 else ''
+    subs = subcategories_list[index] if index < 10 else ''
     if index == 0:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1] + subs[2] + subs[3]):
             return 'Camisas'
@@ -374,6 +373,21 @@ def get_subcategory(brand, name, category, original_subcategory):
             return 'Medias'
         elif any(s in name for s in subs[9]):
             return 'Cinturones'
+    elif index == 9:
+        if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1] + subs[2] + subs[3]):
+            return 'Bikini'
+        elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2] + subs[3]):
+            return 'Trikini'
+        elif any(s in sub for s in subs[2]) and not any(s in sub for s in subs[3]):
+            return 'Bañadores'
+        elif any(s in sub for s in subs[3]):
+            return 'Cover Ups'
+        elif any(s in sub for s in subs[0]):
+            return 'Bikini'
+        elif any(s in sub for s in subs[1]):
+            return 'Trikini'
+        elif any(s in sub for s in subs[2]):
+            return 'Bañadores'
     return category
 
 
@@ -427,7 +441,7 @@ def read_from_excel(excel, user):
 def read_to_add_images():
     bucket = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
     main_folder = './Recursos Marcas'
-    for brand in [b for b in os.listdir(main_folder) if not b.startswith('.')]:
+    for brand in [b for b in os.listdir(main_folder) if not (b.startswith('.') or b.startswith('0.'))]:
         brand_folder = f'{main_folder}/{brand}'
         excel = [f'{brand_folder}/{f}' for f in os.listdir(brand_folder) if 'Plantilla Carga' in f][0]
         data = pd.read_excel(excel, engine='openpyxl', sheet_name='Productos')
@@ -447,7 +461,7 @@ def read_to_add_images():
                 images.append(f'https://{bucket}.s3.amazonaws.com/{upload_key}')
             all_images.append(images)
         data['Imágenes'] = all_images
-        writer = pd.ExcelWriter(f'{main_folder}/{brand}.xlsx', engine='xlsxwriter')
+        writer = pd.ExcelWriter(f'{main_folder}/0. Generated/{brand}.xlsx', engine='xlsxwriter')
         data.to_excel(writer, 'Productos', index=False)
         writer.save()
 

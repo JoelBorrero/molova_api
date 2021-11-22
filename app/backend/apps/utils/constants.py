@@ -2,7 +2,7 @@ import ast
 
 BASE_HOST = 'https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova'
 CATEGORIES = ('Camisas y Camisetas', 'Pantalones y Jeans', 'Vestidos y Enterizos', 'Faldas y Shorts',
-              'Abrigos y Blazers', 'Ropa deportiva', 'Zapatos', 'Bolsos', 'Accesorios', 'Otros')
+              'Abrigos y Blazers', 'Ropa deportiva', 'Zapatos', 'Bolsos', 'Accesorios', 'Swimwear', 'Otros')
 GENDERS = (('h', 'Hombre'), ('m', 'Mujer'))
 IMAGE_FORMATS = ('image/png', 'image/jpeg', 'image/jpg')
 SETTINGS = ast.literal_eval(open('Settings.json', 'r').read())

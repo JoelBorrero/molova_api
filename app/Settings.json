@@ -1030,7 +1030,8 @@
 				"gorros",
 				"medias",
 				"socks"
-			]
+			],
+			["swimwear"]
 		],
 		"Mango": [
 			["camisas", "camisetas", "jerséis", "blusas", "tops"],
@@ -1091,7 +1092,8 @@
 				"gorros",
 				"medias",
 				"socks"
-			]
+			],
+			["swimwear"]
 		],
 		"Mercedes Campuzano": [
 			["camisas", "camisetas", "jerséis", "blusas", "tops"],
@@ -1151,7 +1153,8 @@
 				"gorros",
 				"medias",
 				"socks"
-			]
+			],
+			["swimwear"]
 		],
 		"Pull & Bear": [
 			["camisas", "camisetas", "jerséis", "blusas", "tops"],
@@ -1202,7 +1205,8 @@
 				"gorros",
 				"medias",
 				"socks"
-			]
+			],
+			["swimwear"]
 		],
 		"Stradivarius": [
 			["camisas", "camisetas", "jerséis", "blusas", "tops"],
@@ -1266,7 +1270,8 @@
 				"gorros",
 				"medias",
 				"socks"
-			]
+			],
+			["swimwear"]
 		],
 		"Zara": [
 			["camisas", "camisetas", "jerséis", "blusas", "tops"],
@@ -1317,7 +1322,8 @@
 				"gorros",
 				"medias",
 				"socks"
-			]
+			],
+			["swimwear"]
 		]
 	},
 	"brands_subcategories": {
@@ -1439,10 +1445,11 @@
 				],
 				["gafas"],
 				["bufanda"],
-				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["bralette", "interiores"],
 				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
 				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
 			],
+			[["bikini", "braguita"], ["trikini"], ["bañador", "bañadores"],["cover"]],
 			[[]]
 		],
 		"Mango": [
@@ -1555,10 +1562,11 @@
 				],
 				["gafas"],
 				["bufanda"],
-				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["bralette", "interiores"],
 				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
 				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
 			],
+			[["bikini", "braguita"], ["trikini"], ["bañador", "bañadores"],["cover"]],
 			[[]]
 		],
 		"Mercedes Campuzano": [
@@ -1681,10 +1689,11 @@
 				],
 				["gafas"],
 				["bufanda"],
-				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["bralette", "interiores"],
 				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
 				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
 			],
+			[["bikini", "braguita"], ["trikini"], ["bañador", "bañadores"],["cover"]],
 			[[]]
 		],
 		"Pull & Bear": [
@@ -1826,10 +1835,11 @@
 				],
 				["gafas"],
 				["bufanda"],
-				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["bralette", "interiores"],
 				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
 				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
 			],
+			[["bikini", "braguita"], ["trikini"], ["bañador", "bañadores"],["cover"]],
 			[[]]
 		],
 		"Stradivarius": [
@@ -1984,10 +1994,11 @@
 				],
 				["gafas"],
 				["bufanda"],
-				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["bralette", "interiores"],
 				["medias", "tobillera", "tobilleras", "calcetines", "socks"],
 				["belt", "cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
 			],
+			[["bikini", "braguita"], ["trikini"], ["bañador", "bañadores"],["cover"]],
 			[[]]
 		],
 		"Zara": [
@@ -2112,10 +2123,11 @@
 				],
 				["gafa", "gafas"],
 				["bufanda"],
-				["bañador", "bikini", "braguita", "bralette", "interiores"],
+				["bralette", "interiores"],
 				["media", "medias", "tobillera", "tobilleras", "calcetines", "socks"],
 				["cinturon", "cinturones", "correa", "corset", "fajin", "fajín"]
 			],
+			[["bikini", "braguita"], ["trikini"], ["bañador", "bañadores"], ["cover"]],
 			[[]]
 		]
 	},
@@ -2129,7 +2141,8 @@
 		["socks", "calcetines", "medias"],
 		[],
 		[],
-		["tarjetero"]
+		["tarjetero"],
+		[]
 	],
 	"speed": 1
 }
