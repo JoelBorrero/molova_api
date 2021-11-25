@@ -10,6 +10,7 @@ class Product(ModelBase):
     reference = models.CharField(max_length=20)
     description = models.TextField(blank=True, null=True)
     url = models.TextField()
+    id_producto = models.TextField()
     price = models.PositiveIntegerField()
     price_before = models.PositiveIntegerField()
     discount = models.PositiveSmallIntegerField()

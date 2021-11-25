@@ -5,6 +5,7 @@ from random import randint
 import requests
 from django.db.models import Q
 
+from .models import Debug
 from ..item.models import Product
 from ..item.serializers import ProductSerializer, ProductToPostSerializer
 from ..user.models import Brand
@@ -48,8 +49,11 @@ def post_item(item):
     data = ProductToPostSerializer(item).data
     for bf, af in (('reference', 'ref'), ('price_before', 'priceBefore'), ('price', 'allPricesNow'),
                    ('images', 'allImages'), ('sizes', 'allSizes'), ('original_category', 'originalCategory'),
-                   ('original_subcategory', 'originalSubcategory')):
+                   ('original_subcategory', 'originalSubcategory'), ('national', 'nacional')):
         data[af] = data.pop(bf)
-    data['id_producto'] = data['url']
+    data['nacional'] = 1 if data['nacional'] else 0
+    # data['nacional'] = 'True'
+    name = data['name']
     data = json.dumps(data).encode('utf-8')
+    Debug.objects.update_or_create(name=name, defaults={'text': str(data)})
     return requests.post(f'{BASE_HOST}/find', data)

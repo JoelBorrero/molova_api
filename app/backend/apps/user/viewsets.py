@@ -52,9 +52,17 @@ class BrandViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['POST'])
     def update_files(self, request):
         """
-        Exec function to fill product images in excel files
+        Exec function to fill product images url in excel files
         """
         read_to_add_images()
+        return Response({'status': 'Done'}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['POST'])
+    def compress_images(self, request):
+        """
+        Exec function to send images to Tinify to reduce compress
+        """
+        read_s3_to_compress()
         return Response({'status': 'Done'}, status=status.HTTP_200_OK)
 
 
