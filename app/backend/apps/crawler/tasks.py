@@ -379,8 +379,8 @@ def crawl_stradivarius():
 def crawl_solua():
     session = requests.session()
     session.headers = {'X-Shopify-Access-Token': os.environ.get('SHOPIFY_SOLUA')}
-    session.headers = {'X-Shopify-Access-Token': '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'}
-    url = 'https://solua-accesorios.myshopify.com/admin/api/2021-10/products.json'
+    url = 'https://solua-accesorios.myshopify.com/admin/api/2021-10/products.json?limit=250&fields=id,title,variants,' \
+          'images,product_type,body_html,status,handle'
     products = session.get(url).json()['products']
     brand = 'Solúa'
     self = Process.objects.update_or_create(name=brand, defaults={
@@ -399,10 +399,11 @@ def crawl_solua():
         category = get_category('Stradivarius', name, original_category)
         original_subcategory = original_category
         subcategory = get_subcategory('Stradivarius', name, category, original_subcategory)
-        defaults = {'brand': brand, 'name': name, 'description': p['body_html'],
-                    'url': f'https://soluaccesorios.com/products/{p["handle"]}', 'price': price_now, 'national': True,
-                    'price_before': price_before, 'discount': discount, 'sale': bool(discount), 'images': images,
-                    'category': category, 'original_category': original_category, 'subcategory': subcategory,
+        url = f'https://soluaccesorios.com/products/{p["handle"]}'
+        defaults = {'brand': brand, 'name': name, 'description': p['body_html'], 'url': url, 'id_producto': url,
+                    'price': price_now, 'national': True, 'price_before': price_before, 'discount': discount,
+                    'sale': bool(discount), 'images': images, 'category': category,
+                    'original_category': original_category, 'subcategory': subcategory,
                     'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
         product, created = Product.objects.update_or_create(reference=p['id'], defaults=defaults)
         if product.active:
@@ -424,7 +425,7 @@ def set_visibility(brand_id, visibility):
     else:
         to_delete = []
         for product in products:
-            to_delete.append(product.url)
+            to_delete.append(product.id_producto)
             product.active = False
             product.save()
         delete_from_remote(to_delete)

@@ -18,8 +18,7 @@ def check_images_urls(optional_images, session):
         images = []
         for image in color:
             if len(optional_images) == 1 or len(images) < 2:
-                r = session.head(image)
-                if r.headers["content-type"] in IMAGE_FORMATS:
+                if url_is_image(image, session):
                     images.append(image)
         all_images.append(images)
     return all_images
@@ -52,8 +51,12 @@ def post_item(item):
                    ('original_subcategory', 'originalSubcategory'), ('national', 'nacional')):
         data[af] = data.pop(bf)
     data['nacional'] = 1 if data['nacional'] else 0
-    # data['nacional'] = 'True'
-    name = data['name']
+    name = data['name'][:29]
     data = json.dumps(data).encode('utf-8')
     Debug.objects.update_or_create(name=name, defaults={'text': str(data)})
     return requests.post(f'{BASE_HOST}/find', data)
+
+
+def url_is_image(url, session=None):
+    r = session.head(url) if session else requests.head(url)
+    return r.headers["content-type"] in IMAGE_FORMATS

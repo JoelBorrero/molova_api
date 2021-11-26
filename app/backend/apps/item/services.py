@@ -8,9 +8,10 @@ from zipfile import ZipFile
 
 import requests
 import tinify
+import ast
 
 from ..crawler.models import Debug
-from ..crawler.services import delete_from_remote, check_images_urls
+from ..crawler.services import check_images_urls, delete_from_remote, url_is_image
 from ..item.models import Product
 from ..user.models import Brand
 from ..utils.constants import CATEGORIES, SETTINGS
@@ -79,15 +80,15 @@ def generate_ref(brand, index):
 
 def generate_s3_url(upload_key, tinifying=False):
     bucket_name = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
-    for bf, af in ((' ', '+'), ('á', 'a%CC%81'), ('ó', 'o%CC%81'), ('ñ', 'n%CC%83')):
-        upload_key = upload_key.replace(bf, af)
     if tinifying:
-        upload_key = upload_key[:upload_key.index('/')] + ' Compressed' + upload_key[upload_key.index('/'):]
-        return f'{bucket_name}/{upload_key}'
+        # upload_key = upload_key[:upload_key.index('/')] + 'Compressed' + upload_key[upload_key.index('/'):]
+        return f'{bucket_name}/Compressed {upload_key}'
+    for bf, af in ((' ', '+'), ('á', 'a%CC%81'), ('ó', 'o%CC%81'), ('ñ', 'n%CC%83'), ('ข', '%E0%B8%82'), ('\xa0', '%C2%A0')):
+        upload_key = upload_key.replace(bf, af)
     return f'https://{bucket_name}.s3.amazonaws.com/{upload_key}'
 
 
-def generate_url(brand, ref=''):
+def generate_url(brand, ref='') -> str:
     return f'whatsapp_57{brand.phone}{ref}'
 
 
@@ -434,7 +435,7 @@ def product_from_dict(product, brand):
     defaults = {'id_producto': id_producto, 'reference': product['ref'], 'description': description, 'url': url,
                 'price': product['price_now'], 'price_before': product['price_before'], 'discount': product['discount'],
                 'sale': bool(product['discount']), 'images': str(product.get('images', [])), 'sizes': '[]',
-                'colors': colors, 'category': category, 'original_category': product['category'], 'national': True,
+                'colors': colors, 'category': category, 'original_category': product['category'], 'national': 1,
                 'subcategory': subcategory, 'original_subcategory': product['subcategory'], 'gender': 'm'}
     return Product.objects.update_or_create(brand=brand.name, name=name, defaults=defaults)
 
@@ -454,6 +455,9 @@ def read_from_excel(excel, user):
 
 
 def read_to_add_images():
+    def shorten(text):
+        return text.replace('https://recursosmolova.s3.amazonaws.com/', '')
+
     main_folder = './Recursos Marcas'
     for brand in [b for b in os.listdir(main_folder) if not (b.startswith('.') or b.startswith('0.'))]:
         brand_folder = f'{main_folder}/{brand}'
@@ -462,23 +466,43 @@ def read_to_add_images():
         data = data.dropna(how='all')
         keys = data.keys()[:14]
         data = data[keys]
-        all_images = []
+        debug_name = brand + ' images'
+        debug = Debug.objects.filter(name=debug_name).first()
+        if not debug:
+            debug = Debug.objects.create(name=debug_name, text='{"losen":{"compressed":[],"normal":[]},"verified":[]}')
+        images_data = ast.literal_eval(debug.text)
+        brand_images = []
         for i in range(len(data)):
             row = data.iloc[i]
             product_name = row[1].strip().replace("/", "-")
             images = []
             product_folder = f'{brand_folder}/{brand}/{product_name}'
-            for filename in [f for f in os.listdir(product_folder) if not f.startswith('.')]:
-                url = generate_s3_url(f'Products Images/{brand}/{product_name}/{filename}')
-                images.append(url)
-            all_images.append(images)
-        data['Imágenes'] = all_images
+            for filename in [f for f in os.listdir(product_folder)
+                             if not any([f.startswith('.'), f.endswith('.ini'), '/._' in f])]:
+                url = generate_s3_url(f'Compressed Products Images/{brand}/{product_name}/{filename}')
+                if shorten(url) in images_data['verified']:
+                    images.append(url)
+                else:
+                    image_exists = url_is_image(url)
+                    if not image_exists:
+                        images_data['losen']['compressed'].append(shorten(url))
+                        url = generate_s3_url(f'Products Images/{brand}/{product_name}/{filename}')
+                        image_exists = url_is_image(url)
+                    if image_exists:
+                        images.append(url)
+                        images_data['verified'].append(shorten(url))
+                    else:
+                        images_data['losen']['normal'].append(shorten(url))
+            debug.text = str(images_data)
+            debug.save()
+            brand_images.append(images)
+        data['Imágenes'] = brand_images
         writer = pd.ExcelWriter(f'{main_folder}/0. Generated/{brand}.xlsx', engine='xlsxwriter')
         data.to_excel(writer, 'Productos', index=False)
         writer.save()
 
 
-def read_s3_to_compress(start=24):
+def read_s3_to_compress(start=0, end=0):
     def tinify_img(origin, path, to, output):
         """
         @param origin: s3 or file
@@ -506,18 +530,23 @@ def read_s3_to_compress(start=24):
             if not paths[i] in os.listdir('./' + '/'.join(paths[: i])):
                 os.mkdir('./' + '/'.join(paths[: i + 1]))
         return source.to_file(output)
+
     s3 = boto3.resource('s3', aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID', 'key'),
                         aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY', 'secret'))
     bucket = s3.Bucket(os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket'))
     files = []
-    for i in bucket.objects.filter(Prefix='Products Images'):
-        files.append(i.key)
-    files.pop(0)
-    for file in files[start:]:
-        if not file.endswith('.ini'):
-            tinify_img('s3', generate_s3_url(file), 'local', generate_s3_url(file, True))
-            i = files.index(file)
-            print(f'{i} - {i/len(files)*100}% ({tinify.compression_count} calls) - {file}')
+    for i in bucket.objects.filter(Prefix='Products Images/'):
+        if not any([i.key.endswith('/'), i.key.endswith('.ini'), '/._' in i.key]):
+            files.append(i.key)
+    if not end or end > len(files):
+        end = len(files)
+    session = requests.session()
+    for index, file in enumerate(files[start:end]):
+        if not url_is_image(generate_s3_url('Compressed ' + file), session):
+            t = tinify_img('s3', generate_s3_url(file), 's3', generate_s3_url(file, True))
+            print(f'{index} - {index / len(files) * 100}% ({tinify.compression_count} calls) - {file}')
+        else:
+            print(index, file)
 
 
 def set_product_images(images, product):
