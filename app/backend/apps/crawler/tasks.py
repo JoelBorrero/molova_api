@@ -4,6 +4,7 @@ from random import randint
 from time import sleep
 from urllib.parse import quote
 
+import ast
 import requests
 from celery import shared_task
 
@@ -13,7 +14,7 @@ from ..item.models import Product
 from ..item.services import find_product, get_category, get_subcategory, get_colors_src, create_or_update_item, \
     to_int, calculate_discount
 from ..user.models import Brand
-from ..utils.constants import SETTINGS
+from ..utils.constants import BASE_HOST, SETTINGS
 
 
 # settings = Settings.objects.all().first()
@@ -40,7 +41,7 @@ def crawl_bershka():
         'sec-fetch-site': 'same-origin',
         'user-agent': get_random_agent()}
     session.headers.update(headers)
-    for endpoint in SETTINGS[brand]['endpoints'][-6:-5]:
+    for endpoint in SETTINGS[brand]['endpoints']:
         products = session.get(endpoint[1]).json()['products']
         self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(products)} productos  -  {endpoint[0]}\n'
         for product in products:
@@ -119,7 +120,7 @@ def crawl_mango():
         'sec-fetch-site': 'same-origin',
         'user-agent': get_random_agent()}
     session.headers.update(headers)
-    for endpoint in SETTINGS[brand]['endpoints'][-5:-4]:
+    for endpoint in SETTINGS[brand]['endpoints']:
         page_num = 1
         # try:
         while page_num:
@@ -200,7 +201,7 @@ def crawl_pull():
         'user-agent': get_random_agent()}
     session.headers.update(headers)
     page_size = 25
-    for endpoint in SETTINGS[brand]['endpoints'][-5:-4]:
+    for endpoint in SETTINGS[brand]['endpoints']:
         category_id = endpoint[1][endpoint[1].index('/category/') + 10: endpoint[1].rindex('/')]
         response = session.get(endpoint[1]).json()['productIds']
         self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(response)} productos  -  {endpoint[0]}\n'
@@ -386,7 +387,6 @@ def crawl_solua():
     self = Process.objects.update_or_create(name=brand, defaults={
         'started': datetime.now(),
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n{len(products)} productos\n'})[0]
-    self.save()
     for p in products:
         name = p['title']
         price_now = to_int(p['variants'][0]['price']) / 100
@@ -410,6 +410,47 @@ def crawl_solua():
             post_item(product)
         self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
     self.save()
+
+
+@shared_task
+def pull_from_molova():
+    self = Process.objects.update_or_create(name='Sync', defaults={
+        'started': datetime.now(),
+        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
+    session = requests.session()
+    # for brand in [b.name for b in Brand.objects.all()]:
+    for last in ['Camisas y Camisetas', 'Pantalones y Jeans', 'Vestidos y Enterizos', 'Faldas y Shorts',
+                 'Abrigos y Blazers', 'Ropa Deportiva', 'Zapatos', 'Bolsos', 'Accesorios']:
+        for index in [0, 1]:
+            endpoint = f'{BASE_HOST}/coleccion/{index}/{last}'.replace(' ', '%20')
+            res = session.get(endpoint).json()
+            if 'items' in res:
+                self.logs += f'    {last} ({len(res["items"])}) - {"sale" if index else "col"}\n'
+                for item in res['items']:
+                    for pop in ['data', 'date_time', 'id', 'createdAt', 'updatedAt']:
+                        item.pop(pop)
+                    fields = {'brand': item['brand'], 'name': item['name'], 'reference': item.get('ref', 'ref'),
+                              'id_producto': item['id_producto'], 'url': item['url'],
+                              'description': item['description'], 'price': item['allPricesNow'],
+                              'price_before': item['priceBefore'], 'discount': item['discount'],
+                              'sale': bool(item['sale']), 'images': item['allImages'], 'sizes': item['allSizes'],
+                              'colors': item['colors'], 'category': item['category'],
+                              'original_category': item['originalCategory'], 'subcategory': item['subcategory'],
+                              'original_subcategory': item['originalSubcategory'],
+                              'gender': 'm' if item['gender'] == 'Mujer' else 'h', 'active': True, 'approved': True,
+                              'national': bool(item['nacional']), 'trend': bool(item['trend'])}
+                    # self.logs+=fields['images']
+                    # self.save()
+                    try:
+                        images = ast.literal_eval(fields['images'])
+                    except ValueError:
+                        images = []
+                    product = find_product(fields['id_producto'], images)
+                    product = create_or_update_item(product, fields, session, all_images=fields['images'])
+                    self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {product.name}\n'
+            else:
+                self.logs += f'X {last} - {"sale" if index else "col"}\n'
+            self.save()
 
 
 @shared_task

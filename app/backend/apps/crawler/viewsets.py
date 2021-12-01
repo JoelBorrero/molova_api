@@ -30,8 +30,8 @@ class ProcessViewSet(viewsets.ModelViewSet):
             brand += ' not found. Not'
         return Response({'status': brand + ' started'}, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=['GET'])
-    def broken(self, request):
-        items = Product.objects.filter(active=False)
-        serializer = ProductSerializer(items, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    @action(detail=False, methods=['POST'])
+    def sync(self, request):
+        # pull_from_molova()
+        pull_from_molova.delay()
+        return Response({'status': 'Working'}, status=status.HTTP_200_OK)

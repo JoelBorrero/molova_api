@@ -12,7 +12,12 @@ from ..user.models import Brand
 from ..utils.constants import BASE_HOST, USER_AGENTS, IMAGE_FORMATS
 
 
-def check_images_urls(optional_images, session):
+def check_images_urls(optional_images, session=None) -> list:
+    """
+    @param optional_images: A nested list of possibles image urls
+    @param session: A requests session to avoid using multiple individual requests
+    @return: A nested list clean without broken links
+    """
     all_images = []
     for color in optional_images:
         images = []
@@ -32,7 +37,7 @@ def check_inactive_items(brand, started):
     delete_from_remote([item.url for item in inactive])
 
 
-def delete_from_remote(to_delete):
+def delete_from_remote(to_delete: list):
     if not type(to_delete) is list:
         to_delete = [to_delete]
     return requests.post(f'{BASE_HOST}/delete',
@@ -44,19 +49,19 @@ def get_random_agent():
 
 
 def post_item(item):
-    """Create or update the element with the same url"""
+    """Create or update the element with the same url on remote db"""
     data = ProductToPostSerializer(item).data
     for bf, af in (('reference', 'ref'), ('price_before', 'priceBefore'), ('price', 'allPricesNow'),
                    ('images', 'allImages'), ('sizes', 'allSizes'), ('original_category', 'originalCategory'),
                    ('original_subcategory', 'originalSubcategory'), ('national', 'nacional')):
         data[af] = data.pop(bf)
     data['nacional'] = 1 if data['nacional'] else 0
-    name = data['name'][:29]
+    # name = data['name'][:29]
     data = json.dumps(data).encode('utf-8')
-    Debug.objects.update_or_create(name=name, defaults={'text': str(data)})
+    # Debug.objects.update_or_create(name=name, defaults={'text': str(data)})
     return requests.post(f'{BASE_HOST}/find', data)
 
 
-def url_is_image(url, session=None):
+def url_is_image(url, session=None) -> bool:
     r = session.head(url) if session else requests.head(url)
     return r.headers["content-type"] in IMAGE_FORMATS

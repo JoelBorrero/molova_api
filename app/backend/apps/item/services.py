@@ -23,7 +23,11 @@ def calculate_discount(price_before, price_now):
 
 def create_or_update_item(item, fields, session, optional_images='', all_images=''):
     """
-    If images are trusted, all_images param will be used, else optional_images will be used and will check each one
+    @param item: Product object or None
+    @param fields: Dict with data to be updated in item
+    @param session: Requests session to avoid individual requests
+    @param all_images: Will be used only if images are trusted
+    @param optional_images: Will be used if images could be broken links
     """
     if item:
         if not item.url == fields['url'] or not item.active:
@@ -35,7 +39,7 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
         if not all_images:
             all_images = check_images_urls(optional_images, session)
         item = Product.objects.create(brand=fields['brand'], name=fields['name'], reference=fields['reference'],
-                                      description=fields['description'], url=fields['url'], price=fields['price_now'],
+                                      description=fields['description'], url=fields['url'], price=fields['price'],
                                       price_before=fields['price_before'], discount=fields['discount'],
                                       images=all_images, sizes=fields['sizes'], colors=fields['colors'],
                                       category=fields['category'], original_category=fields['original_category'],
@@ -45,11 +49,16 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
     return item
 
 
-def find_product(url: str, images: list):
+def find_product(url: str, images: list) -> Product or None:
+    """Returns product if found, else None
+
+    @param url: The url to search in existing products
+    @param images: List of images to iterate and search inside products if prev url doesn't match
+    @return: Product or None
     """
-    Returns product if found, else None
-    """
-    product = Product.objects.filter(url__contains=url).first()
+    product = Product.objects.filter(id_producto=url).first()
+    if not product:
+        product = Product.objects.filter(url__contains=url).first()
     if not product:
         for image in images:
             product = Product.objects.filter(images__contains=image).first()
@@ -78,12 +87,16 @@ def generate_ref(brand, index):
     return f'{brand.prefix}_{1000 + index}'
 
 
-def generate_s3_url(upload_key, tinifying=False):
+def generate_s3_url(upload_key, tinifying=False, retry=False):
     bucket_name = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
     if tinifying:
-        # upload_key = upload_key[:upload_key.index('/')] + 'Compressed' + upload_key[upload_key.index('/'):]
         return f'{bucket_name}/Compressed {upload_key}'
-    for bf, af in ((' ', '+'), ('á', 'a%CC%81'), ('ó', 'o%CC%81'), ('ñ', 'n%CC%83'), ('ข', '%E0%B8%82'), ('\xa0', '%C2%A0')):
+    replacements = ((' ', '+'), ('\xa0', '%C2%A0'), ('á', 'a%CC%81'), ('á', '%C2%A0'), ('ó', 'o%CC%81'),
+                    ('ñ', '%E0%B8%84'), ('ข', '%E0%B8%82'))\
+        if retry else ((' ', '+'), ('á', '%C3%A1'), ('á', '%C2%A0'), ('ó', '%E0%B8%82'), ('ó', 'o%CC%81'),
+                       ('ú', 'u%CC%81'), ('ñ', 'n%CC%83'), ('ñ', 'n%CC%83'), ('ข', '%E0%B8%82'), ('ค', '%E0%B8%84'),
+                       ('\xa0', '%C2%A0'))
+    for bf, af in replacements:
         upload_key = upload_key.replace(bf, af)
     return f'https://{bucket_name}.s3.amazonaws.com/{upload_key}'
 
@@ -430,7 +443,8 @@ def product_from_dict(product, brand):
     product['price_before'] = product['price_now']  # To hide discount
     product['discount'] = 100 - int(product['price_now'] / product['price_before'] * 100)
     category = get_category('Mango', name, product['category'])
-    subcategory = get_subcategory('Mango', name, category, product['subcategory'])
+    # subcategory = get_subcategory('Mango', name, category, product['subcategory'])
+    subcategory = product['subcategory']
     colors = [str(product[f'color{c}']).title() for c in range(1, 7) if str(product[f'color{c}']) != 'nan']
     defaults = {'id_producto': id_producto, 'reference': product['ref'], 'description': description, 'url': url,
                 'price': product['price_now'], 'price_before': product['price_before'], 'discount': product['discount'],
@@ -456,7 +470,7 @@ def read_from_excel(excel, user):
 
 def read_to_add_images():
     def shorten(text):
-        return text.replace('https://recursosmolova.s3.amazonaws.com/', '')
+        return text.replace('https://recursosmolova.s3.amazonaws.com/Compressed+Products+Images/', '')
 
     main_folder = './Recursos Marcas'
     for brand in [b for b in os.listdir(main_folder) if not (b.startswith('.') or b.startswith('0.'))]:
@@ -485,9 +499,14 @@ def read_to_add_images():
                 else:
                     image_exists = url_is_image(url)
                     if not image_exists:
-                        images_data['losen']['compressed'].append(shorten(url))
-                        url = generate_s3_url(f'Products Images/{brand}/{product_name}/{filename}')
-                        image_exists = url_is_image(url)
+                        image_exists = url_is_image(generate_s3_url(
+                            f'Compressed Products Images/{brand}/{product_name}/{filename}', retry=True))
+                        if image_exists:
+                            url = generate_s3_url(f'Compressed Products Images/{brand}/{product_name}/{filename}', retry=True)
+                        else:
+                            images_data['losen']['compressed'].append(shorten(url))
+                            url = generate_s3_url(f'Products Images/{brand}/{product_name}/{filename}')
+                            image_exists = url_is_image(url)
                     if image_exists:
                         images.append(url)
                         images_data['verified'].append(shorten(url))
@@ -510,9 +529,9 @@ def read_s3_to_compress(start=0, end=0):
         @param to: where image should be sent
         @param output: output file path
         """
-        tinify.key = os.environ.get('TINIFY_API_KEY_1', 'API')
+        tinify.key = os.environ.get('TINIFY_API_KEY_2', 'API')
         if tinify.compression_count and tinify.compression_count > 490:
-            tinify.key = os.environ.get('TINIFY_API_KEY_2', 'API')
+            tinify.key = os.environ.get('TINIFY_API_KEY_1', 'API')
         if origin == 's3':
             source = tinify.from_url(path)
         else:
@@ -536,17 +555,20 @@ def read_s3_to_compress(start=0, end=0):
     bucket = s3.Bucket(os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket'))
     files = []
     for i in bucket.objects.filter(Prefix='Products Images/'):
-        if not any([i.key.endswith('/'), i.key.endswith('.ini'), '/._' in i.key]):
+        if not any([i.key.endswith('/'), i.key.endswith('.ini'), '/.' in i.key]):
             files.append(i.key)
     if not end or end > len(files):
         end = len(files)
     session = requests.session()
     for index, file in enumerate(files[start:end]):
         if not url_is_image(generate_s3_url('Compressed ' + file), session):
-            t = tinify_img('s3', generate_s3_url(file), 's3', generate_s3_url(file, True))
-            print(f'{index} - {index / len(files) * 100}% ({tinify.compression_count} calls) - {file}')
+            try:
+                t = tinify_img('s3', generate_s3_url(file), 's3', generate_s3_url(file, True))
+                print(f'{index} - {index / len(files) * 100}% ({tinify.compression_count} calls) - {file}')
+            except:
+                print(file, 'error')
         else:
-            print(index, file)
+            print(index, file, 'exists')
 
 
 def set_product_images(images, product):
