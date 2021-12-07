@@ -10,7 +10,8 @@ from ..crawler.models import Debug
 from ..crawler.tasks import set_visibility
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
-from ..item.services import generate_prefix, read_from_excel, read_to_add_images
+from ..item.services import generate_prefix, read_from_excel
+from ..item.tasks import read_to_add_images
 from ..user.models import Brand
 from ..user.serializers import BrandSerializer, UserSerializer
 
@@ -54,7 +55,7 @@ class BrandViewSet(viewsets.ViewSet):
         """
         Exec function to fill product images url in excel files
         """
-        read_to_add_images()
+        read_to_add_images.delay()
         return Response({'status': 'Done'}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['POST'])

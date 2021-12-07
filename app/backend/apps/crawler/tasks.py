@@ -8,7 +8,7 @@ import ast
 import requests
 from celery import shared_task
 
-from .models import Process, Debug  # , Settings
+from .models import Process, Debug
 from .services import get_random_agent, post_item, check_images_urls, check_inactive_items, delete_from_remote
 from ..item.models import Product
 from ..item.services import find_product, get_category, get_subcategory, get_colors_src, create_or_update_item, \
@@ -84,7 +84,7 @@ def crawl_bershka():
                 item = find_product(url, optional_images)
                 active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
                 fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
-                          'price_now': price_now, 'price_before': price_before, 'discount': discount,
+                          'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
                           'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
                           'category': category, 'original_category': original_category, 'subcategory': subcategory,
                           'original_subcategory': original_subcategory, 'gender': 'm', 'active': active}
@@ -160,16 +160,16 @@ def crawl_mango():
                     url = 'https://shop.mango.com' + it['colors'][0]['linkAnchor']
                     active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
                     fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name, 'url': url,
-                              'price_now': price_now, 'price_before': price_before, 'discount': discount,
-                              'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                              'category': category, 'original_category': original_category, 'subcategory': subcategory,
+                              'id_producto': url, 'price': price_now, 'price_before': price_before,
+                              'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
+                              'colors': get_colors_src(colors), 'category': category,
+                              'original_category': original_category, 'subcategory': subcategory,
                               'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
                               'national': False}
                     item = create_or_update_item(None, fields, session, all_images=all_images)
                     self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                     if item.active:
-                        # post_item(item)
-                        pass
+                        post_item(item)
                     else:
                         Debug.objects.create(name='no_stock', text=item)
                 self.save()
@@ -251,16 +251,16 @@ def crawl_pull():
                                 all_images.append(images)
                             active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
                             fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name, 'url': url,
-                                      'price_now': price_now, 'price_before': price_before, 'discount': discount,
-                                      'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                                      'category': category, 'original_category': original_category,
-                                      'subcategory': subcategory, 'original_subcategory': original_subcategory,
-                                      'gender': 'm', 'active': active, 'national': False}
+                                      'id_producto': url, 'price': price_now, 'price_before': price_before,
+                                      'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
+                                      'colors': get_colors_src(colors), 'category': category,
+                                      'original_category': original_category, 'subcategory': subcategory,
+                                      'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
+                                      'national': False}
                             item = create_or_update_item(None, fields, session, all_images=all_images)
                             self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                             if item.active:
-                                # post_item(item)
-                                pass
+                                post_item(item)
                             else:
                                 Debug.objects.create(name='no_stock', text=item)
                 except Exception as e:
@@ -355,7 +355,7 @@ def crawl_stradivarius():
             item = find_product(url, optional_images)
             active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
             fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
-                      'price_now': price_now, 'price_before': price_before, 'discount': discount,
+                      'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
                       'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
                       'category': category, 'original_category': original_category, 'subcategory': subcategory,
                       'original_subcategory': original_subcategory, 'gender': 'm', 'active': active}
@@ -388,69 +388,79 @@ def crawl_solua():
         'started': datetime.now(),
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n{len(products)} productos\n'})[0]
     for p in products:
-        name = p['title']
-        price_now = to_int(p['variants'][0]['price']) / 100
-        price_before = to_int(p['variants'][0]['compare_at_price']) / 100
-        if not price_before:
-            price_before = price_now
-        discount = calculate_discount(price_before, price_now)
-        images = str([i['src'] for i in p['images']])
-        original_category = p['product_type']
-        category = get_category('Stradivarius', name, original_category)
-        original_subcategory = original_category
-        subcategory = get_subcategory('Stradivarius', name, category, original_subcategory)
         url = f'https://soluaccesorios.com/products/{p["handle"]}'
-        defaults = {'brand': brand, 'name': name, 'description': p['body_html'], 'url': url, 'id_producto': url,
-                    'price': price_now, 'national': True, 'price_before': price_before, 'discount': discount,
-                    'sale': bool(discount), 'images': images, 'category': category,
-                    'original_category': original_category, 'subcategory': subcategory,
-                    'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
-        product, created = Product.objects.update_or_create(reference=p['id'], defaults=defaults)
-        if product.active:
-            post_item(product)
-        self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
+        if p['status'] == 'active':
+            name = p['title']
+            price_now = to_int(p['variants'][0]['price']) / 100
+            price_before = to_int(p['variants'][0]['compare_at_price']) / 100
+            if not price_before:
+                price_before = price_now
+            discount = calculate_discount(price_before, price_now)
+            images = str([i['src'] for i in p['images']])
+            original_category = p['product_type']
+            category = get_category('Stradivarius', name, original_category)
+            original_subcategory = original_category
+            subcategory = get_subcategory('Stradivarius', name, category, original_subcategory)
+            defaults = {'brand': brand, 'name': name, 'description': p['body_html'], 'url': url, 'id_producto': url,
+                        'price': price_now, 'national': True, 'price_before': price_before, 'discount': discount,
+                        'sale': bool(discount), 'images': images, 'category': category,
+                        'original_category': original_category, 'subcategory': subcategory,
+                        'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
+            product, created = Product.objects.update_or_create(reference=p['id'], defaults=defaults)
+            if product.active:
+                post_item(product)
+            self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
+        elif p['status'] == 'archived':
+            product = Product.objects.filter(url=url).first()
+            if product:
+                delete_from_remote(url)
+                product.delete()
+                self.logs += f'    - {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
+        self.save()
     self.save()
 
 
 @shared_task
-def pull_from_molova():
+def pull_from_molova(brands=''):
     self = Process.objects.update_or_create(name='Sync', defaults={
         'started': datetime.now(),
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
     session = requests.session()
-    # for brand in [b.name for b in Brand.objects.all()]:
-    for last in ['Camisas y Camisetas', 'Pantalones y Jeans', 'Vestidos y Enterizos', 'Faldas y Shorts',
-                 'Abrigos y Blazers', 'Ropa Deportiva', 'Zapatos', 'Bolsos', 'Accesorios']:
-        for index in [0, 1]:
-            endpoint = f'{BASE_HOST}/coleccion/{index}/{last}'.replace(' ', '%20')
-            res = session.get(endpoint).json()
-            if 'items' in res:
-                self.logs += f'    {last} ({len(res["items"])}) - {"sale" if index else "col"}\n'
-                for item in res['items']:
-                    for pop in ['data', 'date_time', 'id', 'createdAt', 'updatedAt']:
-                        item.pop(pop)
-                    fields = {'brand': item['brand'], 'name': item['name'], 'reference': item.get('ref', 'ref'),
-                              'id_producto': item['id_producto'], 'url': item['url'],
-                              'description': item['description'], 'price': item['allPricesNow'],
-                              'price_before': item['priceBefore'], 'discount': item['discount'],
-                              'sale': bool(item['sale']), 'images': item['allImages'], 'sizes': item['allSizes'],
-                              'colors': item['colors'], 'category': item['category'],
-                              'original_category': item['originalCategory'], 'subcategory': item['subcategory'],
-                              'original_subcategory': item['originalSubcategory'],
-                              'gender': 'm' if item['gender'] == 'Mujer' else 'h', 'active': True, 'approved': True,
-                              'national': bool(item['nacional']), 'trend': bool(item['trend'])}
-                    # self.logs+=fields['images']
-                    # self.save()
-                    try:
-                        images = ast.literal_eval(fields['images'])
-                    except ValueError:
-                        images = []
-                    product = find_product(fields['id_producto'], images)
-                    product = create_or_update_item(product, fields, session, all_images=fields['images'])
-                    self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {product.name}\n'
-            else:
-                self.logs += f'X {last} - {"sale" if index else "col"}\n'
-            self.save()
+    if brands:
+        brands = [f'marcas/{b}' for b in brands]
+    else:
+        brands = ['coleccion']
+    for brand in brands:
+        for last in ['Camisas y Camisetas', 'Pantalones y Jeans', 'Vestidos y Enterizos', 'Faldas y Shorts',
+                     'Abrigos y Blazers', 'Ropa Deportiva', 'Zapatos', 'Bolsos', 'Accesorios']:
+            for index in [0, 1]:
+                endpoint = f'{BASE_HOST}/{brand}/{index}/{last}'.replace(' ', '%20')
+                res = session.get(endpoint).json()
+                if 'items' in res:
+                    self.logs += f'    {last} ({len(res["items"])}) - {"sale" if index else "col"}\n'
+                    for item in res['items']:
+                        for pop in ['data', 'date_time', 'id', 'createdAt', 'updatedAt']:
+                            item.pop(pop)
+                        fields = {'brand': item['brand'], 'name': item['name'], 'reference': item.get('ref', 'ref'),
+                                  'id_producto': item['url'], 'url': item['url'],
+                                  'description': item['description'], 'price': item['allPricesNow'],
+                                  'price_before': item['priceBefore'], 'discount': item['discount'],
+                                  'sale': bool(item['sale']), 'images': item['allImages'], 'sizes': item['allSizes'],
+                                  'colors': item['colors'], 'category': item['category'],
+                                  'original_category': item['originalCategory'], 'subcategory': item['subcategory'],
+                                  'original_subcategory': item['originalSubcategory'],
+                                  'gender': 'm' if item['gender'] == 'Mujer' else 'h', 'active': True, 'approved': True,
+                                  'national': item['nacional'], 'trend': item['trend']}
+                        try:
+                            images = ast.literal_eval(fields['images'])
+                        except ValueError:
+                            images = []
+                        product = find_product(fields['id_producto'], images)
+                        product = create_or_update_item(product, fields, session, all_images=fields['images'])
+                        self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {product.name}\n'
+                else:
+                    self.logs += f'X {last} - {"sale" if index else "col"}\n'
+                self.save()
 
 
 @shared_task
@@ -458,16 +468,28 @@ def set_visibility(brand_id, visibility):
     visibility = str(visibility).title() == 'True'
     brand = Brand.objects.get(id=brand_id)
     products = Product.objects.filter(brand=brand)
+    self = Process.objects.update_or_create(name=f'{brand.name} visibility', defaults={
+        'started': datetime.now(),
+        'logs': '0 %'})[0]
+    count = len(products)
     if visibility:
-        for product in products:
-            post_item(product)
-            product.active = True
-            product.save()
+        for i, product in enumerate(products):
+            posted = post_item(product)
+            if posted:
+                product.active = True
+                product.save()
+            self.logs = f'{(i + 1) / count * 100} %'
+            self.save()
     else:
         to_delete = []
-        for product in products:
+        for i, product in enumerate(products):
             to_delete.append(product.id_producto)
             product.active = False
             product.save()
+            if len(to_delete) == 50:
+                delete_from_remote(to_delete)
+                to_delete.clear()
+            self.logs = f'{(i + 1) / count * 100} %'
+            self.save()
         delete_from_remote(to_delete)
     return f'{brand} set to {visibility}'

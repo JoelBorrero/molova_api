@@ -31,7 +31,13 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
     """
     if item:
         if not item.url == fields['url'] or not item.active:
-            delete_from_remote(item.url)
+            debug = Debug.objects.update_or_create(name='Broken links')[0]
+            try:
+                delete_from_remote(item.url)
+            except:
+                debug.text += 'X'
+            debug.text += item.url + '\n'
+            debug.save()
         for key in fields.keys():
             exec(f'item.{key} = fields[key]')
         item.save()
@@ -39,13 +45,15 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
         if not all_images:
             all_images = check_images_urls(optional_images, session)
         item = Product.objects.create(brand=fields['brand'], name=fields['name'], reference=fields['reference'],
-                                      description=fields['description'], url=fields['url'], price=fields['price'],
+                                      description=fields['description'], url=fields['url'],
+                                      id_producto=fields['id_producto'], price=fields['price'],
                                       price_before=fields['price_before'], discount=fields['discount'],
                                       images=all_images, sizes=fields['sizes'], colors=fields['colors'],
                                       category=fields['category'], original_category=fields['original_category'],
                                       subcategory=fields['subcategory'], national=fields['national'],
                                       original_subcategory=fields['original_subcategory'], gender='m',
-                                      active=fields['active'], sale=bool(fields['discount']))
+                                      active=fields['active'], sale=bool(fields['discount']),
+                                      trend=fields.get('trend', False))
     return item
 
 
@@ -56,11 +64,12 @@ def find_product(url: str, images: list) -> Product or None:
     @param images: List of images to iterate and search inside products if prev url doesn't match
     @return: Product or None
     """
-    product = Product.objects.filter(id_producto=url).first()
+    product = Product.objects.filter(id_producto__icontains=url).first()
     if not product:
-        product = Product.objects.filter(url__contains=url).first()
+        product = Product.objects.filter(url__contains=normalize_url(url)).first()
     if not product:
         for image in images:
+            image = normalize_url(image)
             product = Product.objects.filter(images__contains=image).first()
             if product:
                 break
@@ -92,7 +101,7 @@ def generate_s3_url(upload_key, tinifying=False, retry=False):
     if tinifying:
         return f'{bucket_name}/Compressed {upload_key}'
     replacements = ((' ', '+'), ('\xa0', '%C2%A0'), ('á', 'a%CC%81'), ('á', '%C2%A0'), ('ó', 'o%CC%81'),
-                    ('ñ', '%E0%B8%84'), ('ข', '%E0%B8%82'))\
+                    ('ñ', '%E0%B8%84'), ('ข', '%E0%B8%82')) \
         if retry else ((' ', '+'), ('á', '%C3%A1'), ('á', '%C2%A0'), ('ó', '%E0%B8%82'), ('ó', 'o%CC%81'),
                        ('ú', 'u%CC%81'), ('ñ', 'n%CC%83'), ('ñ', 'n%CC%83'), ('ข', '%E0%B8%82'), ('ค', '%E0%B8%84'),
                        ('\xa0', '%C2%A0'))
@@ -416,9 +425,19 @@ def get_subcategory(brand, name, category, original_subcategory):
 
 
 def normalize_url(url):
+    """
+    @param url: Url to be cropped
+    @return: Url cleaned
+    """
     try:
-        if 'pullandbear' in url:
+        if 'pullandbear.com' in url:
             return url[:url.index('?cS=')]
+        elif any(u in url for u in ['st.mngbcn.com', 'static.bershka.net', 'static.zara.net']):
+            return url[:url.index('?ts=')]
+        elif any(u in url for u in ['static.e-stradivarius.net', 'static.pullandbear.net']):
+            return url[:url.index('?t=')]
+        elif 'mercedescampuzano.vtexassets.com' in url:
+            return url[:url.index('?width=')]
         return url[:url.index('.html') + 5]
     except ValueError:
         return url
@@ -440,7 +459,7 @@ def product_from_dict(product, brand):
     product['price_before'] = to_int(product['price_before'])
     if not product['price_now']:
         product['price_now'] = product['price_before']
-    product['price_before'] = product['price_now']  # To hide discount
+    product['price_now'] = product['price_before']  # To hide discount
     product['discount'] = 100 - int(product['price_now'] / product['price_before'] * 100)
     category = get_category('Mango', name, product['category'])
     # subcategory = get_subcategory('Mango', name, category, product['subcategory'])
@@ -468,74 +487,18 @@ def read_from_excel(excel, user):
         product, created = product_from_dict(product_data, brand)
 
 
-def read_to_add_images():
-    def shorten(text):
-        return text.replace('https://recursosmolova.s3.amazonaws.com/Compressed+Products+Images/', '')
-
-    main_folder = './Recursos Marcas'
-    for brand in [b for b in os.listdir(main_folder) if not (b.startswith('.') or b.startswith('0.'))]:
-        brand_folder = f'{main_folder}/{brand}'
-        excel = [f'{brand_folder}/{f}' for f in os.listdir(brand_folder) if 'Plantilla Carga' in f][0]
-        data = pd.read_excel(excel, engine='openpyxl', sheet_name='Productos')
-        data = data.dropna(how='all')
-        keys = data.keys()[:14]
-        data = data[keys]
-        debug_name = brand + ' images'
-        debug = Debug.objects.filter(name=debug_name).first()
-        if not debug:
-            debug = Debug.objects.create(name=debug_name, text='{"losen":{"compressed":[],"normal":[]},"verified":[]}')
-        images_data = ast.literal_eval(debug.text)
-        brand_images = []
-        for i in range(len(data)):
-            row = data.iloc[i]
-            product_name = row[1].strip().replace("/", "-")
-            images = []
-            product_folder = f'{brand_folder}/{brand}/{product_name}'
-            for filename in [f for f in os.listdir(product_folder)
-                             if not any([f.startswith('.'), f.endswith('.ini'), '/._' in f])]:
-                url = generate_s3_url(f'Compressed Products Images/{brand}/{product_name}/{filename}')
-                if shorten(url) in images_data['verified']:
-                    images.append(url)
-                else:
-                    image_exists = url_is_image(url)
-                    if not image_exists:
-                        image_exists = url_is_image(generate_s3_url(
-                            f'Compressed Products Images/{brand}/{product_name}/{filename}', retry=True))
-                        if image_exists:
-                            url = generate_s3_url(f'Compressed Products Images/{brand}/{product_name}/{filename}', retry=True)
-                        else:
-                            images_data['losen']['compressed'].append(shorten(url))
-                            url = generate_s3_url(f'Products Images/{brand}/{product_name}/{filename}')
-                            image_exists = url_is_image(url)
-                    if image_exists:
-                        images.append(url)
-                        images_data['verified'].append(shorten(url))
-                    else:
-                        images_data['losen']['normal'].append(shorten(url))
-            debug.text = str(images_data)
-            debug.save()
-            brand_images.append(images)
-        data['Imágenes'] = brand_images
-        writer = pd.ExcelWriter(f'{main_folder}/0. Generated/{brand}.xlsx', engine='xlsxwriter')
-        data.to_excel(writer, 'Productos', index=False)
-        writer.save()
-
-
 def read_s3_to_compress(start=0, end=0):
     def tinify_img(origin, path, to, output):
         """
-        @param origin: s3 or file
-        @param path: path to image
-        @param to: where image should be sent
+        @param origin: 's3' or 'file'
+        @param path: url/path to image
+        @param to: where image should be sent, 's3' of 'file'
         @param output: output file path
         """
-        tinify.key = os.environ.get('TINIFY_API_KEY_2', 'API')
+        tinify.key = os.environ.get('TINIFY_API_KEY_1', 'API')
         if tinify.compression_count and tinify.compression_count > 490:
-            tinify.key = os.environ.get('TINIFY_API_KEY_1', 'API')
-        if origin == 's3':
-            source = tinify.from_url(path)
-        else:
-            source = tinify.from_file(path)
+            tinify.key = os.environ.get('TINIFY_API_KEY_2', 'API')
+        source = tinify.from_url(path) if origin == 's3' else tinify.from_file(path)
         if to == 's3':
             return source.store(
                 service='s3',

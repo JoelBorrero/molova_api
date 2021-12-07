@@ -6,7 +6,7 @@ from ..utils.models import ModelBase
 
 class Product(ModelBase):
     brand = models.CharField(max_length=50)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     reference = models.CharField(max_length=20)
     description = models.TextField(blank=True, null=True)
     url = models.TextField()

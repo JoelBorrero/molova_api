@@ -2,6 +2,7 @@ import json
 from datetime import timedelta
 from random import randint
 
+import ast
 import requests
 from django.db.models import Q
 
@@ -30,7 +31,7 @@ def check_images_urls(optional_images, session=None) -> list:
 
 
 def check_inactive_items(brand, started):
-    inactive = Product.objects.filter(Q(brand=brand) & Q(updated__lt=started - timedelta(hours=6)))
+    inactive = Product.objects.filter(Q(brand=brand) & Q(updated__lt=started - timedelta(hours=6)) & Q(active=True))
     for item in inactive:
         item.active = False
         item.save()
@@ -50,16 +51,23 @@ def get_random_agent():
 
 def post_item(item):
     """Create or update the element with the same url on remote db"""
-    data = ProductToPostSerializer(item).data
-    for bf, af in (('reference', 'ref'), ('price_before', 'priceBefore'), ('price', 'allPricesNow'),
-                   ('images', 'allImages'), ('sizes', 'allSizes'), ('original_category', 'originalCategory'),
-                   ('original_subcategory', 'originalSubcategory'), ('national', 'nacional')):
-        data[af] = data.pop(bf)
-    data['nacional'] = 1 if data['nacional'] else 0
-    # name = data['name'][:29]
-    data = json.dumps(data).encode('utf-8')
-    # Debug.objects.update_or_create(name=name, defaults={'text': str(data)})
-    return requests.post(f'{BASE_HOST}/find', data)
+    try:
+        all_sizes = ast.literal_eval(item.sizes)
+    except:
+        all_sizes = [['']]
+    active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+    if active:
+        data = ProductToPostSerializer(item).data
+        for bf, af in (('reference', 'ref'), ('price_before', 'priceBefore'), ('price', 'allPricesNow'),
+                       ('images', 'allImages'), ('sizes', 'allSizes'), ('original_category', 'originalCategory'),
+                       ('original_subcategory', 'originalSubcategory'), ('national', 'nacional')):
+            data[af] = data.pop(bf)
+        data['nacional'] = 1 if data['nacional'] else 0
+        # name = data['name'][:29]
+        data = json.dumps(data).encode('utf-8')
+        # Debug.objects.update_or_create(name=name, defaults={'text': str(data)})
+        return requests.post(f'{BASE_HOST}/find', data)
+    return False
 
 
 def url_is_image(url, session=None) -> bool:
