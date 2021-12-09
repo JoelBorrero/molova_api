@@ -5,7 +5,7 @@ from rest_framework.decorators import permission_classes
 from django.http import HttpResponse
 from django.template import loader
 
-from ..crawler.models import Debug
+from ..crawler.models import Debug, Process
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
 from ..user.models import Brand
@@ -19,9 +19,13 @@ def brand(request):
     """
     if request.user.is_superuser:
         brands = Brand.objects.all()
-        serializer = BrandSerializer(brands, many=True)
+        serializer = BrandSerializer(brands, many=True).data
+        for brand in serializer:
+            percentage = Process.objects.filter(name=f'{brand["name"]} visibility').first()
+            if percentage:
+                brand['percentage'] = percentage.logs
         template = loader.get_template('brand.html')
-        document = template.render({'brands': serializer.data, 'is_superuser': True})
+        document = template.render({'brands': serializer, 'is_superuser': True})
     else:
         brand = Brand.objects.filter(id=request.user.id).first()
         serializer = BrandSerializer(brand)
@@ -36,7 +40,18 @@ def crawl(request):
     This view allows admin to control scraps processes.
     """
     template = loader.get_template('crawl.html')
-    document = template.render({})
+    bershka = Process.objects.filter(name='Bershka').first()
+    mango = Process.objects.filter(name='Mango').first()
+    pull = Process.objects.filter(name='Pull & Bear').first()
+    stradivarius = Process.objects.filter(name='Stradivarius').first()
+    solua = Process.objects.filter(name='Solúa').first()
+    data = {}
+    for brand in ['Bershka', 'Mango', 'Pull', 'Stradivarius', 'Solua']:
+        try:
+            exec(f'data[brand] = {brand.lower()}.started')
+        except AttributeError:
+            pass
+    document = template.render(data)
     return HttpResponse(document, status=200)
 
 
@@ -83,10 +98,15 @@ def stats(request):
     """
     template = loader.get_template('stats.html')
     statistics = Debug.objects.filter(name='Statistics').first()
-    data = ast.literal_eval(statistics.text.replace(' ', ''))
+    if statistics:
+        data = ast.literal_eval(statistics.text.replace(' ', ''))
+        updated = statistics.updated
+    else:
+        data = None
+        updated = 'Nunca'
     # keys = data.keys()
     # for key in keys:
     #     data[key.replace(' ', '')] = data.pop(key)
     # categories = [str(key).replace(' ', '') for key in data['Mango']['col'].keys()]
-    document = template.render({'data': data, 'updated': statistics.updated})
+    document = template.render({'data': data, 'updated': updated})
     return HttpResponse(document, status=200)
