@@ -7,6 +7,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from ..crawler.models import Debug
+from ..crawler.services import get_statistics
 from ..crawler.tasks import set_visibility
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
@@ -57,6 +58,14 @@ class BrandViewSet(viewsets.ViewSet):
         """
         read_to_add_images.delay()
         return Response({'status': 'Done'}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['POST'])
+    def update_statistics(self, request):
+        """
+        Exec function to update the collected statistics
+        """
+        stats = get_statistics()
+        return Response({'data': stats}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['POST'])
     def compress_images(self, request):

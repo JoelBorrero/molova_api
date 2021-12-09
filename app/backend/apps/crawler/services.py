@@ -49,6 +49,30 @@ def get_random_agent():
     return USER_AGENTS[randint(0, len(USER_AGENTS)) - 1]
 
 
+def get_statistics():
+    output = {}
+    keys = ['Camisas y Camisetas', 'Pantalones y Jeans', 'Vestidos y Enterizos', 'Faldas y Shorts', 'Abrigos y Blazers',
+            'Ropa deportiva', 'Zapatos', 'Bolsos', 'Accesorios']
+    for last in keys:
+        for index in [0, 1]:
+            endpoint = f'{BASE_HOST}/coleccion/{index}/{last}'.replace(' ', '%20')
+            res = requests.get(endpoint).json()
+            if 'items' in res:
+                for item in res['items']:
+                    brand = item['brand']
+                    if brand not in output:
+                        output[brand] = {'col': {}, 'sale': {}}
+                        for key in keys:
+                            output[brand]['col'][key] = 0
+                            output[brand]['sale'][key] = 0
+                    if item['sale']:
+                        output[brand]['sale'][item['category']] += 1
+                    else:
+                        output[brand]['col'][item['category']] += 1
+    Debug.objects.update_or_create(name='Statistics', defaults={'text': str(output)})
+    return output
+
+
 def post_item(item):
     """Create or update the element with the same url on remote db"""
     try:

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col">
+    <div class="row justify-content-between align-items-center">
+        <h1>Estadísticas</h1>
+        <div></div>
+        <p class="l-5">
+            {{updated}}
+        </p>
+        <form action="javascript:post('/api/v1/user/brand/update_statistics/')" method="post">
+            <input type="submit" value="Actualizar">
+        </form>
+    </div>
+    <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th>Marca</th>
+            <th>Categoría</th>
+            <th>Cantidad</th>
+        </tr>
+        </thead>
+        {% for brand, data in data.items %}
+        <tr>
+            <th rowspan="18">{{brand}}</th>
+            <td rowspan="2">Camisas y Camisetas</td>
+            <td> {{data.col.CamisasyCamisetas}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.CamisasyCamisetas}} Sale</td>
+        </tr>
+        <td rowspan="2">Pantalones y Jeans</td>
+        <td> {{data.col.PantalonesyJeans}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.PantalonesyJeans}} Sale</td>
+        </tr>
+        <td rowspan="2">Vestidos y Enterizos</td>
+        <td> {{data.col.VestidosyEnterizos}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.VestidosyEnterizos}} Sale</td>
+        </tr>
+        <td rowspan="2">Faldas y Shorts</td>
+        <td> {{data.col.FaldasyShorts}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.FaldasyShorts}} Sale</td>
+        </tr>
+        <td rowspan="2">Abrigos y Blazers</td>
+        <td> {{data.col.AbrigosyBlazers}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.AbrigosyBlazers}} Sale</td>
+        </tr>
+        <td rowspan="2">Ropa Deportiva</td>
+        <td> {{data.col.RopaDeportiva}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.RopaDeportiva}} Sale</td>
+        </tr>
+        <td rowspan="2">Zapatos</td>
+        <td> {{data.col.Zapatos}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.Zapatos}} Sale</td>
+        </tr>
+        <td rowspan="2">Bolsos</td>
+        <td> {{data.col.Bolsos}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.Bolsos}} Sale</td>
+        </tr>
+        <td rowspan="2">Accesorios</td>
+        <td> {{data.col.Accesorios}} Colección</td>
+        <tr class="table-success">
+            <td> {{data.sale.Accesorios}} Sale</td>
+        </tr>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<script>
+    function post(endpoint) {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": get_cookie("csrftoken"),
+            }
+        }).then((result) => {
+            alert('Estadísticas actualizadas');
+            location.reload();
+        })
+    }
+</script>
+{% endblock content %}

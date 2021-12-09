@@ -274,6 +274,50 @@ def crawl_pull():
 
 
 @shared_task
+def crawl_solua():
+    session = requests.session()
+    session.headers = {'X-Shopify-Access-Token': os.environ.get('SHOPIFY_SOLUA')}
+    url = 'https://solua-accesorios.myshopify.com/admin/api/2021-10/products.json?limit=250&fields=id,title,variants,' \
+          'images,product_type,body_html,status,handle'
+    products = session.get(url).json()['products']
+    brand = 'Solúa'
+    self = Process.objects.update_or_create(name=brand, defaults={
+        'started': datetime.now(),
+        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n{len(products)} productos\n'})[0]
+    for p in products:
+        url = f'https://soluaccesorios.com/products/{p["handle"]}'
+        if p['status'] == 'active':
+            name = p['title']
+            price_now = to_int(p['variants'][0]['price']) / 100
+            price_before = to_int(p['variants'][0]['compare_at_price']) / 100
+            if not price_before:
+                price_before = price_now
+            discount = calculate_discount(price_before, price_now)
+            images = str([i['src'] for i in p['images']])
+            original_category = p['product_type']
+            category = get_category('Stradivarius', name, original_category)
+            original_subcategory = original_category
+            subcategory = get_subcategory('Stradivarius', name, category, original_subcategory)
+            defaults = {'brand': brand, 'name': name, 'description': p['body_html'], 'url': url, 'id_producto': url,
+                        'price': price_now, 'national': True, 'price_before': price_before, 'discount': discount,
+                        'sale': bool(discount), 'images': images, 'category': category,
+                        'original_category': original_category, 'subcategory': subcategory,
+                        'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
+            product, created = Product.objects.update_or_create(reference=p['id'], defaults=defaults)
+            if product.active:
+                post_item(product)
+            self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
+        elif p['status'] == 'archived':
+            product = Product.objects.filter(url=url).first()
+            if product:
+                delete_from_remote(url)
+                product.delete()
+                self.logs += f'    - {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
+        self.save()
+    self.save()
+
+
+@shared_task
 def crawl_stradivarius():
     brand = 'Stradivarius'
     self = Process.objects.update_or_create(name=brand, defaults={
@@ -374,50 +418,6 @@ def crawl_stradivarius():
         session = requests.session()
         session.headers.update(headers)
     check_inactive_items(brand, self.started)
-
-
-@shared_task
-def crawl_solua():
-    session = requests.session()
-    session.headers = {'X-Shopify-Access-Token': os.environ.get('SHOPIFY_SOLUA')}
-    url = 'https://solua-accesorios.myshopify.com/admin/api/2021-10/products.json?limit=250&fields=id,title,variants,' \
-          'images,product_type,body_html,status,handle'
-    products = session.get(url).json()['products']
-    brand = 'Solúa'
-    self = Process.objects.update_or_create(name=brand, defaults={
-        'started': datetime.now(),
-        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n{len(products)} productos\n'})[0]
-    for p in products:
-        url = f'https://soluaccesorios.com/products/{p["handle"]}'
-        if p['status'] == 'active':
-            name = p['title']
-            price_now = to_int(p['variants'][0]['price']) / 100
-            price_before = to_int(p['variants'][0]['compare_at_price']) / 100
-            if not price_before:
-                price_before = price_now
-            discount = calculate_discount(price_before, price_now)
-            images = str([i['src'] for i in p['images']])
-            original_category = p['product_type']
-            category = get_category('Stradivarius', name, original_category)
-            original_subcategory = original_category
-            subcategory = get_subcategory('Stradivarius', name, category, original_subcategory)
-            defaults = {'brand': brand, 'name': name, 'description': p['body_html'], 'url': url, 'id_producto': url,
-                        'price': price_now, 'national': True, 'price_before': price_before, 'discount': discount,
-                        'sale': bool(discount), 'images': images, 'category': category,
-                        'original_category': original_category, 'subcategory': subcategory,
-                        'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
-            product, created = Product.objects.update_or_create(reference=p['id'], defaults=defaults)
-            if product.active:
-                post_item(product)
-            self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
-        elif p['status'] == 'archived':
-            product = Product.objects.filter(url=url).first()
-            if product:
-                delete_from_remote(url)
-                product.delete()
-                self.logs += f'    - {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
-        self.save()
-    self.save()
 
 
 @shared_task

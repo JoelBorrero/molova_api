@@ -5,6 +5,7 @@ from rest_framework.decorators import permission_classes
 from django.http import HttpResponse
 from django.template import loader
 
+from ..crawler.models import Debug
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
 from ..user.models import Brand
@@ -39,6 +40,16 @@ def crawl(request):
     return HttpResponse(document, status=200)
 
 
+@permission_classes([permissions.IsAdminUser])
+def login(request):
+    """
+    This view allows user to login. Don't need authentication to see it
+    """
+    template = loader.get_template('auth.html')
+    document = template.render({})
+    return HttpResponse(document, status=200)
+
+
 def product_list(request):
     """
     This view shows all products.
@@ -54,7 +65,7 @@ def product_list(request):
         try:
             product['images'] = ast.literal_eval(product['images'])
         except:
-            product['images'] = 'https://'+str(products)
+            product['images'] = 'https://' + str(products)
         if not type(product['images'][0]) is str:
             product['images'] = product['images'][0]
     brand_names = []
@@ -66,11 +77,16 @@ def product_list(request):
     return HttpResponse(document, status=200)
 
 
-@permission_classes([permissions.IsAdminUser])
-def login(request):
+def stats(request):
     """
-    This view allows user to login. Don't need authentication to see it
+    This view allows admin to control scraps processes.
     """
-    template = loader.get_template('auth.html')
-    document = template.render({})
+    template = loader.get_template('stats.html')
+    statistics = Debug.objects.filter(name='Statistics').first()
+    data = ast.literal_eval(statistics.text.replace(' ', ''))
+    # keys = data.keys()
+    # for key in keys:
+    #     data[key.replace(' ', '')] = data.pop(key)
+    # categories = [str(key).replace(' ', '') for key in data['Mango']['col'].keys()]
+    document = template.render({'data': data, 'updated': statistics.updated})
     return HttpResponse(document, status=200)

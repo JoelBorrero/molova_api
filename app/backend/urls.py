@@ -21,6 +21,7 @@ urlpatterns = [
       path('views/brand', brand, name='brand'),
       path('views/crawl', crawl, name='crawl'),
       path('views/login', login, name='login'),
-      path('views/products', product_list, name='products')
+      path('views/products', product_list, name='products'),
+      path('views/stats', stats, name='stats')
 ]
 
