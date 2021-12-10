@@ -17,12 +17,6 @@ from ..user.models import Brand
 from ..utils.constants import BASE_HOST, SETTINGS
 
 
-# settings = Settings.objects.all().first()
-# if not settings:
-#     settings = settings.objects.create()[0]
-
-
-#  TODO Verify stock to inactive, brands needs approval and products also
 @shared_task
 def crawl_bershka():
     brand = 'Bershka'
@@ -115,14 +109,16 @@ def crawl_blunua():
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n{len(products)} productos\n'})[0]
     for p in products:
         url = f'https://blunua.com/products/{p["handle"]}'
-        if p['status'] == 'active':
+        active = any([v['inventory_quantity'] for v in p['variants']])
+        images = str([i['src'] for i in p['images']])
+        if p['status'] == 'active' and active and not images == '[]':
             name = p['title']
-            price_now = to_int(p['variants'][0]['price']) / 100
+            # price_now = to_int(p['variants'][0]['price']) / 100
             price_before = to_int(p['variants'][0]['compare_at_price']) / 100
+            price_now = price_before
             if not price_before:
                 price_before = price_now
             discount = calculate_discount(price_before, price_now)
-            images = str([i['src'] for i in p['images']])
             original_category = p['product_type']
             category = get_category('Stradivarius', name, original_category)
             original_subcategory = original_category
@@ -131,12 +127,12 @@ def crawl_blunua():
                         'price': price_now, 'national': True, 'price_before': price_before, 'discount': discount,
                         'sale': bool(discount), 'images': images, 'category': category,
                         'original_category': original_category, 'subcategory': subcategory,
-                        'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
+                        'original_subcategory': original_subcategory, 'gender': 'm', 'active': active}
             product, created = Product.objects.update_or_create(reference=p['id'], defaults=defaults)
             if product.active:
                 post_item(product)
             self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
-        elif p['status'] == 'archived':
+        else:
             product = Product.objects.filter(url=url).first()
             if product:
                 delete_from_remote(url)
@@ -468,10 +464,10 @@ def crawl_stradivarius():
 def pull_from_molova(brands=''):
     self = Process.objects.update_or_create(name='Sync', defaults={
         'started': datetime.now(),
-        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
+        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········{brands}··········\n'})[0]
     session = requests.session()
     if brands:
-        brands = [f'marcas/{b}' for b in brands]
+        brands = [f'marcas/{b}' for b in brands.split(',')]
     else:
         brands = ['coleccion']
     for brand in brands:
@@ -512,17 +508,17 @@ def set_visibility(brand_id, visibility):
     visibility = str(visibility).title() == 'True'
     brand = Brand.objects.get(id=brand_id)
     products = Product.objects.filter(brand=brand)
+    count = len(products)
     self = Process.objects.update_or_create(name=f'{brand.name} visibility', defaults={
         'started': datetime.now(),
-        'logs': f'0 % to {visibility}'})[0]
-    count = len(products)
+        'logs': f'(Total {count}) 0 % to {visibility}'})[0]
     if visibility:
         for i, product in enumerate(products):
             posted = post_item(product)
             if posted:
                 product.active = True
                 product.save()
-            self.logs = f'{(i + 1) / count * 100} %'
+            self.logs = f'{(i + 1) / count * 100} % to {visibility}'
             self.save()
     else:
         to_delete = []
@@ -533,7 +529,7 @@ def set_visibility(brand_id, visibility):
             if len(to_delete) == 50:
                 delete_from_remote(to_delete)
                 to_delete.clear()
-            self.logs = f'{(i + 1) / count * 100} %'
+            self.logs = f'{(i + 1) / count * 100} % to {visibility}'
             self.save()
         delete_from_remote(to_delete)
     return f'{brand} set to {visibility}'

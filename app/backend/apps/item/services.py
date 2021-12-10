@@ -4,6 +4,7 @@ import os
 import boto3
 import numpy as np
 import pandas as pd
+import urllib.parse
 from zipfile import ZipFile
 
 import requests
@@ -29,6 +30,8 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
     @param all_images: Will be used only if images are trusted
     @param optional_images: Will be used if images could be broken links
     """
+    fields['url'] = urllib.parse.quote(fields['url'], safe=':/')
+    fields['id_producto'] = urllib.parse.quote(fields['id_producto'], safe=':/')
     if item:
         if not item.url == fields['url'] or not item.active:
             debug = Debug.objects.update_or_create(name='Broken links')[0]
@@ -64,7 +67,7 @@ def find_product(url: str, images: list) -> Product or None:
     @param images: List of images to iterate and search inside products if prev url doesn't match
     @return: Product or None
     """
-    product = Product.objects.filter(id_producto__icontains=url).first()
+    product = Product.objects.filter(id_producto__icontains=urllib.parse.quote(url)).first()
     if not product:
         product = Product.objects.filter(url__contains=normalize_url(url)).first()
     if not product:

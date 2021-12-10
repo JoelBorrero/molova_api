@@ -41,12 +41,13 @@ def crawl(request):
     """
     template = loader.get_template('crawl.html')
     bershka = Process.objects.filter(name='Bershka').first()
+    blunua = Process.objects.filter(name='Blunua').first()
     mango = Process.objects.filter(name='Mango').first()
     pull = Process.objects.filter(name='Pull & Bear').first()
-    stradivarius = Process.objects.filter(name='Stradivarius').first()
     solua = Process.objects.filter(name='Solúa').first()
+    stradivarius = Process.objects.filter(name='Stradivarius').first()
     data = {}
-    for brand in ['Bershka', 'Mango', 'Pull', 'Stradivarius', 'Solua']:
+    for brand in ['Bershka', 'Blunua', 'Mango', 'Pull', 'Solua', 'Stradivarius']:
         try:
             exec(f'data[brand] = {brand.lower()}.started')
         except AttributeError:

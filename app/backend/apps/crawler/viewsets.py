@@ -18,6 +18,8 @@ class ProcessViewSet(viewsets.ModelViewSet):
         brand = request.data['brand']
         if brand == 'Bershka':
             crawl_bershka.delay()
+        elif brand == 'Blunua':
+            crawl_blunua.delay()
         elif brand == 'Mango':
             crawl_mango.delay()
         elif brand == 'Pull & Bear':
@@ -33,5 +35,5 @@ class ProcessViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['POST'])
     def sync(self, request):
         # pull_from_molova()
-        pull_from_molova.delay()
+        pull_from_molova.delay(request.data['brand'])
         return Response({'status': 'Working'}, status=status.HTTP_200_OK)

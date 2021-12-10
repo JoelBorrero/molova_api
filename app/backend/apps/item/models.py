@@ -30,3 +30,7 @@ class Product(ModelBase):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'

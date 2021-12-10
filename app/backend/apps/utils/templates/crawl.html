@@ -3,8 +3,14 @@
 <h1>Crawling</h1>
 <div class="row">
     <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Bershka')" method="post">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Bershka')">
             <label>Bershka ({{Bershka}})</label><br>
+            <input type="submit" value="Iniciar">
+        </form>
+    </div>
+    <div class="col-4">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Blunua')">
+            <label>Blunua ({{Blunua}})</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
@@ -21,27 +27,31 @@
         </form>
     </div>
     <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Stradivarius')">
-            <label>Stradivarius ({{Stradivarius}})</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
-    </div>
-    <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Solua Accesorios')">
             <label>Solúa ({{Solua}})</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
+    <div class="col-4">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Stradivarius')">
+            <label>Stradivarius ({{Stradivarius}})</label><br>
+            <input type="submit" value="Iniciar">
+        </form>
+    </div>
 </div>
-<div >
-    <form action="javascript:post('/api/v1/crawler/process/sync/', 'Sincronizar')">
+<div>
+    <form action="javascript:post('/api/v1/crawler/process/sync/', 'Sync')">
         <label>Sincronizar</label><br>
+        <input type="text" placeholder="Marca" id="brand_to_sync">
         <input type="submit" value="Iniciar">
     </form>
 </div>
 
 <script>
     function post(endpoint, brand) {
+        if (brand == 'Sync') {
+            brand = document.getElementById("brand_to_sync").value;
+        }
         fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -49,9 +59,11 @@
                 "X-CSRFToken": get_cookie("csrftoken"),
             },
             body: JSON.stringify({'brand': brand})
-        }).then((result) => {
-            alert('Process started');
-        })
+        }).then(response => response.json())
+            .then(data => {
+                alert(data.status);
+                location.reload();
+            });
     }
 </script>
 {% endblock content %}
