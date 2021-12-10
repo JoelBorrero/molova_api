@@ -37,8 +37,8 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
             debug = Debug.objects.update_or_create(name='Broken links')[0]
             try:
                 delete_from_remote(item.url)
-            except:
-                debug.text += 'X'
+            except Exception as e:
+                debug.text += f'X - {e}'
             debug.text += item.url + '\n'
             debug.save()
         for key in fields.keys():
@@ -67,10 +67,16 @@ def find_product(url: str, images: list) -> Product or None:
     @param images: List of images to iterate and search inside products if prev url doesn't match
     @return: Product or None
     """
-    product = Product.objects.filter(id_producto__icontains=urllib.parse.quote(url)).first()
+    product = Product.objects.filter(id_producto__icontains=urllib.parse.quote(url, safe=':/')).first()
     if not product:
         product = Product.objects.filter(url__contains=normalize_url(url)).first()
     if not product:
+        if type(images[0]) is list:
+            optional_images = images
+            images = []
+            for color in optional_images:
+                for image in color:
+                    images.append(image)
         for image in images:
             image = normalize_url(image)
             product = Product.objects.filter(images__contains=image).first()

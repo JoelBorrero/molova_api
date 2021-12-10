@@ -56,9 +56,16 @@ def crawl_bershka():
                         f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg'
                         f'?t={color["image"]["timestamp"]}')
                     sizes = []
+                    alter = True
                     for size in color['sizes']:
-                        stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
-                        sizes.append(size['name'] + stock)
+                        if alter:
+                            stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
+                            # if size['name'] not in sizes:
+                            sizes.append(size['name'] + stock)
+                            # elif stock:
+                            #     sizes.remove(size['name'])
+                            #     sizes.append(size['name'] + stock)
+                        alter = not alter
                     all_sizes.append(sizes)
                 price_now = int(product['colors'][0]['sizes'][0]['price']) / 100
                 try:
@@ -81,11 +88,14 @@ def crawl_bershka():
                           'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
                           'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
                           'category': category, 'original_category': original_category, 'subcategory': subcategory,
-                          'original_subcategory': original_subcategory, 'gender': 'm', 'active': active}
+                          'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
+                          'national': False}
                 item = create_or_update_item(item, fields, session, optional_images=optional_images)
-                self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                 if item.active:
+                    self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                     post_item(item)
+                else:
+                    self.logs += f'X NO STOCK {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second} - {name}\n'
             except Exception as e:
                 self.logs += f'X {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {e}\n'
         self.save()
