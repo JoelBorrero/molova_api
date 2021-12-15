@@ -34,6 +34,18 @@ class ProcessViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['POST'])
     def sync(self, request):
-        # pull_from_molova()
         pull_from_molova.delay(request.data['brand'])
         return Response({'status': 'Working'}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['POST'])
+    def activate_product(self, request):
+        product = Product.objects.get(id=request.data['brand'])  # Should be id instead brand
+        if product.active:
+            delete_from_remote(product.id_producto)
+            product.active = False
+            res = ''
+        else:
+            res = post_item(product)
+            product.active = True
+        product.save()
+        return Response({'status': f'{product.name} set visible to {product.active} ({res})'}, status=status.HTTP_200_OK)

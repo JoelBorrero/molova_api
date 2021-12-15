@@ -16,7 +16,7 @@
         <h4>
             {{product.name}}
         </h4>
-        <img src="{{product.images.0}}" style="width: inherit">
+        <img class="active-{{product.active}}" src="{{product.images.0}}" style="width: inherit">
         <div class="row mx-2 prices">
             <p>
                 Precio: {{product.price}}
@@ -33,9 +33,15 @@
             {% endif %}
         </div>
         {{product.description}}
-        <form action="{{product.url}}" target="_blank">
-            <input type="submit" value="Ir a la tienda">
+        <div class="row">
+
+        <form class="p-2" action="{{product.url}}" target="_blank">
+            <input class="btn btn-primary" type="submit" value="Ir a la tienda">
         </form>
+        <form class="p-2" action="javascript:post('/api/v1/crawler/process/activate_product/', {{product.id}})">
+            <input class="btn btn-warning" type="submit" value="Habilitar/Deshabilitar">
+        </form>
+        </div>
     </div>
     {% endfor %}
 </div>
@@ -49,8 +55,8 @@
                 "X-CSRFToken": get_cookie("csrftoken"),
             },
             body: JSON.stringify({'brand': brand})
-        }).then((result) => {
-            alert('Process started');
+        }).then(response => response.json()).then((result) => {
+            alert(result.status);
         })
     }
 </script>
@@ -66,6 +72,12 @@
         border-top: 2px solid rgba(207, 24, 0, 0.99);
         bottom: 0;
         transform: rotate(-7deg) translate(2px, -17px);
+    }
+
+    img.active-False{
+        filter: grayscale(1);
+        border: 5px dashed;
+        cursor: not-allowed;
     }
 </style>
 {% endblock content %}

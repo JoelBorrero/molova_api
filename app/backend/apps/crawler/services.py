@@ -77,7 +77,9 @@ def post_item(item):
     """Create or update the element with the same url on remote db"""
     try:
         all_sizes = ast.literal_eval(item.sizes)
-    except:
+        if not all_sizes:
+            all_sizes = [['']]
+    except (SyntaxError, ValueError):
         all_sizes = [['']]
     active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
     if active:
