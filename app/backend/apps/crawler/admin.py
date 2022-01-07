@@ -11,6 +11,7 @@ class DebugAdmin(admin.ModelAdmin):
 @admin.register(Process)
 class ProcessAdmin(admin.ModelAdmin):
     list_display = ('name', 'started')
+    ordering = ('-started',)
     readonly_fields = ('started',)
 
 

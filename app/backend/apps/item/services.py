@@ -4,15 +4,15 @@ import os
 import boto3
 import numpy as np
 import pandas as pd
-import urllib.parse
 from zipfile import ZipFile
 
+import ast
 import requests
 import tinify
-import ast
+import urllib.parse
 
 from ..crawler.models import Debug
-from ..crawler.services import check_images_urls, delete_from_remote, url_is_image
+from ..crawler.services import check_images_urls, delete_from_remote, parse_url, url_is_image
 from ..item.models import Product
 from ..user.models import Brand
 from ..utils.constants import CATEGORIES, SETTINGS
@@ -30,8 +30,8 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
     @param all_images: Will be used only if images are trusted
     @param optional_images: Will be used if images could be broken links
     """
-    fields['url'] = urllib.parse.quote(fields['url'], safe=':/')
-    fields['id_producto'] = urllib.parse.quote(fields['id_producto'], safe=':/')
+    fields['url'] = parse_url(fields['url'])
+    fields['id_producto'] = parse_url(fields['id_producto'])
     if item:
         if not item.url == fields['url'] or not item.active:
             debug = Debug.objects.update_or_create(name='Broken links')[0]

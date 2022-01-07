@@ -2,7 +2,6 @@ import os
 from datetime import datetime, timedelta
 from random import randint
 from time import sleep
-from urllib.parse import quote
 
 import ast
 import requests
@@ -99,7 +98,6 @@ def crawl_bershka():
                     item = create_or_update_item(item, fields, session, optional_images=optional_images)
                     if item.active:
                         # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
-                        self.logs += f'{products.index(product)}, '
                         post_item(item)
                     else:
                         self.logs += f'\nX NO STOCK {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second} - {name}\n'
@@ -177,7 +175,7 @@ def crawl_mango():
         'sec-fetch-site': 'same-origin',
         'user-agent': get_random_agent()}
     session.headers.update(headers)
-    for endpoint in SETTINGS[brand]['endpoints'][:1]:
+    for endpoint in SETTINGS[brand]['endpoints']:
         page_num = 1
         # try:
         while page_num:
@@ -322,8 +320,10 @@ def crawl_pull():
                             self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                             if item.active:
                                 post_item(item)
+                                # Debug.objects.create(name='Post it', text=item.url)
+                                # pass
                             else:
-                                Debug.objects.create(name='no_stock', text=item)
+                                Debug.objects.create(name='no_stock', text=item.url)
                 except Exception as e:
                     self.logs += f'\nERROR\n{e}\n'
                     Debug.objects.create(name='Error in Pull', text=str(e))
@@ -413,68 +413,135 @@ def crawl_stradivarius():
         products = session.get(endpoint[1]).json()['products']
         self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(products)} productos  -  {endpoint[0]}\n'
         for product in products:
-            # try:
-            ref = f'{product["detail"]["displayReference"]}'
-            original_category = str(product['detail']['familyInfo']['familyName'])
-            original_subcategory = str(product['detail']['subfamilyInfo']['subFamilyName'])
-            prod_id = product['id']
-            # try:
-            cat_id = product['relatedCategories'][0]['id']
-            # except:
-            #     cat_id = '12345'
-            # try:
-            product = product['bundleProductSummaries'][0]
-            # except:
-            #     pass
-            name = product['name']
-            category = get_category(brand, name, original_category)
-            subcategory = get_subcategory(brand, name, category, original_subcategory)
-            product = product['detail']
-            description = product['description']
-            price_now = int(product['colors'][0]['sizes'][0]['price']) / 100
             try:
-                price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
-            except TypeError:
-                price_before = price_now
-            discount = calculate_discount(price_before, price_now)
-            url = f'{endpoint[0][:endpoint[0].index("-c")]}/{quote(name.lower().replace(" ", "-"))}-c{cat_id}p{prod_id}.html'
-            all_images, all_sizes, colors = [], [], []
-            for color in product['colors']:
-                sizes = []
-                if color['image']:
-                    image = f'https://static.e-stradivarius.net/5/photos3{color["image"]["url"]}_3_1_5.jpg' \
-                            f'?t={color["image"]["timestamp"]}'
-                    colors.append(image)
-                for size in color['sizes']:
-                    stock = ''
-                    if 'visibilityValue' in size and not size['visibilityValue'] == 'SHOW':
-                        stock = '(AGOTADO)'
-                    sizes.append(f'{size["name"]} {stock}')
-                all_sizes.append(sizes)
-            optional_images = []
-            for media in product['xmedia']:
-                color = []
-                for i in media['xmediaItems'][0]['medias']:
-                    color.append(
-                        f'https://static.e-stradivarius.net/5/photos3{media["path"]}/{i["idMedia"]}2.jpg'
-                        f'?t={i["timestamp"]}')
-                optional_images.append(color)
-            item = find_product(url, optional_images)
-            active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
-            fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
-                      'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
-                      'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                      'category': category, 'original_category': original_category, 'subcategory': subcategory,
-                      'original_subcategory': original_subcategory, 'gender': 'm', 'active': active, 'national': False}
-            item = create_or_update_item(item, fields, session, optional_images=optional_images)
-            self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
-            if item.active:
-                post_item(item)
-            else:
-                Debug.objects.create(name='no_stock', text=item)
-            # except Exception as e:
-            #     self.logs += f'X {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {e}\n'
-            #     Debug.objects.create(text=e, name='Error STR')
+                ref = f'{product["detail"]["displayReference"]}'
+                original_category = str(product['detail']['familyInfo']['familyName'])
+                original_subcategory = str(product['detail']['subfamilyInfo']['subFamilyName'])
+                prod_id = product['id']
+                # try:
+                cat_id = product['relatedCategories'][0]['id']
+                # except:
+                #     cat_id = '12345'
+                # try:
+                product = product['bundleProductSummaries'][0]
+                # except:
+                #     pass
+                name = product['name']
+                category = get_category(brand, name, original_category)
+                subcategory = get_subcategory(brand, name, category, original_subcategory)
+                product = product['detail']
+                description = product['description']
+                price_now = int(product['colors'][0]['sizes'][0]['price']) / 100
+                try:
+                    price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
+                except TypeError:
+                    price_before = price_now
+                discount = calculate_discount(price_before, price_now)
+                url = f'{endpoint[0][:endpoint[0].index("-c")]}/{quote(name.lower().replace(" ", "-"))}-c{cat_id}p{prod_id}.html'
+                all_images, all_sizes, colors = [], [], []
+                for color in product['colors']:
+                    sizes = []
+                    if color['image']:
+                        image = f'https://static.e-stradivarius.net/5/photos3{color["image"]["url"]}_3_1_5.jpg' \
+                                f'?t={color["image"]["timestamp"]}'
+                        colors.append(image)
+                    for size in color['sizes']:
+                        stock = ''
+                        if 'visibilityValue' in size and not size['visibilityValue'] == 'SHOW':
+                            stock = '(AGOTADO)'
+                        sizes.append(f'{size["name"]} {stock}')
+                    all_sizes.append(sizes)
+                optional_images = []
+                for media in product['xmedia']:
+                    color = []
+                    for i in media['xmediaItems'][0]['medias']:
+                        color.append(
+                            f'https://static.e-stradivarius.net/5/photos3{media["path"]}/{i["idMedia"]}2.jpg'
+                            f'?t={i["timestamp"]}')
+                    optional_images.append(color)
+                item = find_product(url, optional_images)
+                active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
+                          'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
+                          'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
+                          'category': category, 'original_category': original_category, 'subcategory': subcategory,
+                          'original_subcategory': original_subcategory, 'gender': 'm', 'active': active, 'national': False}
+                item = create_or_update_item(item, fields, session, optional_images=optional_images)
+                if item.active:
+                    post_item(item)
+                else:
+                    self.logs += f'X {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {url} (No stock)\n'
+            except Exception as e:
+                self.logs += f'X {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {e}\n'
+        self.save()
+        headers = session.headers
+        sleep(randint(30, 120) / 1)
+        session = requests.session()
+        session.headers.update(headers)
+    check_inactive_items(brand, self.started)
+
+
+@shared_task
+def crawl_zara():
+    brand = 'Zara'
+    self = Process.objects.update_or_create(name=brand, defaults={
+        'started': datetime.now(),
+        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
+    session = requests.session()
+    headers = {
+        'accept': '*/*',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en;q=0.9',
+        'cache-control': 'no-cache',
+        'cookie': 'ITXSESSIONID=d458e4b17f001e37dfdd0cc93fbe1717; web_version=STANDARD; bm_sz=B77396026A92E8F97FA258393551A02E~YAAQpKpLaP3Jm7R6AQAAMbyEvg2KTcnl6zbnIQp+bZr8QZF8eXTyts74BzbwCO5yOYGfgrQ1IK/ZtgBxEIdaxz/4vh4DW3DjZOvD6jMhLg7HWKxSEJLwRG3QE9en2at6n104IgL8ncgIML9rNJfv9bzJoKScK+FbZnG9Xav64FI9U850vPuzCcC2Q7yluiPX1McNYw0glOBo7TH6dO5feI2rFAWAJJfHv6Y2eQ6gYu46OZ7vOanrBwTi4HaeVptV80R+3gLetroqBfLaWXZIIT82hBO90y27hL8JeHD/HtE0~3424833~4273222; _abck=AD1BE4EBB69FA500FE0C71CB433A60B0~0~YAAQpKpLaAPKm7R6AQAAj8GEvgZ+SRGl6rrPLN5AeYGCRe76FBuhKFLzvcf3qD+YdOCRYAq2AO4JgUfWq00iE7KWe9B8TeKUqodFqzD/yAoJrN+LvAfwmmP5mO+hPcndGJYxcSWBTUZRrzFyR8labOPBk04SMr6ie4QMrOtjwfo8W8vG9PDex8FGoZhZqcE4Qu10CbBlOpzcumdc0ka6X2L/D2XMfq19EyBgvRiWSKHCHZOC6R4SxI8z1VrDxGvpcdxDNSq+UzOWpjPuV8xRJwQfoKfItmWWPzEcPn3OF2mwQGhHy6JUaE/mIF1ldde8qpRz38KFsrLYX2n+Htlim5tgX0gLSo1UhSmYgVDXx/KbM2Yr0l5ImcUGgNE2lCZsj6hJ5tQT12ARz8zv/FBvQZxCmNiFaw==~-1~-1~-1; ak_bmsc=8329DA2709C86864C6E40D3ACBA821AE~000000000000000000000000000000~YAAQpKpLaAvKm7R6AQAAP8WEvg33e6w414subhHXC3mgw6uB3YZvjS22aPHbCCOR2laB3AF2hINX/nG2ud2aPU/v5/kJFsIbuoaI5WTCKYiqIyJEks63rvazFKn4okA8r5u/Q0pvGUpPz/L8GdmTOHxrU7cvHqltA5MS/nD0C1Ctt6TXz0M1kmZKBOEJHmlPH1mQPoNiZQVieRSO4+bk4Im9ml5yO691ogvDxw//dHwUd4xvWylRyyHAqTl89Mbar93V2xmKl/ANvdzPRwtzdFxVameqNjlL+nYLPAlPNxsLfKPKcKjHhl45G5iAtcMbc5BahKLAwQ4QuutHfVnFWaWANAO7UH1v7h1kOT5LqM8L+bTryXq0xWUSLpL/R6D++Uaz1J69mEfisXiH5VVeyHtXiInPxYiucKayF5bLUE60rCT9fSsVfb8zxwRkdaPx4AQ+Vdhcc/X6ujcubVnBZyyrh4j3OhxF+ZmUsOcrZmEr9wrTpxpN/w==; rid=61e5ec44-e21e-4a15-a356-817a5015c536; vwr_global=1.1.1630988978.b8630a30-29c8-4f68-a346-56eeff82262b.1630988978..M4EHYfBDQijUPEKmwTyNXh4yy6_bS2cOX-QOKMWkhow; storepath=co%2Fes; cart-was-updated-in-standard=true; rskxRunCookie=0; rCookie=jo27kadi1hlmxxaul4r3kt9kq6n1; chin={"status":"chat-status:not_connected","isChatAttended":false,"privacyAccepted":false,"email":"","userJid":"","uiCurrentView":"view:hidden","timeShowInteractiveChat":0,"compatMode":true,"businessKind":"online"}; lastRskxRun=1630988990053; _ga=GA1.2.1818226498.1630988991; _gid=GA1.2.237491462.1630988991; _fbp=fb.1.1630988991038.1662346990; _gat_UA-18083935-1=1; OptanonConsent=isIABGlobal=false&datestamp=Mon+Sep+06+2021+23%3A29%3A51+GMT-0500+(Colombia+Standard+Time)&version=6.8.0&hosts=&consentId=a9608d84-85af-48dd-b839-cfa5e1d8d766&interactionCount=1&landingPath=https%3A%2F%2Fwww.zara.com%2Fco%2Fes%2Fmujer-nuevo-l1180.html%3Fv1%3D1881787&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1; RT="z=1&dm=zara.com&si=38791a9a-8027-4374-94b3-e222789fe077&ss=kt9kq31v&sl=4&tt=emy&bcn=%2F%2F17c8edc7.akstat.io%2F&ld=dz3&ul=y6f&hd=ycs"; _ga_D8SW45BC2Z=GS1.1.1630988990.1.0.1630989019.31',
+        'pragma': 'no-cache',
+        'referer': 'https://www.zara.com/co/es',
+        'sec-ch-ua-mobile': '?0',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': get_random_agent()}
+    session.headers.update(headers)
+    for endpoint in SETTINGS[brand]['endpoints']:
+        templates = session.get(endpoint[1]).json()['productGroups'][0]['elements']
+        for template in templates:
+            for product in template['commercialComponents']:
+                try:
+                    name = product['name']
+                    description = product['description']
+                    price_now = product['price'] / 100
+                    price_before = product['oldPrice'] / 100 if 'oldPrice' in product else price_now
+                    discount = calculate_discount(price_before, price_now)
+                    url = f'https://www.zara.com/co/es/{product["seo"]["keyword"]}-p{product["seo"]["seoProductId"]}.html'
+                    original_category = product['familyName']
+                    original_subcategory = product['subfamilyName']
+                    category = get_category(brand, name, original_category)
+                    subcategory = get_subcategory(brand, name, category, original_subcategory)
+                    product = product['detail']
+                    ref = product['displayReference']
+                    all_images, all_sizes, colors = [], [['']], []
+                    for color in product['colors']:
+                        colors.append(color['name'])
+                        images, sizes = [], []
+                        for image in color['xmedia']:
+                            images.append(
+                                f'https://static.zara.net/photos//{image["path"]}/w/563/{image["name"]}.jpg?ts={image["timestamp"]}')
+                        all_images.append(images)
+                    item = find_product(url, all_images)
+                    active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                    fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
+                              'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
+                              'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
+                              'category': category, 'original_category': original_category, 'subcategory': subcategory,
+                              'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
+                              'national': False}
+                    item = create_or_update_item(item, fields, session, all_images=all_images)
+                    if item.active:
+                        post_item(item)
+                    else:
+                        self.logs += f'X {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {url} (No stock)\n'
+                except Exception as e:
+                    self.logs += f'X {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {e}\n'
         self.save()
         headers = session.headers
         sleep(randint(30, 120) / 1)
@@ -520,7 +587,7 @@ def pull_from_molova(brands=''):
                             images = []
                         product = find_product(fields['id_producto'], images)
                         product = create_or_update_item(product, fields, session, all_images=fields['images'])
-                        self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {product.name}\n'
+                        # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {product.name}\n'
                 else:
                     self.logs += f'X {last} - {"sale" if index else "col"}\n'
                 self.save()

@@ -49,3 +49,10 @@ class ProcessViewSet(viewsets.ModelViewSet):
             product.active = True
         product.save()
         return Response({'status': f'{product.name} set visible to {product.active} ({res})'}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['POST'])
+    def update_links(self, request):
+        """Update links to search in crawl process"""
+        update_brand_links(request.data.get('brand', ''))
+        return Response({'status': brand + ' started'}, status=status.HTTP_200_OK)
+
