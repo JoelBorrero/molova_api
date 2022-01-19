@@ -31,7 +31,7 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
     @param optional_images: Will be used if images could be broken links
     @param sync: If False, url parse will run
     """
-    if sync:
+    if not sync:
         fields['url'] = parse_url(fields['url'])
         fields['id_producto'] = parse_url(fields['id_producto'])
     if item:

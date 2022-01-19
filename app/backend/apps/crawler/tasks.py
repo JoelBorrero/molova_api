@@ -8,7 +8,7 @@ import requests
 from celery import shared_task
 
 from .models import Process, Debug
-from .services import get_random_agent, post_item, check_images_urls, check_inactive_items, delete_from_remote
+from .services import get_random_agent, post_item, check_images_urls, check_inactive_items, delete_from_remote, parse_url
 from ..item.models import Product
 from ..item.services import find_product, get_category, get_subcategory, get_colors_src, create_or_update_item, \
     to_int, calculate_discount
@@ -437,7 +437,7 @@ def crawl_stradivarius():
                 except TypeError:
                     price_before = price_now
                 discount = calculate_discount(price_before, price_now)
-                url = f'{endpoint[0][:endpoint[0].index("-c")]}/{quote(name.lower().replace(" ", "-"), safe=":/?=")}-c{cat_id}p{prod_id}.html'
+                url = f'{endpoint[0][:endpoint[0].index("-c")]}/{parse_url(name.replace(" ", "-"))}-c{cat_id}p{prod_id}.html'
                 all_images, all_sizes, colors = [], [], []
                 for color in product['colors']:
                     sizes = []
