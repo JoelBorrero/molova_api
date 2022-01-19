@@ -437,7 +437,7 @@ def crawl_stradivarius():
                 except TypeError:
                     price_before = price_now
                 discount = calculate_discount(price_before, price_now)
-                url = f'{endpoint[0][:endpoint[0].index("-c")]}/{quote(name.lower().replace(" ", "-"))}-c{cat_id}p{prod_id}.html'
+                url = f'{endpoint[0][:endpoint[0].index("-c")]}/{quote(name.lower().replace(" ", "-"), safe=":/?=")}-c{cat_id}p{prod_id}.html'
                 all_images, all_sizes, colors = [], [], []
                 for color in product['colors']:
                     sizes = []
@@ -505,7 +505,7 @@ def crawl_zara():
     for endpoint in SETTINGS[brand]['endpoints']:
         templates = session.get(endpoint[1]).json()['productGroups'][0]['elements']
         for template in templates:
-            for product in template['commercialComponents']:
+            for product in template.get('commercialComponents', []):
                 try:
                     name = product['name']
                     description = product['description']
@@ -586,11 +586,14 @@ def pull_from_molova(brands=''):
                         except ValueError:
                             images = []
                         product = find_product(fields['id_producto'], images)
-                        product = create_or_update_item(product, fields, session, all_images=fields['images'])
+                        product = create_or_update_item(product, fields, session, all_images=fields['images'], sync=True)
                         # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {product.name}\n'
                 else:
                     self.logs += f'X {last} - {"sale" if index else "col"}\n'
                 self.save()
+    self.logs += '---------- END ----------'
+    self.save()
+    return f'Brands {brands} updated'
 
 
 @shared_task

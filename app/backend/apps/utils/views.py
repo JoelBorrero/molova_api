@@ -46,8 +46,9 @@ def crawl(request):
     pull = Process.objects.filter(name='Pull & Bear').first()
     solua = Process.objects.filter(name='Solúa').first()
     stradivarius = Process.objects.filter(name='Stradivarius').first()
+    zara = Process.objects.filter(name='Zara').first()
     data = {}
-    for brand in ['Bershka', 'Blunua', 'Mango', 'Pull', 'Solua', 'Stradivarius']:
+    for brand in ['Bershka', 'Blunua', 'Mango', 'Pull', 'Solua', 'Stradivarius', 'Zara']:
         try:
             exec(f'data[brand] = {brand.lower()}.started')
         except AttributeError:

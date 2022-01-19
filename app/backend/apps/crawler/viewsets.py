@@ -28,6 +28,8 @@ class ProcessViewSet(viewsets.ModelViewSet):
             crawl_stradivarius.delay()
         elif brand == 'Solua Accesorios':
             crawl_solua.delay()
+        elif brand == 'Zara':
+            crawl_zara.delay()
         else:
             brand += ' not found. Not'
         return Response({'status': brand + ' started'}, status=status.HTTP_200_OK)

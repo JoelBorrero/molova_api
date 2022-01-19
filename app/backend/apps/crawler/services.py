@@ -5,8 +5,8 @@ from random import randint
 import ast
 import os
 import requests
-import urllib.parse
 from django.db.models import Q
+from urllib.parse import quote
 
 from .models import Debug
 from ..item.models import Product
@@ -76,7 +76,7 @@ def get_statistics():
 
 
 def parse_url(url):
-    return urllib.parse.quote(url.lower(), safe=':/')
+    return quote(url.lower(), safe=':/?=')
 
 
 def post_item(item):
@@ -110,7 +110,8 @@ def update_brand_links(brand):
     urls = []
     session = requests.session()
     if brand == 'Bershka':
-        pass
+        base_url = 'url'
+
     elif brand == 'Mango':
         url = 'https://shop.mango.com/services/menus/v2.0/header/CO'
         categories = requests.get(url).json()['menus'][0]['menus']['1']
@@ -132,8 +133,36 @@ def update_brand_links(brand):
                     # urls.append(category['link'])
                     print(category['link'])
     elif brand == 'Pull & Bear':
-        base_url = 'https://www.pullandbear.com/itxrest/2/catalog/store/25009465/20309430/category?languageId=-5&typeCatalog=1&appId=1'
-
+        host = 'https://www.pullandbear.com'
+        base_url = f'{host}/itxrest/2/catalog/store/25009465/20309430/category?languageId=-5&typeCatalog=1&appId=1'
+        session = requests.session()
+        headers = {
+            'accept': '*/*',
+            'accept-encoding': 'gzip, deflate, br',
+            'accept-language': 'en-US,en;q=0.9,es-US;q=0.8,es;q=0.7',
+            'content-type': 'application/json',
+            'referer': 'https://www.pullandbear.com/',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"macOS"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-origin',
+            'user-agent': get_random_agent()}
+        session.headers.update(headers)
+        res = session.get(base_url).json()['categories'][0]['subcategories']
+        for category in res:
+            for cat in category['subcategories']:
+                if 'categoryUrl' in cat:
+                    if cat['subcategories']:
+                        for subcategory in cat['subcategories']:
+                            if cat['id'] == subcategory['viewCategoryId']:
+                                url = f'{host}/co/{cat["categoryUrl"]}'
+                                endpoint = f'{host}/itxrest/3/catalog/store/25009465/20309430/category/{cat["id"]}/product?languageId=-5&showProducts=false&appId=1'
+                                urls.append([url, endpoint])
+                    else:
+                        url = f'{host}/co/{cat["categoryUrl"]}'
+                        endpoint = f'{host}/itxrest/3/catalog/store/25009465/20309430/category/{cat["id"]}/product?languageId=-5&showProducts=false&appId=1'
+                        urls.append([url, endpoint])
     elif brand == 'Stradivarius':
         url = 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category?languageId=-48&typeCatalog=1&appId=1'
         session = requests.session()

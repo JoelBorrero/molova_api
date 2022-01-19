@@ -645,40 +645,80 @@
   "Pull & Bear": {
     "endpoints": [
       [
-        "https://www.pullandbear.com/co/mujer/novedades-n6491?celement=1030017536",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030017536/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/rebajas/favoritos-n7254",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030024024/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/tendencias/efecto-piel-n6992?celement=1030291510",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030291510/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/rebajas/ropa/jeans-y-pantalones-n7104",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204706/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/rebajas/ropa/camisetas-y-tops-n7097",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204630/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/rebajas/ropa/abrigos-y-cazadoras-n7099",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204597/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/rebajas/ropa/vestidos-y-monos-n7102",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204627/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/rebajas/ropa/sudaderas-n7100",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204667/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/rebajas/ropa/punto-n7101",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204676/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/rebajas/mujer/ropa/blusas-y-camisas-n6757",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204657/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/rebajas/ropa/faldas-y-shorts-n7103",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204677/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/rebajas/zapatos-n7106",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207002/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/rebajas/bolsos-y-accesorios-n7107",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204878/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/ropa/juego-del-calamar-n7258",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030378680/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/ropa/jeans-n6581",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204692/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/ropa/camisetas-n6541",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204631/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/ropa/pantalones-n6600",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207189/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/ropa/cazadoras-y-chaquetas-n6555",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204607/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/ropa/abrigos-n6504",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204600/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/ropa/pantalones-n6600",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207189/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/ropa/sudaderas-n6636",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204660/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/ropa/camisetas-n6541",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204631/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/ropa/tops-n6644",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207187/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/ropa/abrigos-n6504",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030364619/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
+        "https://www.pullandbear.com/co/mujer/ropa/sudaderas-n6636",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204660/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/ropa/vestidos-n6646",
@@ -697,10 +737,6 @@
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204645/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/ropa/monos-y-petos-n6599",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204628/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
         "https://www.pullandbear.com/co/mujer/ropa/shorts-n6629",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204685/product?languageId=-5&showProducts=false&appId=1"
       ],
@@ -709,35 +745,19 @@
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204678/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/ropa/cazadoras-y-chaquetas/blazers-y-americanas-n6558",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204605/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/ropa/banadores-y-bikinis-n6513?celement=1030204707",
+        "https://www.pullandbear.com/co/mujer/ropa/banadores-y-bikinis-n6513",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204707/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/ropa/comfy-n6897",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030272390/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/ropa/teen-collection-n6643",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030118503/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/ropa/intimates-n7128",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030291005/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/ropa/limited-edition-mexico-n6817",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030070509/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/ropa/nfl-n7165",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030362062/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/zapatos/ver-todo-n6685?celement=1030207001",
+        "https://www.pullandbear.com/co/mujer/zapatos/ver-todo-n6685",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207001/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/novedades/zapatos-n6836?celement=739503",
+        "https://www.pullandbear.com/co/mujer/novedades/zapatos-n6836",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/739503/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
@@ -745,44 +765,32 @@
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207017/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
+        "https://www.pullandbear.com/co/mujer/zapatos/botas-altas-n6923",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030291019/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
         "https://www.pullandbear.com/co/mujer/zapatos/zapatillas-n6686",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207009/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/bolsos-n6878",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207021/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/bolsos/mochilas-n6885",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207023/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/bolsos/bolsos-de-hombro-n6881",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030291008/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/bolsos/shoppers-n6889",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207024/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/zapatos/fiesta-n6672",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030312008/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/accesorios/carteras-n6453",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204879/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030283585/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/bolsos/licencias-n6976",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030313518/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030313519/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/accesorios/bolsos/exclusivo-online-n6446",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207033/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/bolsos-y-accesorios/ver-todo-n6826?celement=1030204877",
+        "https://www.pullandbear.com/co/mujer/bolsos-y-accesorios/ver-todo-n6826",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204877/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/accesorios/gorros-y-sombreros-n6457",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207068/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/accesorios/bufandas-y-fulares-n6452",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204883/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/accesorios/bisuteria-n6435",
@@ -793,35 +801,39 @@
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207063/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/accesorios/accesorios-pelo-n6419",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204881/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/accesorios/gorros-y-sombreros-n6457",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207068/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/accesorios/cinturones-n6454",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207049/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/accesorios/accesorios-pelo-n6419",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204881/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/accesorios/medias-y-calcetines-n6458",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207069/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
+        "https://www.pullandbear.com/co/mujer/accesorios/cinturones-n6454",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207049/product?languageId=-5&showProducts=false&appId=1"
+      ],
+      [
         "https://www.pullandbear.com/co/mujer/accesorios/gafas-de-sol-n6456",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207065/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/accesorios/bufandas-y-fulares-n6452",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204883/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/accesorios/carteras-n6453",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204879/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/ropa/teen-collection-n6643?celement=1030118503",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030118503/product?languageId=-5&showProducts=false&appId=1"
+        "https://www.pullandbear.com/co/mujer/bolsos-n6878",
+        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207021/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/join-life/coleccion-n6490?celement=1030210504",
+        "https://www.pullandbear.com/co/mujer/join-life/coleccion-n6490",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030210504/product?languageId=-5&showProducts=false&appId=1"
       ]
     ],
-    "endpoint": "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/739503/product?languageId=-5&showProducts=true&appId=1"
+    "endpoint": "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030024024/product?languageId=-5&showProducts=false&appId=1"
   },
   "Stradivarius": {
     "endpoints": [

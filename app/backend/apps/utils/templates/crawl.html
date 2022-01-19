@@ -38,6 +38,12 @@
             <input type="submit" value="Iniciar">
         </form>
     </div>
+    <div class="col-4">
+        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Zara')">
+            <label>Zara ({{Zara}})</label><br>
+            <input type="submit" value="Iniciar">
+        </form>
+    </div>
 </div>
 <div>
     <form action="javascript:post('/api/v1/crawler/process/sync/', 'Sync')">

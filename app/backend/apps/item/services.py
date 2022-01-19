@@ -9,7 +9,7 @@ from zipfile import ZipFile
 import ast
 import requests
 import tinify
-import urllib.parse
+from urllib.parse import quote
 
 from ..crawler.models import Debug
 from ..crawler.services import check_images_urls, delete_from_remote, parse_url, url_is_image
@@ -22,16 +22,18 @@ def calculate_discount(price_before, price_now):
     return int(100 - price_now / price_before * 100)
 
 
-def create_or_update_item(item, fields, session, optional_images='', all_images=''):
+def create_or_update_item(item, fields, session, optional_images='', all_images='', sync=False):
     """
     @param item: Product object or None
     @param fields: Dict with data to be updated in item
     @param session: Requests session to avoid individual requests
     @param all_images: Will be used only if images are trusted
     @param optional_images: Will be used if images could be broken links
+    @param sync: If False, url parse will run
     """
-    fields['url'] = parse_url(fields['url'])
-    fields['id_producto'] = parse_url(fields['id_producto'])
+    if sync:
+        fields['url'] = parse_url(fields['url'])
+        fields['id_producto'] = parse_url(fields['id_producto'])
     if item:
         if not item.url == fields['url'] or not item.active:
             debug = Debug.objects.update_or_create(name='Broken links')[0]
@@ -62,12 +64,11 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
 
 def find_product(url: str, images: list) -> Product or None:
     """Returns product if found, else None
-
     @param url: The url to search in existing products
     @param images: List of images to iterate and search inside products if prev url doesn't match
     @return: Product or None
     """
-    product = Product.objects.filter(id_producto__icontains=urllib.parse.quote(url, safe=':/')).first()
+    product = Product.objects.filter(id_producto__icontains=quote(url, safe=':/?=')).first()
     if not product:
         product = Product.objects.filter(url__contains=normalize_url(url)).first()
     if not product:
