@@ -110,11 +110,35 @@ def update_brand_links(brand):
     urls = []
     session = requests.session()
     if brand == 'Bershka':
-        base_url = 'url'
-
+        host = 'https://www.bershka.com'
+        base_url = f'{host}/itxrest/2/marketing/store/45109565/40259535/spot?languageId=-5&spot=BK3_ESpot_I18N&appId=1'
+        headers = {
+            'accept': 'application/json, text/plain, */*',
+            'accept-encoding': 'gzip, deflate, br',
+            'accept-language': 'en-US,en;q=0.9',
+            'cookie': 'ITXSESSIONID=3ee14ba34dfc995d70db354ab8080761; BSKSESSION=978fe558a1d558033c5ca231238f8bca; AKA_A2=A; bm_sz=7638EA7910C89DA7119EB6D817AFD079~YAAQtqpLaDKLFnF+AQAA5vxedA4mr9yHZTRY8+QkTBtYqIvmVYOgevGRAK3l6uzPOoivM5DNvYtAQ5hiMmrD4iNUdhnVs9QnX8ddPtPR/kHILHWqaG16pRWBczAl5bJ3gSn5cZorioF7lkexiN6bxlLhWTAtLAa8QySBAg6IEjMLIxW4MEe7+NMb0XvwIFJqHPI2YOuWdIELWBrknJRF+r+I7dgB9WGQZdu2FeK0UhJrfcRrYU4mUkipGj2gjiU9LXcYKuSUK3O7QgpXczRTSvAI8mePBSVxHZhwCrXn3s8rxe+b~4538677~3488049; _abck=E3CA12B51EA31D4931269A3B9CBF6479~0~YAAQtqpLaLaLFnF+AQAASgRfdAfMSetcUwuLid+BWUyLmKkG3+65ZdtTC5NdHPPUMzOD+dJ+1Hex8mcmgM4AEV2dUuIseZKi2wLtiRTfj09Pu6ucr9eP3gbLDXSeNren5j75eiwrJ2g15tl7V5isX58qezMclw3GulVdadqD7QWzo8BqAuCRQhN7CesREQwk5y4KIQbDT793IPLd0UJDR8/xeSuxL35+8D+LOOuORgdWxy/7atr2mPnkcYNbraz4z/90spYpIOp5xRIACWEnxexnOQP6MThxZKItKFM5oFm5EgSDRhW4RKONFghIEpb7bD+Wquf/iBgfranSB/cJTc8QwIeh8dIL5K6B+63zTZGq6U46m+yKAEg1GdikWpZXFQTDzCtpor55Jl3Hq4APrj8pCn8NfhrDaQ==~-1~-1~-1; ak_bmsc=C9E13B72C3BB3F83107B139FA7A5FD30~000000000000000000000000000000~YAAQtqpLaOCLFnF+AQAALQdfdA6bK8hfLeKAHZG79vyEJrDU8EbvM+FfVY/S+5+8Xa9F8H2oc0eguQ0iloJeSLxBHCzAOvXqn/E5Sj2BhA1z/hsxJHoNPYj4J/hGuiQ18iN2epB6lPycJJU4FFtSJD2mB4Aow/l4Gm0JRCmsg9J51GPbFohxDhMrmbTZp8dOMZ7BSlt6ByRvbyZSyEoXkHGA13EuyQiPRI0ZB9Z7GmfE8ewO5HwjEFZX0Mq+/Gd/xTo79JQlAuZZJq5DdOYo1jWO6BtnSSN+JV3WSomwwpuS5JsQgj6sCvbndqNJ5DvcMk6ZJc7nI/ELxqrcn3Glnmj3vU7SQZWOH2AcSmua1aCWVwVBLLwEBhCneQFfedbC8ynQWJk8jxsVQEnYXSbZFeqkHwKmH4WUhZig5cgBt7/Hebp4hyD0jy7Ia+i7sdhf7j9gEcegMU8Cxyn/6HofhwM8GsjVk6c+H2IGOfXrCh6mYFuXy3Bdo94=; JSESSIONID=0000p-aooDS7zImjpP9lRM6PCLt:2bb5bu1sx; 13d5823230c8607ca960f5962192c9e2=50e00281f36d1947da8664796a34091f; OptanonConsent=isIABGlobal=false&datestamp=Wed+Jan+19+2022+17:08:16+GMT-0500+(Colombia+Standard+Time)&version=6.8.0&hosts=&consentId=575fe5a6-ee00-403f-8b32-ae2c810ae690&interactionCount=1&landingPath=NotLandingPage&groups=C0001:1,C0003:1,C0002:1,C0004:1&geolocation=CO;BOL&AwaitingReconsent=false; OptanonAlertBoxClosed=2022-01-19T22:08:16.149Z',
+            'content-type': 'application/json',
+            'referer': 'https://www.bershka.com/',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-origin',
+            'sec-gpc': '1',
+            'user-agent': get_random_agent()}
+        session.headers.update(headers)
+        response = session.get(base_url).json()['spots'][4]['value'].split('ItxCategoryPage.')
+        categories = []
+        for i, category in enumerate(response):
+            if '.title' in category and 'Home.title' not in category and 'mujer' in category.lower():
+                category_id = category[:category.index('.')]
+                if category_id not in str(categories) and ' |' in category:
+                    name = category[category.index('.title=') + 7 : category.index(' |')]
+                    endpoint = f'{host}/itxrest/3/catalog/store/45109565/40259535/category/{category_id}/product?showProducts=false&languageId=-5'
+                    if bool(session.get(endpoint).json()['productIds']):
+                        urls.append([name, endpoint])
+        urls.reverse()
     elif brand == 'Mango':
         url = 'https://shop.mango.com/services/menus/v2.0/header/CO'
-        categories = requests.get(url).json()['menus'][0]['menus']['1']
+        categories = session.get(url).json()['menus'][0]['menus']['1']
         for category in categories:
             if category['containsChilds']:
                 for key in category['menus'].keys():
@@ -127,7 +151,7 @@ def update_brand_links(brand):
                                 except ValueError:
                                     retro_id = ''
                                 urls.append([cat['link'],
-                                     f'https://shop.mango.com/services/productlist/products/CO/she/{category["appId"]}/?idSubSection={cat["id"]}{retro_id}'])
+                                             f'https://shop.mango.com/services/productlist/products/CO/she/{category["appId"]}/?idSubSection={cat["id"]}{retro_id}'])
             else:
                 if category['link'] not in urls and 'https://' in category['link']:
                     # urls.append(category['link'])
@@ -135,7 +159,6 @@ def update_brand_links(brand):
     elif brand == 'Pull & Bear':
         host = 'https://www.pullandbear.com'
         base_url = f'{host}/itxrest/2/catalog/store/25009465/20309430/category?languageId=-5&typeCatalog=1&appId=1'
-        session = requests.session()
         headers = {
             'accept': '*/*',
             'accept-encoding': 'gzip, deflate, br',
@@ -165,7 +188,6 @@ def update_brand_links(brand):
                         urls.append([url, endpoint])
     elif brand == 'Stradivarius':
         url = 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category?languageId=-48&typeCatalog=1&appId=1'
-        session = requests.session()
         headers = {
             'accept': '*/*',
             'accept-encoding': 'gzip, deflate, br',
@@ -198,13 +220,16 @@ def update_brand_links(brand):
                     if c['subcategories']:
                         for subcategory in c['subcategories']:
                             if c['viewCategoryId'] == subcategory['id']:
-                                url = f'{p1}/co/{p2}/{category["name"]}/{cat["name"]}/{c["name"]}-c{c["id"]}.html'.replace(' ', '-')
-                                urls.append([parse_url(url), f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{subcategory["id"]}/product?languageId=-48&appId=1'])
+                                url = f'{p1}/co/{p2}/{category["name"]}/{cat["name"]}/{c["name"]}-c{c["id"]}.html'.replace(
+                                    ' ', '-')
+                                urls.append([parse_url(url),
+                                             f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{subcategory["id"]}/product?languageId=-48&appId=1'])
                     else:
-                        url = f'{p1}/co/{p2}/{category["name"]}/{cat["name"]}/{c["name"]}-c{c["id"]}.html'.replace(' ', '-')
-                        urls.append([parse_url(url), f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{c["id"]}/product?languageId=-48&appId=1'])
+                        url = f'{p1}/co/{p2}/{category["name"]}/{cat["name"]}/{c["name"]}-c{c["id"]}.html'.replace(' ',
+                                                                                                                   '-')
+                        urls.append([parse_url(url),
+                                     f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{c["id"]}/product?languageId=-48&appId=1'])
     elif brand == 'Zara':
-        session = requests.session()
         headers = {
             'accept': '*/*',
             'accept-encoding': 'gzip, deflate, br',
@@ -239,6 +264,24 @@ def update_brand_links(brand):
     settings[brand]['endpoints'] = urls
     with open('Settings.json', 'w') as s:
         s.write(str(settings).replace("'", '"'))
+
+
+def bershka_endpoint_maker(urls, save=True):
+    """
+    Manual mode to modify Bershka urls and generate endpoints
+    """
+    output = []
+    for url in urls:
+        category_id = url[url.rindex('-c')+2:url.rindex('.html')]
+        endpoint = f'https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/{category_id}/product?showProducts=false&languageId=-5'
+        output.append([url, endpoint])
+    if save:
+        settings = ast.literal_eval(open('Settings.json', 'r').read())
+        settings[brand]['endpoint'] = urls[0][1]
+        settings[brand]['endpoints'] = urls
+        with open('Settings.json', 'w') as s:
+            s.write(str(settings).replace("'", '"'))
+    return output
 
 
 def url_is_image(url, session=None) -> bool:
