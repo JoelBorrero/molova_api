@@ -424,60 +424,12 @@
   "Mercedes Campuzano": {
     "endpoints": [
       [
-        "https://www.mercedescampuzano.com/zapatos/baletas/",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbaletas%2F&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/botas-y-botines",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbotas-y-botines&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/mocasines",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fmocasines&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/oxford",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Foxford&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/tenis",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Ftenis&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/zuecos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fzuecos&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/sandalias-de-tacon",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-de-tacon&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/sandalias-planas",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-planas&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/sandalias-plataforma",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-plataforma&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/bolsos-y-carteras",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbolsos-y-carteras&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/morrales",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fmorrales&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/bandoleras",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbandoleras&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/sobres",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fsobres&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+        "https://www.mercedescampuzano.com/168?map=productClusterIds",
+        "https://api.retailrocket.net/api/2.0/recommendation/Search/606c7dd297a5251cbce1fc3e/?&phrase=168&pvid=945173868868723&isDebug=false&format=json"
       ],
       [
         "https://www.mercedescampuzano.com/vestuario/vestidos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fvestidos&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fvestidos&pvid=945173868868723&isDebug=false&format=json"
       ],
       [
         "https://www.mercedescampuzano.com/vestuario/faldas",
@@ -508,139 +460,75 @@
         "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fbuzos-y-chaquetas&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
       ],
       [
-        "https://www.mercedescampuzano.com/bolsos/bolsos-y-carteras",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbolsos-y-carteras&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/morrales",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fmorrales&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/bandoleras",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbandoleras&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/sobres",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fsobres&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/vestidos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fvestidos&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/faldas",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Ffaldas&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/pantalones",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fpantalones&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/enterizos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fenterizos&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/kimonos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fkimonos&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/shorts",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fshorts&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/blusas-y-t-shirts",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fblusas-y-t-shirts&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/buzos-y-chaquetas",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fbuzos-y-chaquetas&session=6166696b85068200012a1f6d&pvid=869630920902483&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/bolsos-y-carteras",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbolsos-y-carteras&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/morrales",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fmorrales&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/bandoleras",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbandoleras&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/bolsos/sobres",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fsobres&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/vestidos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fvestidos&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/faldas",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Ffaldas&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/pantalones",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fpantalones&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/enterizos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fenterizos&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/kimonos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fkimonos&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/shorts",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fshorts&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/blusas-y-t-shirts",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fblusas-y-t-shirts&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/vestuario/buzos-y-chaquetas",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fvestuario%2Fbuzos-y-chaquetas&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
         "https://www.mercedescampuzano.com/zapatos/baletas/",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbaletas%2F&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbaletas%2F&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
       ],
       [
         "https://www.mercedescampuzano.com/zapatos/botas-y-botines",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbotas-y-botines&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbotas-y-botines&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
       ],
       [
         "https://www.mercedescampuzano.com/zapatos/mocasines",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fmocasines&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fmocasines&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
       ],
       [
         "https://www.mercedescampuzano.com/zapatos/oxford",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Foxford&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/tenis",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Ftenis&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
-      ],
-      [
-        "https://www.mercedescampuzano.com/zapatos/zuecos",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fzuecos&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Foxford&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
       ],
       [
         "https://www.mercedescampuzano.com/zapatos/sandalias-de-tacon",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-de-tacon&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-de-tacon&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
       ],
       [
         "https://www.mercedescampuzano.com/zapatos/sandalias-planas",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-planas&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-planas&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
       ],
       [
         "https://www.mercedescampuzano.com/zapatos/sandalias-plataforma",
-        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-plataforma&session=61667ce6101fb800011a579c&pvid=360499928564639&isDebug=false&format=json"
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fsandalias-plataforma&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/139?map=productClusterIds",
+        "https://api.retailrocket.net/api/2.0/recommendation/Search/606c7dd297a5251cbce1fc3e/?&phrase=139&pvid=945173868868723&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/249?map=productClusterIds",
+        "https://api.retailrocket.net/api/2.0/recommendation/Search/606c7dd297a5251cbce1fc3e/?&phrase=249&pvid=945173868868723&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/zapatos/tenis",
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Ftenis&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/zapatos/zuecos",
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fzuecos&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/bolsos/bolsos-y-carteras",
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbolsos-y-carteras&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/bolsos/morrales",
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fmorrales&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/bolsos/bandoleras",
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fbandoleras&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/bolsos/sobres",
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fbolsos%2Fsobres&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/accesorios/cosmetiqueras",
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Faccesorios%2Fcosmetiqueras&pvid=945173868868723&isDebug=false&format=json"
+      ],
+      [
+        "https://www.mercedescampuzano.com/accesorios/billeteras-y-monederos",
+        "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Faccesorios%2Fbilleteras-y-monederos&pvid=945173868868723&isDebug=false&format=json"
       ]
     ],
-    "endpoint": "https://api.retailrocket.net/api/2.0/recommendation/popular/606c7dd297a5251cbce1fc3e/?&categoryIds=&categoryPaths=%2Fzapatos%2Fbaletas%2F&session=6160fd37f3fa8d00018b15d3&pvid=260395106652979&isDebug=false&format=json"
+    "endpoint": "https://api.retailrocket.net/api/2.0/recommendation/Search/606c7dd297a5251cbce1fc3e/?&phrase=168&pvid=945173868868723&isDebug=false&format=json"
   },
   "Pull & Bear": {
     "endpoints": [

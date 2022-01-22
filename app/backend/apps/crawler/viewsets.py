@@ -22,6 +22,8 @@ class ProcessViewSet(viewsets.ModelViewSet):
             crawl_blunua.delay()
         elif brand == 'Mango':
             crawl_mango.delay()
+        elif brand == 'Mercedes Campuzano':
+            crawl_mercedes.delay()
         elif brand == 'Pull & Bear':
             crawl_pull.delay()
         elif brand == 'Stradivarius':

@@ -247,6 +247,59 @@ def crawl_mango():
 
 
 @shared_task
+def crawl_mercedes():
+    brand = 'Mercedes Campuzano'
+    self = Process.objects.update_or_create(name=brand, defaults={
+        'started': datetime.now(),
+        'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
+    session = requests.session()
+    for endpoint in SETTINGS[brand]['endpoints']:
+        response = session.get(endpoint[1]).json()
+        for product in response:
+            try:
+                name = product['Params']['productGroupName']
+                ref = product['ItemId']
+                price_before = product['OldPrice']
+                price_now = product['Price']
+                if not price_before:
+                    price_before = price_now
+                discount = calculate_discount(price_before, price_now)
+                original_subcategory = product['CategoryNames'][0].replace('-', ' ')
+                category = get_category(brand, name, original_subcategory)
+                subcategory = get_subcategory(brand, name, category, original_subcategory)
+                url = product['Url']
+                description = product['Description']
+                all_images = [[product['PictureUrl']]]
+                if 'AlternativePictureURL' in product['Params']:
+                    all_images[0].append(product['Params']['AlternativePictureURL'])
+                all_sizes = [[product['Params']['Talla']]]
+                colors = [product['Params']['Color']]
+                item = find_product(url, all_images)
+                active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
+                          'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
+                          'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
+                          'category': category, 'original_category': original_subcategory, 'subcategory': subcategory,
+                          'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
+                          'national': False}
+                item = create_or_update_item(item, fields, session, all_images=all_images)
+                if item.active:
+                    post_item(item)
+                else:
+                    self.logs += f'X {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {url} (No stock)\n'
+            except Exception as e:
+                self.logs += f'\nERROR\n{e}\n'
+                Debug.objects.create(name='Error in Mercedes', text=str(e))
+            # self.logs += '<>' * 10 + '\n'
+            self.save()
+            headers = session.headers
+            # sleep(randint(30, 120) / 1)
+            session = requests.session()
+            session.headers.update(headers)
+    check_inactive_items(brand, self.started)
+
+
+@shared_task
 def crawl_pull():
     brand = 'Pull & Bear'
     self = Process.objects.update_or_create(name=brand, defaults={
