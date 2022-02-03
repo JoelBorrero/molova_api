@@ -10,6 +10,7 @@ from ..item.models import Product
 from ..item.serializers import ProductSerializer
 from ..user.models import Brand
 from ..user.serializers import BrandSerializer
+from .constants import PROCESS_STATUS
 
 
 @permission_classes([permissions.IsAdminUser])
@@ -49,9 +50,12 @@ def crawl(request):
     stradivarius = Process.objects.filter(name='Stradivarius').first()
     zara = Process.objects.filter(name='Zara').first()
     data = {}
-    for brand in ['Bershka', 'Blunua', 'Mango', 'Mercedes', 'Pull', 'Solua', 'Stradivarius', 'Zara']:
+    for brand in ['bershka', 'blunua', 'mango', 'mercedes', 'pull', 'solua', 'stradivarius', 'zara']:
         try:
-            exec(f'data[brand] = {brand.lower()}.started')
+            exec(f'data[brand] = {{"started":{brand}.started, "updated": {brand}.updated, "status": {brand}.status}}')
+            for p in PROCESS_STATUS:
+                if p[0] == data[brand]['status']:
+                    data[brand]['status'] = p[1]
         except AttributeError:
             pass
     document = template.render(data)

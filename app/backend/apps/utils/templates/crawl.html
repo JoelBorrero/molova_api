@@ -4,49 +4,73 @@
 <div class="row">
     <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Bershka')">
-            <label>Bershka ({{Bershka}})</label><br>
+            <label><h4>Bershka</h4></label>
+            <label class="{{bershka.status}}">{{bershka.status}}</label>
+            <label>Iniciado: {{bershka.started}}</label><br>
+            <label>Actualizado: {{bershka.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
     <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Blunua')">
-            <label>Blunua ({{Blunua}})</label><br>
+            <label><h4>Blunua</h4></label>
+            <label class="{{blunua.status}}">{{blunua.status}}</label>
+            <label>Iniciado: {{blunua.started}}</label><br>
+            <label>Actualizado: {{blunua.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
     <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Mango')">
-            <label>Mango ({{Mango}})</label><br>
+            <label><h4>Mango</h4></label>
+            <label class="{{mango.status}}">{{mango.status}}</label>
+            <label>Iniciado: {{mango.started}}</label><br>
+            <label>Actualizado: {{mango.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
     <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Mercedes Campuzano')">
-            <label>Mercedes Campuzano ({{Mercedes}})</label><br>
+            <label><h4>Mercedes Campuzano</h4></label>
+            <label class="{{mercedes.status}}">{{mercedes.status}}</label>
+            <label>Iniciado: {{mercedes.started}}</label><br>
+            <label>Actualizado: {{mercedes.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
     <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Pull & Bear')">
-            <label>Pull & Bear ({{Pull}})</label><br>
+            <label><h4>Pull & Bear</h4></label>
+            <label class="{{pull.status}}">{{pull.status}}</label>
+            <label>Iniciado: {{pull.started}}</label><br>
+            <label>Actualizado: {{pull.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
     <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Solua Accesorios')">
-            <label>Solúa ({{Solua}})</label><br>
+            <label><h4>Solúa</h4></label>
+            <label class="{{solua.status}}">{{solua.status}}</label>
+            <label>Iniciado: {{solua.started}}</label><br>
+            <label>Actualizado: {{solua.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
     <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Stradivarius')">
-            <label>Stradivarius ({{Stradivarius}})</label><br>
+            <label><h4>Stradivarius</h4></label>
+            <label class="{{stradivarius.status}}">{{stradivarius.status}}</label>
+            <label>Iniciado: {{stradivarius.started}}</label><br>
+            <label>Actualizado: {{stradivarius.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
     <div class="col-4">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Zara')">
-            <label>Zara ({{Zara}})</label><br>
+            <label><h4>Zara</h4></label>
+            <label class="{{zara.status}}">{{zara.status}}</label>
+            <label>Iniciado: {{zara.started}}</label><br>
+            <label>Actualizado: {{zara.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
@@ -78,4 +102,36 @@
             });
     }
 </script>
+
+<style>
+    @keyframes BackgroundAnimation {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+    .En.proceso {
+        animation: BackgroundAnimation 2s ease infinite;
+        background: linear-gradient(270deg, red, yellow, limegreen);
+        background-size: 800% 800%;
+        border-radius: 10px;
+    }
+    .Exitoso {
+        background: limegreen;
+        border-radius: 10px;
+    }
+    .Error {
+        background: red;
+        border-radius: 10px;
+    }
+    .None {
+        background: lightgray;
+        border-radius: 10px;
+    }
+</style>
 {% endblock content %}

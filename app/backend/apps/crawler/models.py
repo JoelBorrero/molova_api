@@ -1,4 +1,5 @@
 from django.db import models
+from ..utils.constants import PROCESS_STATUS
 from ..utils.models import ModelBase
 
 
@@ -12,7 +13,8 @@ class Debug(ModelBase):
 
 class Process(ModelBase):
     name = models.CharField(max_length=30)
-    started = models.DateTimeField(auto_now=True)
+    started = models.DateTimeField()
+    status = models.CharField(max_length=1, choices=PROCESS_STATUS, default='n')
     logs = models.TextField()
 
     def __str__(self):

@@ -1,11 +1,14 @@
 import ast
+import pytz
 
 BASE_HOST = 'https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova'
 CATEGORIES = ('Camisas y Camisetas', 'Pantalones y Jeans', 'Vestidos y Enterizos', 'Faldas y Shorts',
               'Abrigos y Blazers', 'Ropa deportiva', 'Zapatos', 'Bolsos', 'Accesorios', 'Swimwear', 'Otros')
 GENDERS = (('h', 'Hombre'), ('m', 'Mujer'))
 IMAGE_FORMATS = ('image/png', 'image/jpeg', 'image/jpg')
+PROCESS_STATUS = (('n', 'None'), ('x', 'En proceso'), ('s', 'Exitoso'), ('f', 'Error'))
 SETTINGS = ast.literal_eval(open('Settings.json', 'r').read())
+TIMEZONE = pytz.timezone('America/Bogota')
 USER_AGENTS = ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko)'
                'Chrome/92.0.4515.131 Safari/537.36',
                'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)'
