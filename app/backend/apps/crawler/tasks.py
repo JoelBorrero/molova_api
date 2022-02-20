@@ -8,13 +8,25 @@ import requests
 from celery import shared_task
 
 from .models import Process, Debug
-from .services import get_random_agent, post_item, check_images_urls, check_inactive_items, delete_from_remote, parse_url
+from .services import get_random_agent, post_item, check_images_urls, check_inactive_items, delete_from_remote, \
+    parse_url
 from ..item.models import Product
 from ..item.services import find_product, get_category, get_subcategory, get_colors_src, create_or_update_item, \
     to_int, calculate_discount
 from ..user.models import Brand
 from ..utils.constants import BASE_HOST, SETTINGS, TIMEZONE
 
+
+# Subcategoría: Vestidos
+# Color: azul, verde
+# Estampado: liso, lunares, flores, lentejuelas
+# Ocasión: Fiesta, Playa
+# Material: Seda, Lino, licra
+# Corte: Corto, Largo, Midi
+# Clima: cálido, frío, templado
+# Marca: Zara, Molú, Mango
+# Valores: hecho en Colombia, moda lenta, moda consciente
+# Precio: menos de 50.000, rango
 
 @shared_task
 def crawl_bershka():
@@ -46,7 +58,7 @@ def crawl_bershka():
                 ids = [prod_id for prod_id in response[page * page_size: (page + 1) * page_size]]
                 page_endpoint = f'https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/productsArray?categoryId={category_id}&productIds={str(ids)[1:-1].replace(", ", "%2C")}&languageId=-5'
                 products = session.get(page_endpoint).json()['products']
-                for product in products[:2]:
+                for product in products:
                     name = product['name']
                     if name:
                         try:
@@ -57,7 +69,8 @@ def crawl_bershka():
                                 product = product['bundleProductSummaries'][0]['detail']
                             else:
                                 product = product['detail']
-                            description = product['description'] if product['description'] else product['longDescription']
+                            description = product['description'] if product['description'] else product[
+                                'longDescription']
                             ref = product['displayReference']
                             original_subcategory = product['subfamilyInfo']['subFamilyName']
                             if not original_subcategory:
@@ -67,8 +80,8 @@ def crawl_bershka():
                             all_images, all_sizes, colors, color_styles = [], [], [], []
                             for color in product['colors']:
                                 colors.append(
-                                    f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg'
-                                    f'?t={color["image"]["timestamp"]}')
+                                    {'name': color['name'],
+                                     'picture': f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}'})
                                 if color['image']['style']:
                                     color_styles.append(f'{color["image"]["style"][0]}/')
                                 else:
@@ -77,7 +90,6 @@ def crawl_bershka():
                                 for index, size in enumerate(color['sizes']):
                                     stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
                                     tag = size['name'] + stock
-                                    print(tag)
                                     if size['name'] not in sizes and tag not in sizes:
                                         sizes.append(tag)
                                 all_sizes.append(sizes)
@@ -100,11 +112,13 @@ def crawl_bershka():
                                 optional_images.append(color)
                             item = find_product(url, optional_images)
                             active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
-                            fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
+                            fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description,
+                                      'url': url,
                                       'id_producto': url, 'price': price_now, 'price_before': price_before,
                                       'discount': discount,
                                       'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                                      'category': category, 'original_category': original_category, 'subcategory': subcategory,
+                                      'category': category, 'original_category': original_category,
+                                      'subcategory': subcategory,
                                       'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
                                       'national': False}
                             item = create_or_update_item(item, fields, session, optional_images=optional_images)
@@ -112,7 +126,7 @@ def crawl_bershka():
                                 # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                                 post_item(item)
                             else:
-                                self.logs += f'\nX NO STOCK {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second} - {name}\n'
+                                self.logs += f'\nX NO STOCK {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second} - {url}\n'
                         except Exception as e:
                             self.logs += f'X {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {e}\n'
             self.save()
@@ -210,7 +224,7 @@ def crawl_mango():
                 response = session.get(endpoint[1] + str(page_num))
                 if response.status_code == 200:
                     response = response.json()
-                    if response['lastPage'] or page_num >= 5:
+                    if response['lastPage'] or page_num >= 2:
                         page_num = 0
                     else:
                         page_num += 1
@@ -312,9 +326,11 @@ def crawl_mercedes():
                     item = find_product(url, all_images)
                     active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
                     fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
-                              'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
+                              'id_producto': url, 'price': price_now, 'price_before': price_before,
+                              'discount': discount,
                               'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                              'category': category, 'original_category': original_subcategory, 'subcategory': subcategory,
+                              'category': category, 'original_category': original_subcategory,
+                              'subcategory': subcategory,
                               'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
                               'national': False}
                     item = create_or_update_item(item, fields, session, all_images=all_images)
@@ -367,6 +383,7 @@ def crawl_pull():
             category_id = endpoint[1][endpoint[1].index('/category/') + 10: endpoint[1].rindex('/')]
             response = session.get(endpoint[1]).json()['productIds']
             self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(response)} productos  -  {endpoint[0]}\n'
+            self.save()
             for page in range(len(response) // page_size):
                 ids = [prod_id for prod_id in response[page * page_size: (page + 1) * page_size]]
                 page_endpoint = f'https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/productsArray?productIds={str(ids)[1:-1].replace(", ", "%2C")}&languageId=-5&categoryId={category_id}&appId=1'
@@ -383,7 +400,8 @@ def crawl_pull():
                                 product = product['bundleProductSummaries'][0]['detail']
                             else:
                                 product = product['detail']
-                            description = product['description'] if product['description'] else product['longDescription']
+                            description = product['description'] if product['description'] else product[
+                                'longDescription']
                             ref = product['displayReference']
                             original_category = product['familyInfo']['familyName']
                             category = get_category(brand, name, original_category)
@@ -414,7 +432,8 @@ def crawl_pull():
                                     all_images.append(images)
                                 item = find_product(url, all_images)
                                 active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
-                                fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name, 'url': url,
+                                fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name,
+                                          'url': url,
                                           'id_producto': url, 'price': price_now, 'price_before': price_before,
                                           'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
                                           'colors': get_colors_src(colors), 'category': category,
@@ -432,12 +451,12 @@ def crawl_pull():
                     except Exception as e:
                         self.logs += f'\nERROR\n{e}\n'
                         Debug.objects.create(name='Error in Pull', text=str(e))
-                    # self.logs += '<>' * 10 + '\n'
-                    # self.save()
-                    headers = session.headers
-                    sleep(randint(30, 120) / 1)
-                    session = requests.session()
-                    session.headers.update(headers)
+                # self.logs += '<>' * 10 + '\n'
+                # self.save()
+                headers = session.headers
+                sleep(randint(30, 120) / 1)
+                session = requests.session()
+                session.headers.update(headers)
         self.status = 's'
         self.save()
         check_inactive_items(brand, self.started)
@@ -480,7 +499,8 @@ def crawl_solua():
                             'price': price_now, 'national': True, 'price_before': price_before, 'discount': discount,
                             'sale': bool(discount), 'images': images, 'category': category,
                             'original_category': original_category, 'subcategory': subcategory,
-                            'original_subcategory': original_subcategory, 'gender': 'm', 'active': p['status'] == 'active'}
+                            'original_subcategory': original_subcategory, 'gender': 'm',
+                            'active': p['status'] == 'active'}
                 product, created = Product.objects.update_or_create(reference=p['id'], defaults=defaults)
                 if product.active:
                     post_item(product)
@@ -509,25 +529,15 @@ def crawl_stradivarius():
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
     session = requests.session()
     headers = {
-        'accept': '*/*',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'es-US,es;q=0.9',
-        'content-type': 'application/json',
-        'cookie': 'ITXSESSIONID=182592649f55aa1d98689723945fba3c; _abck=98D0A42A991781EA9192E81AB1B3DA3F~-1~YAAQT/1Vvs+'
-                  '4hLh6AQAAeqNzSgaJEW8ixKACFBQiOORFishd5S4Qz7WkGyAvA0LNo/wTMQ4S6a5NkeaLagHp/t9Zbk9B6ga2UTgMBMhrC0rtyMi'
-                  'rxcWjDCX8+hXQRF5Eex8lXYCu4V7H7HyTvSBPuK29LvIW3aFHvmqxw17hbJBndu67nAhdmxNNZ7r7wuqF861oo9dVhzLHYbhiBjP'
-                  'UmuOr5x22PV8HNtU3a15bH/pTOp/86mPMTWdWmmsO40hy/cFHprjRPILbrZqtt5zsZ46U6d+ODU2pGvwyvOXyIwQ4rSrPcBKcgmU'
-                  'w6Dtq/GBqlVzS9wfKc5RsbjAvn2anQyRSLhdS2ClIRGBc7knewLNuoBXxNrPFq3lPzdt5uXs=~-1~-1~-1; ak_bmsc=DD61DFF3'
-                  'B5C9D1B3E4463FEA8F6BDEC3~000000000000000000000000000000~YAAQT/1VvtC4hLh6AQAAeqNzSgzQJDKMApzD4ibQ2yO5'
-                  'D+QCMRHgTZRmSgabRaqtAeQTyqfPc0D1k3m0S66Jr5kvkwDl1rr1NNCyBLA+jZ83hwbE3Oq2KmOponQVKwsCHqbtQVS7W9Ne7/8k'
-                  'mLznO6z2fbKXtMG8Zntc+aeqY4eJ46PIzSdQPjrIoFu5zqPAOEbnSa99LDEcuJpIErezw5E+EDrbrh8n0OnL5xHzyiyTMYrq9uPK'
-                  'MfzzpM4NDUovIBvvN0TwGcDU0b6Ju+UlF9cqiMUhMaoLZCXw+RcFF/4aAhpstC8h5gJa4BCk/P7EIeBpOFJg9nKgWeqiP6Hkhh46'
-                  'mn3XN67SPHCt4/3iyVYumSCtiKryOQktUcVzkEO9V30=; bm_sz=972FA142E752B8D15050CD920326B68B~YAAQT/1VvtG4hLh'
-                  '6AQAAeqNzSgzXXX/95f+VvKgIwgtfU2OQW+ZMBBTicVhdB7msgrQ1jZ+P5pI1kwmpg3hmAD/29FxFdJTtw6yQTmmoLL8J2d2ZJj6'
-                  'JryxZIjM1uqDkZ7gy1mIP8kKwn61leSzqsZvRD+Zc5wYav5rroxMeNcFT0InjGA+juZx8ZtWfZ1PI5fD2iK1fDhUoZxcLAHJc5AL'
-                  'WycjN/fqV8WpnA+YJKNJVr7ePQncd0aNN3tLJGptKK49ts8dEtjYh2GbwUhuRRO5NQJCGvdpcpdjhTtruOEjQgrgevMA7naI=~34'
-                  '91394~3425845',
-        'referer': 'https://www.stradivarius.com/',
+        'accept-language': 'en-US,en;q=0.9',
+        'sec-fetch-dest': 'document',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'none',
+        'sec-fetch-user': '?1',
+        'sec-gpc': '1',
+        'upgrade-insecure-requests': '1',
         'user-agent': get_random_agent()}
     session.headers.update(headers)
     try:
@@ -540,14 +550,8 @@ def crawl_stradivarius():
                     original_category = str(product['detail']['familyInfo']['familyName'])
                     original_subcategory = str(product['detail']['subfamilyInfo']['subFamilyName'])
                     prod_id = product['id']
-                    # try:
                     cat_id = product['relatedCategories'][0]['id']
-                    # except:
-                    #     cat_id = '12345'
-                    # try:
                     product = product['bundleProductSummaries'][0]
-                    # except:
-                    #     pass
                     name = product['name']
                     category = get_category(brand, name, original_category)
                     subcategory = get_subcategory(brand, name, category, original_subcategory)
@@ -584,10 +588,12 @@ def crawl_stradivarius():
                     item = find_product(url, optional_images)
                     active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
                     fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
-                              'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
+                              'id_producto': url, 'price': price_now, 'price_before': price_before,
+                              'discount': discount,
                               'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
                               'category': category, 'original_category': original_category, 'subcategory': subcategory,
-                              'original_subcategory': original_subcategory, 'gender': 'm', 'active': active, 'national': False}
+                              'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
+                              'national': False}
                     item = create_or_update_item(item, fields, session, optional_images=optional_images)
                     if item.active:
                         post_item(item)
@@ -622,11 +628,6 @@ def crawl_zara():
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'accept-encoding': 'gzip, deflate, br',
         'accept-language': 'en-US,en;q=0.9',
-        # 'cache-control': 'no-cache',
-        # 'cookie': self.cookie,
-        # 'pragma': 'no-cache',
-        # 'referer': 'https://www.zara.com/co/es',
-        # 'sec-ch-ua-mobile': '?0',
         'sec-fetch-dest': 'document',
         'sec-fetch-mode': 'navigate',
         'sec-fetch-site': 'none',
@@ -641,7 +642,9 @@ def crawl_zara():
             res = session.get(endpoint[1])
             count = 0
             if res.status_code == 200:
-                templates = res.json()['productGroups'][0]['elements']
+                templates = res.json()['productGroups']
+                if templates:
+                    templates = templates[0]['elements']
                 for template in templates:
                     count += len(template.get('commercialComponents', []))
             else:
@@ -676,10 +679,13 @@ def crawl_zara():
                                 all_images.append(images)
                             item = find_product(url, all_images)
                             active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
-                            fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
-                                      'id_producto': url, 'price': price_now, 'price_before': price_before, 'discount': discount,
+                            fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description,
+                                      'url': url,
+                                      'id_producto': url, 'price': price_now, 'price_before': price_before,
+                                      'discount': discount,
                                       'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                                      'category': category, 'original_category': original_category, 'subcategory': subcategory,
+                                      'category': category, 'original_category': original_category,
+                                      'subcategory': subcategory,
                                       'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
                                       'national': False}
                             item = create_or_update_item(item, fields, session, all_images=all_images)
@@ -730,11 +736,13 @@ def pull_from_molova(brands=''):
                                       'id_producto': item['url'], 'url': item['url'],
                                       'description': item['description'], 'price': item['allPricesNow'],
                                       'price_before': item['priceBefore'], 'discount': item['discount'],
-                                      'sale': bool(item['sale']), 'images': item['allImages'], 'sizes': item['allSizes'],
+                                      'sale': bool(item['sale']), 'images': item['allImages'],
+                                      'sizes': item['allSizes'],
                                       'colors': item['colors'], 'category': item['category'],
                                       'original_category': item['originalCategory'], 'subcategory': item['subcategory'],
                                       'original_subcategory': item['originalSubcategory'],
-                                      'gender': 'm' if item['gender'] == 'Mujer' else 'h', 'active': True, 'approved': True,
+                                      'gender': 'm' if item['gender'] == 'Mujer' else 'h', 'active': True,
+                                      'approved': True,
                                       'national': item['nacional'], 'trend': item['trend']}
                             try:
                                 images = ast.literal_eval(fields['images'])

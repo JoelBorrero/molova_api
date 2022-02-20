@@ -10,7 +10,8 @@ class DebugAdmin(admin.ModelAdmin):
 
 @admin.register(Process)
 class ProcessAdmin(admin.ModelAdmin):
-    list_display = ('name', 'started')
+    list_display = ('name', 'started', 'updated', 'status')
+    list_filter = ('status',)
     ordering = ('-started',)
     readonly_fields = ('started',)
 

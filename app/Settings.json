@@ -34,10 +34,6 @@
         "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194041/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/faldas-y-shorts-c1010494502.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010494502/product?showProducts=false&languageId=-5"
-      ],
-      [
         "https://www.bershka.com/co/mujer/rebajas/zapatos-c1010193352.html",
         "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193352/product?showProducts=false&languageId=-5"
       ],
@@ -525,48 +521,12 @@
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030024024/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
-        "https://www.pullandbear.com/co/mujer/rebajas/ropa/jeans-y-pantalones-n7104",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204706/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/rebajas/ropa/camisetas-y-tops-n7097",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204630/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/rebajas/ropa/abrigos-y-cazadoras-n7099",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204597/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/rebajas/ropa/vestidos-y-monos-n7102",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204627/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/rebajas/ropa/sudaderas-n7100",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204667/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/rebajas/ropa/punto-n7101",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204676/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/rebajas/mujer/ropa/blusas-y-camisas-n6757",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204657/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/rebajas/ropa/faldas-y-shorts-n7103",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204677/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
         "https://www.pullandbear.com/co/mujer/rebajas/zapatos-n7106",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030207002/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/rebajas/bolsos-y-accesorios-n7107",
         "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030204878/product?languageId=-5&showProducts=false&appId=1"
-      ],
-      [
-        "https://www.pullandbear.com/co/mujer/ropa/juego-del-calamar-n7258",
-        "https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/category/1030378680/product?languageId=-5&showProducts=false&appId=1"
       ],
       [
         "https://www.pullandbear.com/co/mujer/ropa/jeans-n6581",
@@ -714,597 +674,509 @@
   "Stradivarius": {
     "endpoints": [
       [
-        "https://www.stradivarius.com/co/new-collection/rebajas/favoritos/favoritos-c1020411345.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020411345/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/nuevo/ver-todo-c1020210508.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020210508/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/abrigos-y-chaquetas-c1020412971.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412968/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/pantalones/ver-todo-c1020047050.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047051/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/pantalones-y-jeans-c1020412932.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412933/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/punto-c1020412949.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412950/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/camisetas-y-sudaderas-c1020412938.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412939/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/camisas-c1020412944.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412945/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/vestidos-c1020412922.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412923/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/tops-y-bodies-c1020412957.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412956/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/faldas-c1020412928.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412929/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/sport-c1020412959.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412960/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/pijamas-c1020412964.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412965/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/todo-c1020412313.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412314/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/bolsos-y-mochilas-c1020412323.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412324/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/monederos-c1020412329.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412329/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/gorros-y-sombreros-c1020412339.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412342/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/bisuter%C3%ADa-c1020412330.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412331/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/m%C3%A1s-accesorios-c1020412343.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412344/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/home-%26-living-c1020412353.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412347/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/todo-c1020170504.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020170504/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/botas-y-botines-c1399011.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1399011/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/deportivos-c1399015.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1399015/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/zapatos-tac%C3%B3n-c1399017.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1399017/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/zapatos-planos-c1399016.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1399016/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/sandalias-c1020040559.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020040559/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/abrigos-y-chaquetas-c1020412971.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412968/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/pantalones-y-jeans-c1020412932.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412933/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/punto-c1020412949.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412950/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/camisetas-y-sudaderas-c1020412938.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412939/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/camisas-c1020412944.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412945/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/vestidos-c1020412922.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412923/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/tops-y-bodies-c1020412957.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412956/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/faldas-c1020412928.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412929/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/sport-c1020412959.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412960/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/ropa/pijamas-c1020412964.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412965/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/todo-c1020412313.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412314/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/bolsos-y-mochilas-c1020412323.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412324/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/monederos-c1020412329.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412329/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/gorros-y-sombreros-c1020412339.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412342/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/bisuter%C3%ADa-c1020412330.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412331/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/m%C3%A1s-accesorios-c1020412343.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412344/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/accesorios/home-%26-living-c1020412353.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020412347/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/todo-c1020170504.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020170504/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/botas-y-botines-c1399011.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1399011/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/deportivos-c1399015.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1399015/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/zapatos-tac%C3%B3n-c1399017.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1399017/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/zapatos-planos-c1399016.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1399016/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/rebajas/zapatos/sandalias-c1020040559.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020040559/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/plum%C3%ADferos-y-acolchados-c1020409339.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020409339/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/leggings-c1020409340.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020409342/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/varius-nights-c1020367521.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020367521/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/jeans-c1020047058.html",
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/jeans/ver-todo-c1020047058.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047059/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/vestidos-c1020047028.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020132510/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/camisetas-c1020047035.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047036/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/camisas-c1020047029.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047030/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/tops-y-bodies-c1020206052.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020283521/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/packs-c1020336501.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020336501/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/shorts-c1020047071.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020355018/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/faldas-c1020047066.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047067/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/pantalones-c1020047050.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047051/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/chaquetas/ver-todo-c1020206014.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020206021/product?languageId=-48&appId=1"
       ],
       [
         "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/blazers-c1020053048.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020053048/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/chaquetas-c1020206014.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020206021/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/camisetas/ver-todo-c1020047035.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047036/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/punto-c1020047043.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047045/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/tops-y-bodies/ver-todo-c1020206052.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020283521/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/sudaderas-c1020047049.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020206147/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/camisas/ver-todo-c1020047029.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047030/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/pijamas-c1020350001.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020350001/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/vestidos/ver-todo-c1020047028.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020132510/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/denim-fits-c1020283505.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020283505/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/shorts/ver-todo-c1020047071.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020355018/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/str-meets-art-c1020334503.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020334503/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/faldas/ver-todo-c1020047066.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047067/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/abrigos-c1020206509.html",
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/plum%C3%ADferos-y-acolchados/ver-todo-c1020409339.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020421809/product?languageId=-48&appId=1"
+      ],
+      [
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/abrigos/ver-todo-c1020206509.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020206505/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/lo-mejor-de-rebajas-c1020124602.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020124602/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/punto/ver-todo-c1020047043.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020047045/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/stradimarket-c1020380512.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020380512/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/sudaderas/ver-todo-c1020047049.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020206147/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/limited-edition-c1020393176.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020393176/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/leggings/ver-todo-c1020409340.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020409342/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/black-friday-c1020269548.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020269548/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/join-life-c1020254570.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020254570/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/dress-to-go-c1020389674.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020389674/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/dress2go-c1020318535.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020318535/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/summer-mantras-c1020161827.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020161827/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/str-meets-art-c1020384504.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020384504/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/str-meets-art-c1020393175.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020393175/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/str-meets-art-c1020402292.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020402292/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/str-meets-art---arte-en-vivo-c1020402308.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020402308/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/str-meets-art---arte-en-vivo-c1020415315.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020415315/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/str-meets-art---distribuidora-de-artistas-c1020402312.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020402312/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/ver-todo-c1020283507.html",
+        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/ver-todo/ver-todo-c1020283507.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020343508/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/leggings-c1020350007.html",
+        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/leggings/ver-todo-c1020350007.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020350008/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/shorts-c1020411355.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020411355/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/tops-c1020411356.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020411356/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/chaquetas-y-sudaderas-c1020411358.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020411358/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/conjuntos-combinados-c1020411359.html",
+        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/conjuntos-combinados/ver-todo-c1020411359.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020411360/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/sport/compra-por-producto/shoes-%26-accesories-c1020343003.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020343003/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/str-teen/ver-todo-c1020347013.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020347013/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/todos-c1020048021.html",
+        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/todos/todos-c1020048021.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020273100/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/-c1020361503.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020361503/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/botas-y-botines-c1020048017.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020048017/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/deportivos-c1020048018.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020048018/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/zapatos-tac%C3%B3n-c1020048020.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020048020/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/zapatos-planos-c1020048019.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020048019/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/sandalias-tac%C3%B3n-c1020048025.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020048025/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/zapatos/compra-por-producto/sandalias-planas-c1020048023.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020048023/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/ver-todo-c1020330471.html",
+        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/ver-todo/ver-todo-c1020330471.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330483/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/bolsos-y-mochilas-c1020330379.html",
+        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/bolsos-y-mochilas/ver-todo-c1020330379.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330394/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/monederos-c1020330392.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330392/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/bisuter%C3%ADa-c1020330398.html",
+        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/bisuter%C3%ADa/ver-todo-c1020330398.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330399/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/bufandas-y-pa%C3%B1oletas-c1020330459.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330459/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/pijamas/ver-todo-c1020350002.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020350002/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/gorros-y-sombreros-c1020330385.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330385/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/correas-c1020330382.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330382/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/accesorios-de-pelo-c1020330383.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330383/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/gafas-c1020330384.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330384/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/medias-y-pantimedias-c1020330381.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020330381/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/lencer%C3%ADa-c1020283567.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020283567/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/accesorios/compra-por-producto/fragancias-c1020208533.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020208533/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/home-%26-living/compra-por-producto/ver-todo-c1020273197.html",
+        "https://www.stradivarius.com/co/new-collection/home-%26-living/compra-por-producto/ver-todo/ver-todo-c1020273197.html",
         "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020343010/product?languageId=-48&appId=1"
       ],
       [
-        "https://www.stradivarius.com/co/new-collection/home-%26-living/compra-por-producto/pets-c1020411804.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020411804/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/home-%26-living/compra-por-producto/decoraci%C3%B3n-c1020206109.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020206109/product?languageId=-48&appId=1"
-      ],
-      [
-        "https://www.stradivarius.com/co/new-collection/home-%26-living/compra-por-producto/papeler%C3%ADa-c1020206074.html",
-        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020206074/product?languageId=-48&appId=1"
+        "https://www.stradivarius.com/co/new-collection/varius/ver-todo-c1020343023.html",
+        "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020343023/product?languageId=-48&appId=1"
       ]
     ],
-    "endpoint": "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020411345/product?languageId=-48&appId=1"
+    "endpoint": "https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/1020210508/product?languageId=-48&appId=1"
   },
   "Zara": {
     "endpoints": [
       [
-        "https://www.zara.com/co/es/mujer-prendas-exterior-l1184.html?v1=2004427",
-        "https://www.zara.com/co/es/category/2004427/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-prendas-exterior-acolchado-l1195.html?v1=2004456",
-        "https://www.zara.com/co/es/category/2004456/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-chaquetas-l1114.html?v1=2004466",
-        "https://www.zara.com/co/es/category/2004466/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-blazers-l1055.html?v1=2004493",
-        "https://www.zara.com/co/es/category/2004493/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-vestidos-l1066.html?v1=2004553",
-        "https://www.zara.com/co/es/category/2004553/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-punto-l1152.html?v1=2004682",
-        "https://www.zara.com/co/es/category/2004682/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-tops-l1322.html?v1=2004656",
-        "https://www.zara.com/co/es/category/2004656/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-camisas-l1217.html?v1=2004604",
-        "https://www.zara.com/co/es/category/2004604/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-camisetas-l1362.html?v1=2004640",
-        "https://www.zara.com/co/es/category/2004640/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-sudaderas-l1320.html?v1=2004712",
-        "https://www.zara.com/co/es/category/2004712/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-pantalones-l1335.html?v1=2004791",
-        "https://www.zara.com/co/es/category/2004791/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-jeans-l1119.html?v1=2004764",
-        "https://www.zara.com/co/es/category/2004764/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-faldas-l1299.html?v1=2004809",
-        "https://www.zara.com/co/es/category/2004809/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-zapatos-l1251.html?v1=2004949",
-        "https://www.zara.com/co/es/category/2004949/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-bolsos-l1024.html?v1=2005005",
-        "https://www.zara.com/co/es/category/2005005/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-accesorios-l1003.html?v1=2005034",
-        "https://www.zara.com/co/es/category/2005034/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-nuevo-l1180.html?v1=2026572",
-        "https://www.zara.com/co/es/category/2026572/products?ajax=true"
-      ],
-      [
-        "https://www.zara.com/co/es/mujer-prendas-exterior-l1184.html?v1=2024686",
-        "https://www.zara.com/co/es/category/2024686/products?ajax=true"
-      ],
-      [
         "https://www.zara.com/co/es/mujer-prendas-exterior-acolchado-l1195.html?v1=2025914",
         "https://www.zara.com/co/es/category/2025914/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-outerwear-padded-short-l4717.html?v1=2025911",
+        "https://www.zara.com/co/es/category/2025911/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-outerwear-padded-long-l4716.html?v1=2025912",
+        "https://www.zara.com/co/es/category/2025912/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-prendas-exterior-chalecos-l1204.html?v1=2025910",
+        "https://www.zara.com/co/es/category/2025910/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-outerwear-padded-join-life-l4944.html?v1=2046392",
+        "https://www.zara.com/co/es/category/2046392/products?ajax=true"
       ],
       [
         "https://www.zara.com/co/es/mujer-chaquetas-l1114.html?v1=2025657",
         "https://www.zara.com/co/es/category/2025657/products?ajax=true"
       ],
       [
-        "https://www.zara.com/co/es/mujer-blazers-l1055.html?v1=2025482",
-        "https://www.zara.com/co/es/category/2025482/products?ajax=true"
+        "https://www.zara.com/co/es/mujer-chaquetas-l1114.html?v1=2025639",
+        "https://www.zara.com/co/es/category/2025639/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-camisas-sobrecamisa-l3160.html?v1=2025654",
+        "https://www.zara.com/co/es/category/2025654/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-jackets-join-life-l4943.html?v1=2025645",
+        "https://www.zara.com/co/es/category/2025645/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-blazers-join-life-l4945.html?v1=2046393",
+        "https://www.zara.com/co/es/category/2046393/products?ajax=true"
       ],
       [
         "https://www.zara.com/co/es/mujer-vestidos-l1066.html?v1=2026629",
         "https://www.zara.com/co/es/category/2026629/products?ajax=true"
       ],
       [
+        "https://www.zara.com/co/es/mujer-vestidos-mini-l1083.html?v1=2026607",
+        "https://www.zara.com/co/es/category/2026607/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-vestidos-midi-l1081.html?v1=2026605",
+        "https://www.zara.com/co/es/category/2026605/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-vestidos-maxi-l1079.html?v1=2026604",
+        "https://www.zara.com/co/es/category/2026604/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-dresses-join-life-l4946.html?v1=2046894",
+        "https://www.zara.com/co/es/category/2046894/products?ajax=true"
+      ],
+      [
         "https://www.zara.com/co/es/mujer-camisas-l1217.html?v1=2025595",
         "https://www.zara.com/co/es/category/2025595/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-camisas-camisas-l1244.html?v1=2025574",
+        "https://www.zara.com/co/es/category/2025574/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-camisas-blusas-l1221.html?v1=2025572",
+        "https://www.zara.com/co/es/category/2025572/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-shirts-join-life-l4947.html?v1=2046895",
+        "https://www.zara.com/co/es/category/2046895/products?ajax=true"
       ],
       [
         "https://www.zara.com/co/es/mujer-camisetas-l1362.html?v1=2025627",
         "https://www.zara.com/co/es/category/2025627/products?ajax=true"
       ],
       [
+        "https://www.zara.com/co/es/mujer-camisetas-manga-larga-l1373.html?v1=2025617",
+        "https://www.zara.com/co/es/category/2025617/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-camisetas-manga-corta-l1380.html?v1=2025616",
+        "https://www.zara.com/co/es/category/2025616/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-camisetas-basicos-l1364.html?v1=2025603",
+        "https://www.zara.com/co/es/category/2025603/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-polos-l1785.html?v1=2025620",
+        "https://www.zara.com/co/es/category/2025620/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-camisetas-cropped-l1368.html?v1=2025607",
+        "https://www.zara.com/co/es/category/2025607/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-camisetas-sin-mangas-l1382.html?v1=2025622",
+        "https://www.zara.com/co/es/category/2025622/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-tshirts-join-life-l4948.html?v1=2046896",
+        "https://www.zara.com/co/es/category/2046896/products?ajax=true"
+      ],
+      [
         "https://www.zara.com/co/es/mujer-tops-l1322.html?v1=2026564",
         "https://www.zara.com/co/es/category/2026564/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-tops-crop-l1584.html?v1=2026549",
+        "https://www.zara.com/co/es/category/2026549/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-tops-event-l1323.html?v1=2053379",
+        "https://www.zara.com/co/es/category/2053379/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-body-l1057.html?v1=2026545",
+        "https://www.zara.com/co/es/category/2026545/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-tops-join-life-l4949.html?v1=2046897",
+        "https://www.zara.com/co/es/category/2046897/products?ajax=true"
       ],
       [
         "https://www.zara.com/co/es/mujer-punto-l1152.html?v1=2025946",
         "https://www.zara.com/co/es/category/2025946/products?ajax=true"
       ],
       [
-        "https://www.zara.com/co/es/mujer-sudaderas-l1320.html?v1=2026528",
-        "https://www.zara.com/co/es/category/2026528/products?ajax=true"
+        "https://www.zara.com/co/es/mujer-punto-jerseys-l1165.html?v1=2025935",
+        "https://www.zara.com/co/es/category/2025935/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-punto-tops-l1167.html?v1=2025944",
+        "https://www.zara.com/co/es/category/2025944/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-punto-vestidos-l1160.html?v1=2025949",
+        "https://www.zara.com/co/es/category/2025949/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-punto-chaquetas-punto-l1156.html?v1=2025927",
+        "https://www.zara.com/co/es/category/2025927/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-punto-basicos-l1153.html?v1=2025921",
+        "https://www.zara.com/co/es/category/2025921/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-knitwear-premium-l4880.html?v1=2025940",
+        "https://www.zara.com/co/es/category/2025940/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-punto-neutral-l1733.html?v1=2025945",
+        "https://www.zara.com/co/es/category/2025945/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-knitwear-join-life-l4950.html?v1=2046394",
+        "https://www.zara.com/co/es/category/2046394/products?ajax=true"
       ],
       [
         "https://www.zara.com/co/es/mujer-jeans-l1119.html?v1=2025798",
         "https://www.zara.com/co/es/category/2025798/products?ajax=true"
       ],
       [
+        "https://www.zara.com/co/es/mujer-jeans-cintura-alta-l1134.html?v1=2025784",
+        "https://www.zara.com/co/es/category/2025784/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-jeans-mom-fit-l1137.html?v1=2025788",
+        "https://www.zara.com/co/es/category/2025788/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-jeans-tiro-medio-l1463.html?v1=2025797",
+        "https://www.zara.com/co/es/category/2025797/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-jeans-campana-l1132.html?v1=2025782",
+        "https://www.zara.com/co/es/category/2025782/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-jeans-anchos-l2241.html?v1=2025801",
+        "https://www.zara.com/co/es/category/2025801/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-jeans-skinny-l1145.html?v1=2025789",
+        "https://www.zara.com/co/es/category/2025789/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-jeans-regular-l1140.html?v1=2025792",
+        "https://www.zara.com/co/es/category/2025792/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-jeans-join-life-l4951.html?v1=2046395",
+        "https://www.zara.com/co/es/category/2046395/products?ajax=true"
+      ],
+      [
         "https://www.zara.com/co/es/mujer-pantalones-l1335.html?v1=2025899",
         "https://www.zara.com/co/es/category/2025899/products?ajax=true"
       ],
       [
-        "https://www.zara.com/co/es/mujer-faldas-l1299.html?v1=2025721",
-        "https://www.zara.com/co/es/category/2025721/products?ajax=true"
+        "https://www.zara.com/co/es/mujer-pantalones-plisado-l1352.html?v1=2025893",
+        "https://www.zara.com/co/es/category/2025893/products?ajax=true"
       ],
       [
-        "https://www.zara.com/co/es/mujer-conjuntos-l1061.html?v1=2026566",
-        "https://www.zara.com/co/es/category/2026566/products?ajax=true"
+        "https://www.zara.com/co/es/mujer-pantalones-leggings-l1348.html?v1=2025887",
+        "https://www.zara.com/co/es/category/2025887/products?ajax=true"
       ],
       [
-        "https://www.zara.com/co/es/mujer-zapatos-l1251.html?v1=2026644",
-        "https://www.zara.com/co/es/category/2026644/products?ajax=true"
+        "https://www.zara.com/co/es/mujer-pantalones-joggers-l1346.html?v1=2025884",
+        "https://www.zara.com/co/es/category/2025884/products?ajax=true"
       ],
       [
-        "https://www.zara.com/co/es/mujer-bolsos-l1024.html?v1=2025509",
-        "https://www.zara.com/co/es/category/2025509/products?ajax=true"
+        "https://www.zara.com/co/es/mujer-pantalones-fluidos-l1342.html?v1=2025879",
+        "https://www.zara.com/co/es/category/2025879/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-trousers-join-life-l4952.html?v1=2045884",
+        "https://www.zara.com/co/es/category/2045884/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-faldas-l1299.html?v1=2025744",
+        "https://www.zara.com/co/es/category/2025744/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-faldas-mini-l1307.html?v1=2025736",
+        "https://www.zara.com/co/es/category/2025736/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-faldas-midi-l1305.html?v1=2025735",
+        "https://www.zara.com/co/es/category/2025735/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-pantalones-shorts-l1355.html?v1=2025742",
+        "https://www.zara.com/co/es/category/2025742/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-skirts-join-life-l4953.html?v1=2046396",
+        "https://www.zara.com/co/es/category/2046396/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-l1251.html?v1=2026736",
+        "https://www.zara.com/co/es/category/2026736/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-nuevo-l1277.html?v1=2026701",
+        "https://www.zara.com/co/es/category/2026701/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-precios-especiales-l1290.html?v1=2026713",
+        "https://www.zara.com/co/es/category/2026713/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-shoes-platforms-l5024.html?v1=2056383",
+        "https://www.zara.com/co/es/category/2056383/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-piel-l1275.html?v1=2026704",
+        "https://www.zara.com/co/es/category/2026704/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-botas-l1263.html?v1=2026655",
+        "https://www.zara.com/co/es/category/2026655/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-botines-l1259.html?v1=2026674",
+        "https://www.zara.com/co/es/category/2026674/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-tacon-l1271.html?v1=2026756",
+        "https://www.zara.com/co/es/category/2026756/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-plano-l1269.html?v1=2026752",
+        "https://www.zara.com/co/es/category/2026752/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-zapatillas-l1287.html?v1=2047394",
+        "https://www.zara.com/co/es/category/2047394/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-sandalias-l1280.html?v1=2045886",
+        "https://www.zara.com/co/es/category/2045886/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-shoes-joinlife-l4965.html?v1=2047400",
+        "https://www.zara.com/co/es/category/2047400/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-bolsos-l1024.html?v1=2025563",
+        "https://www.zara.com/co/es/category/2025563/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-bolsos-nuevo-l1045.html?v1=2044477",
+        "https://www.zara.com/co/es/category/2044477/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-bolsos-precios-especiales-l1046.html?v1=2025553",
+        "https://www.zara.com/co/es/category/2025553/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-bolsos-piel-l1041.html?v1=2025550",
+        "https://www.zara.com/co/es/category/2025550/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-bolsos-bandoleras-l1032.html?v1=2025513",
+        "https://www.zara.com/co/es/category/2025513/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-bolsos-hombro-l1924.html?v1=2025521",
+        "https://www.zara.com/co/es/category/2025521/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-bolsos-grande-l1039.html?v1=2025526",
+        "https://www.zara.com/co/es/category/2025526/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-bolsos-mini-l1044.html?v1=2025542",
+        "https://www.zara.com/co/es/category/2025542/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-bags-joinlife-l4966.html?v1=2053876",
+        "https://www.zara.com/co/es/category/2053876/products?ajax=true"
       ],
       [
         "https://www.zara.com/co/es/mujer-accesorios-l1003.html?v1=2024752",
         "https://www.zara.com/co/es/category/2024752/products?ajax=true"
       ],
       [
+        "https://www.zara.com/co/es/mujer-accesorios-joyeria-l1015.html?v1=2024724",
+        "https://www.zara.com/co/es/category/2024724/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-accesorios-fulares-l1008.html?v1=2024739",
+        "https://www.zara.com/co/es/category/2024739/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-accesorios-cinturones-l1004.html?v1=2024731",
+        "https://www.zara.com/co/es/category/2024731/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-accesorios-sombreros-l1013.html?v1=2024734",
+        "https://www.zara.com/co/es/category/2024734/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-accesorios-calcetines-l1446.html?v1=2024738",
+        "https://www.zara.com/co/es/category/2024738/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-accessories-join-life-l4954.html?v1=2047393",
+        "https://www.zara.com/co/es/category/2047393/products?ajax=true"
+      ],
+      [
         "https://www.zara.com/co/es/mujer-belleza-perfumes-l1415.html?v1=2024787",
         "https://www.zara.com/co/es/category/2024787/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-beauty-new-in-l4877.html?v1=2024785",
+        "https://www.zara.com/co/es/category/2024785/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-beauty-perfume-best-l4882.html?v1=2024767",
+        "https://www.zara.com/co/es/category/2024767/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-beauty-stores-l4420.html?v1=2024773",
+        "https://www.zara.com/co/es/category/2024773/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/woman-beauty-gifs-l4419.html?v1=2024774",
+        "https://www.zara.com/co/es/category/2024774/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-belleza-velas-l1416.html?v1=2024786",
+        "https://www.zara.com/co/es/category/2024786/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/precios-especiales-l1707.html?v1=2057882",
+        "https://www.zara.com/co/es/category/2057882/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/mujer-zapatos-bolsos-l1253.html?v1=2053372",
+        "https://www.zara.com/co/es/category/2053372/products?ajax=true"
+      ],
+      [
+        "https://www.zara.com/co/es/join-life-woman-new-in-l2975.html?v1=2025818",
+        "https://www.zara.com/co/es/category/2025818/products?ajax=true"
       ]
     ],
     "endpoint": "https://www.zara.com/co/es/category/2004427/products?ajax=true"

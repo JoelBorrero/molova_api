@@ -4,7 +4,7 @@ from .base import *
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 SENDGRID_SANDBOX_MODE_IN_DEBUG = DEBUG
 
 CORS_ORIGIN_ALLOW_ALL = True

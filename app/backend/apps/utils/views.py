@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.template import loader
 
 from ..crawler.models import Debug, Process
+from ..crawler.services import get_next_process
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
 from ..user.models import Brand
@@ -58,6 +59,7 @@ def crawl(request):
                     data[brand]['status'] = p[1]
         except AttributeError:
             pass
+    data['next'] = get_next_process()
     document = template.render(data)
     return HttpResponse(document, status=200)
 

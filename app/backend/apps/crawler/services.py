@@ -1,18 +1,19 @@
 import json
-from datetime import timedelta
+from datetime import datetime, timedelta
 from random import randint
 
 import ast
 import os
 import requests
 from django.db.models import Q
+from django_celery_beat.models import PeriodicTask
 from urllib.parse import quote
 
 from .models import Debug
 from ..item.models import Product
 from ..item.serializers import ProductSerializer, ProductToPostSerializer
 from ..user.models import Brand
-from ..utils.constants import BASE_HOST, USER_AGENTS, IMAGE_FORMATS
+from ..utils.constants import BASE_HOST, IMAGE_FORMATS, TIMEZONE, USER_AGENTS
 
 
 def check_images_urls(optional_images, session=None) -> list:
@@ -45,6 +46,19 @@ def delete_from_remote(to_delete: list):
         to_delete = [to_delete]
     return requests.post(f'{BASE_HOST}/delete',
                          f'{{"data": {to_delete}}}'.replace("'", '"')).json()
+
+
+def get_next_process():
+    """Returns info about next crawling process to be executed"""
+    next_task = {}
+    tasks = PeriodicTask.objects.all().exclude(name='celery.backend_cleanup')
+    for task in tasks:
+        description = task.description
+        estimated = task.schedule.remaining_estimate(datetime.now(TIMEZONE)).seconds
+        name = task.name
+        if 'estimated' not in next_task or estimated < next_task['estimated']:
+            next_task = {'description': description, 'estimated': estimated, 'name': name}
+    return next_task
 
 
 def get_random_agent():
@@ -107,6 +121,7 @@ def post_item(item):
 
 
 def update_brand_links(brand):
+    """Function to scrap categories and generate urls and endpoints for specific brand"""
     urls = []
     session = requests.session()
     if brand == 'Bershka':
@@ -131,7 +146,7 @@ def update_brand_links(brand):
             if '.title' in category and 'Home.title' not in category and 'mujer' in category.lower():
                 category_id = category[:category.index('.')]
                 if category_id not in str(categories) and ' |' in category:
-                    name = category[category.index('.title=') + 7 : category.index(' |')]
+                    name = category[category.index('.title=') + 7: category.index(' |')]
                     endpoint = f'{host}/itxrest/3/catalog/store/45109565/40259535/category/{category_id}/product?showProducts=false&languageId=-5'
                     if bool(session.get(endpoint).json()['productIds']):
                         urls.append([name, endpoint])
@@ -213,35 +228,34 @@ def update_brand_links(brand):
         res = session.get(url).json()['categories'][0]
         p1 = 'https://www.stradivarius.com'
         p2 = res['name']
+        id = res['id']
         res = res['subcategories']
         for category in res:
             for cat in category['subcategories']:
-                for c in cat['subcategories']:
-                    if c['subcategories']:
-                        for subcategory in c['subcategories']:
-                            if c['viewCategoryId'] == subcategory['id']:
-                                url = f'{p1}/co/{p2}/{category["name"]}/{cat["name"]}/{c["name"]}-c{c["id"]}.html'.replace(
-                                    ' ', '-')
-                                urls.append([parse_url(url),
-                                             f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{subcategory["id"]}/product?languageId=-48&appId=1'])
-                    else:
-                        url = f'{p1}/co/{p2}/{category["name"]}/{cat["name"]}/{c["name"]}-c{c["id"]}.html'.replace(' ',
-                                                                                                                   '-')
-                        urls.append([parse_url(url),
-                                     f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{c["id"]}/product?languageId=-48&appId=1'])
+                if cat['name'] == 'Ver todo':
+                    url = f'{p1}/co/{p2}/{category["name"]}/{cat["name"]}-c{cat["id"]}.html'.lower().replace(' ', '-')
+                    endpoint = f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{cat["id"]}/product?languageId=-48&appId=1'
+                    urls.append([parse_url(url), endpoint])
+                elif cat['subcategories']:
+                    for c in cat['subcategories']:
+                        if c['viewCategoryId']:
+                            for subcategory in c['subcategories']:
+                                if subcategory['id'] == c['viewCategoryId']:
+                                    url = f'{p1}/co/{p2}/{category["name"]}/{cat["name"]}/{c["name"]}/{subcategory["name"]}-c{c["id"]}.html'.lower().replace(
+                                        ' ', '-')
+                                    endpoint = f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{subcategory["id"]}/product?languageId=-48&appId=1'
+                                    urls.append([parse_url(url), endpoint])
     elif brand == 'Zara':
         headers = {
-            'accept': '*/*',
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             'accept-encoding': 'gzip, deflate, br',
             'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
-            'cookie': 'ITXSESSIONID=d458e4b17f001e37dfdd0cc93fbe1717; web_version=STANDARD; bm_sz=B77396026A92E8F97FA258393551A02E~YAAQpKpLaP3Jm7R6AQAAMbyEvg2KTcnl6zbnIQp+bZr8QZF8eXTyts74BzbwCO5yOYGfgrQ1IK/ZtgBxEIdaxz/4vh4DW3DjZOvD6jMhLg7HWKxSEJLwRG3QE9en2at6n104IgL8ncgIML9rNJfv9bzJoKScK+FbZnG9Xav64FI9U850vPuzCcC2Q7yluiPX1McNYw0glOBo7TH6dO5feI2rFAWAJJfHv6Y2eQ6gYu46OZ7vOanrBwTi4HaeVptV80R+3gLetroqBfLaWXZIIT82hBO90y27hL8JeHD/HtE0~3424833~4273222; _abck=AD1BE4EBB69FA500FE0C71CB433A60B0~0~YAAQpKpLaAPKm7R6AQAAj8GEvgZ+SRGl6rrPLN5AeYGCRe76FBuhKFLzvcf3qD+YdOCRYAq2AO4JgUfWq00iE7KWe9B8TeKUqodFqzD/yAoJrN+LvAfwmmP5mO+hPcndGJYxcSWBTUZRrzFyR8labOPBk04SMr6ie4QMrOtjwfo8W8vG9PDex8FGoZhZqcE4Qu10CbBlOpzcumdc0ka6X2L/D2XMfq19EyBgvRiWSKHCHZOC6R4SxI8z1VrDxGvpcdxDNSq+UzOWpjPuV8xRJwQfoKfItmWWPzEcPn3OF2mwQGhHy6JUaE/mIF1ldde8qpRz38KFsrLYX2n+Htlim5tgX0gLSo1UhSmYgVDXx/KbM2Yr0l5ImcUGgNE2lCZsj6hJ5tQT12ARz8zv/FBvQZxCmNiFaw==~-1~-1~-1; ak_bmsc=8329DA2709C86864C6E40D3ACBA821AE~000000000000000000000000000000~YAAQpKpLaAvKm7R6AQAAP8WEvg33e6w414subhHXC3mgw6uB3YZvjS22aPHbCCOR2laB3AF2hINX/nG2ud2aPU/v5/kJFsIbuoaI5WTCKYiqIyJEks63rvazFKn4okA8r5u/Q0pvGUpPz/L8GdmTOHxrU7cvHqltA5MS/nD0C1Ctt6TXz0M1kmZKBOEJHmlPH1mQPoNiZQVieRSO4+bk4Im9ml5yO691ogvDxw//dHwUd4xvWylRyyHAqTl89Mbar93V2xmKl/ANvdzPRwtzdFxVameqNjlL+nYLPAlPNxsLfKPKcKjHhl45G5iAtcMbc5BahKLAwQ4QuutHfVnFWaWANAO7UH1v7h1kOT5LqM8L+bTryXq0xWUSLpL/R6D++Uaz1J69mEfisXiH5VVeyHtXiInPxYiucKayF5bLUE60rCT9fSsVfb8zxwRkdaPx4AQ+Vdhcc/X6ujcubVnBZyyrh4j3OhxF+ZmUsOcrZmEr9wrTpxpN/w==; rid=61e5ec44-e21e-4a15-a356-817a5015c536; vwr_global=1.1.1630988978.b8630a30-29c8-4f68-a346-56eeff82262b.1630988978..M4EHYfBDQijUPEKmwTyNXh4yy6_bS2cOX-QOKMWkhow; storepath=co%2Fes; cart-was-updated-in-standard=true; rskxRunCookie=0; rCookie=jo27kadi1hlmxxaul4r3kt9kq6n1; chin={"status":"chat-status:not_connected","isChatAttended":false,"privacyAccepted":false,"email":"","userJid":"","uiCurrentView":"view:hidden","timeShowInteractiveChat":0,"compatMode":true,"businessKind":"online"}; lastRskxRun=1630988990053; _ga=GA1.2.1818226498.1630988991; _gid=GA1.2.237491462.1630988991; _fbp=fb.1.1630988991038.1662346990; _gat_UA-18083935-1=1; OptanonConsent=isIABGlobal=false&datestamp=Mon+Sep+06+2021+23%3A29%3A51+GMT-0500+(Colombia+Standard+Time)&version=6.8.0&hosts=&consentId=a9608d84-85af-48dd-b839-cfa5e1d8d766&interactionCount=1&landingPath=https%3A%2F%2Fwww.zara.com%2Fco%2Fes%2Fmujer-nuevo-l1180.html%3Fv1%3D1881787&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1; RT="z=1&dm=zara.com&si=38791a9a-8027-4374-94b3-e222789fe077&ss=kt9kq31v&sl=4&tt=emy&bcn=%2F%2F17c8edc7.akstat.io%2F&ld=dz3&ul=y6f&hd=ycs"; _ga_D8SW45BC2Z=GS1.1.1630988990.1.0.1630989019.31',
-            'pragma': 'no-cache',
-            'referer': 'https://www.zara.com/co/',
-            'sec-ch-ua-mobile': '?0',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-origin',
+            'sec-fetch-dest': 'document',
+            'sec-fetch-mode': 'navigate',
+            'sec-fetch-site': 'none',
+            'sec-fetch-user': '?1',
+            'sec-gpc': '1',
+            'upgrade-insecure-requests': '1',
             'user-agent': get_random_agent()}
         session.headers.update(headers)
         host = 'https://www.zara.com/co/es'
@@ -272,7 +286,7 @@ def bershka_endpoint_maker(urls, save=True):
     """
     output = []
     for url in urls:
-        category_id = url[url.rindex('-c')+2:url.rindex('.html')]
+        category_id = url[url.rindex('-c') + 2:url.rindex('.html')]
         endpoint = f'https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/{category_id}/product?showProducts=false&languageId=-5'
         output.append([url, endpoint])
     if save:
@@ -285,5 +299,6 @@ def bershka_endpoint_maker(urls, save=True):
 
 
 def url_is_image(url, session=None) -> bool:
+    """Verify if a url is image"""
     r = session.head(url) if session else requests.head(url)
     return r.headers["content-type"] in IMAGE_FORMATS

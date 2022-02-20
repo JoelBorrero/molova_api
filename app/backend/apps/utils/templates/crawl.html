@@ -1,86 +1,104 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Crawling</h1>
-<div class="row">
-    <div class="col-4">
+<div class="row brands">
+    <div class="col-4 {{bershka.status}}">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Bershka')">
             <label><h4>Bershka</h4></label>
-            <label class="{{bershka.status}}">{{bershka.status}}</label>
+            <label class="status">{{bershka.status}}</label>
             <label>Iniciado: {{bershka.started}}</label><br>
             <label>Actualizado: {{bershka.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
-    <div class="col-4">
+    <div class="col-4 {{blunua.status}}">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Blunua')">
             <label><h4>Blunua</h4></label>
-            <label class="{{blunua.status}}">{{blunua.status}}</label>
+            <label class="status">{{blunua.status}}</label>
             <label>Iniciado: {{blunua.started}}</label><br>
             <label>Actualizado: {{blunua.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
-    <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Mango')">
-            <label><h4>Mango</h4></label>
-            <label class="{{mango.status}}">{{mango.status}}</label>
-            <label>Iniciado: {{mango.started}}</label><br>
-            <label>Actualizado: {{mango.updated}}</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
+    <div class="col-4 {{mango.status}}">
+        <div class="content">
+            <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Mango')">
+                <label><h4>Mango</h4></label>
+                <label class="status">{{mango.status}}</label>
+                <label>Iniciado: {{mango.started}}</label><br>
+                <label>Actualizado: {{mango.updated}}</label><br>
+                <input type="submit" value="Iniciar">
+            </form>
+        </div>
     </div>
-    <div class="col-4">
+    <div class="col-4 {{mercedes.status}}">
         <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Mercedes Campuzano')">
             <label><h4>Mercedes Campuzano</h4></label>
-            <label class="{{mercedes.status}}">{{mercedes.status}}</label>
+            <label class="status">{{mercedes.status}}</label>
             <label>Iniciado: {{mercedes.started}}</label><br>
             <label>Actualizado: {{mercedes.updated}}</label><br>
             <input type="submit" value="Iniciar">
         </form>
     </div>
-    <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Pull & Bear')">
-            <label><h4>Pull & Bear</h4></label>
-            <label class="{{pull.status}}">{{pull.status}}</label>
-            <label>Iniciado: {{pull.started}}</label><br>
-            <label>Actualizado: {{pull.updated}}</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
+    <div class="col-4 {{pull.status}}">
+        <div class="content">
+            <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Pull & Bear')">
+                <label><h4>Pull & Bear</h4></label>
+                <label class="status">{{pull.status}}</label>
+                <label>Iniciado: {{pull.started}}</label><br>
+                <label>Actualizado: {{pull.updated}}</label><br>
+                <input type="submit" value="Iniciar">
+            </form>
+        </div>
     </div>
-    <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Solua Accesorios')">
-            <label><h4>Solúa</h4></label>
-            <label class="{{solua.status}}">{{solua.status}}</label>
-            <label>Iniciado: {{solua.started}}</label><br>
-            <label>Actualizado: {{solua.updated}}</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
+    <div class="col-4 {{solua.status}}">
+        <div class="content">
+            <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Solua Accesorios')">
+                <label><h4>Solúa</h4></label>
+                <label class="status">{{solua.status}}</label>
+                <label>Iniciado: {{solua.started}}</label><br>
+                <label>Actualizado: {{solua.updated}}</label><br>
+                <input type="submit" value="Iniciar">
+            </form>
+        </div>
     </div>
-    <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Stradivarius')">
-            <label><h4>Stradivarius</h4></label>
-            <label class="{{stradivarius.status}}">{{stradivarius.status}}</label>
-            <label>Iniciado: {{stradivarius.started}}</label><br>
-            <label>Actualizado: {{stradivarius.updated}}</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
+    <div class="col-4 {{stradivarius.status}}">
+        <div class="content">
+            <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Stradivarius')">
+                <label><h4>Stradivarius</h4></label>
+                <label class="status">{{stradivarius.status}}</label>
+                <label>Iniciado: {{stradivarius.started}}</label><br>
+                <label>Actualizado: {{stradivarius.updated}}</label><br>
+                <input type="submit" value="Iniciar">
+            </form>
+        </div>
     </div>
-    <div class="col-4">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Zara')">
-            <label><h4>Zara</h4></label>
-            <label class="{{zara.status}}">{{zara.status}}</label>
-            <label>Iniciado: {{zara.started}}</label><br>
-            <label>Actualizado: {{zara.updated}}</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
+    <div class="col-4 {{zara.status}}">
+        <div class="content">
+            <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Zara')">
+                <label><h4>Zara</h4></label>
+                <label class="status">{{zara.status}}</label>
+                <label>Iniciado: {{zara.started}}</label><br>
+                <label>Actualizado: {{zara.updated}}</label><br>
+                <input type="submit" value="Iniciar">
+            </form>
+        </div>
     </div>
 </div>
-<div>
-    <form action="javascript:post('/api/v1/crawler/process/sync/', 'Sync')">
-        <label>Sincronizar</label><br>
-        <input type="text" placeholder="Marca" id="brand_to_sync">
-        <input type="submit" value="Iniciar">
-    </form>
+<div class="d-flex justify-content-around None next_process">
+    <div>
+        <form action="javascript:post('/api/v1/crawler/process/sync/', 'Sync')">
+            <h3>Sincronizar</h3><br>
+            <input type="text" placeholder="Marca" id="brand_to_sync">
+            <input type="submit" value="Iniciar">
+        </form>
+    </div>
+    <div>
+        <h3>Próximo proceso</h3>
+        <h4>{{next.name}}</h4>
+        <p>{{next.description}}</p>
+        <p>Se ejecutará dentro de <span id="time">3</span></p>
+    </div>
 </div>
 
 <script>
@@ -101,6 +119,32 @@
                 location.reload();
             });
     }
+
+    function startTimer(duration, display) {
+        let timer = duration, hours, minutes, seconds;
+        setInterval(function () {
+            hours = parseInt(timer / 3600, 10);
+            minutes = parseInt(timer % 3600 / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+
+            if (timer <= 0) {
+                display.className = 'timeout';
+            } else {
+                timer--;
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var time = document.querySelector('#time');
+        startTimer(parseInt(time.textContent), time);
+    };
 </script>
 
 <style>
@@ -115,23 +159,86 @@
             background-position: 0% 50%
         }
     }
+
     .En.proceso {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 4px;
+    }
+
+    .En.proceso, .En.proceso .status {
+        border-radius: 15px;
         animation: BackgroundAnimation 2s ease infinite;
         background: linear-gradient(270deg, red, yellow, limegreen);
         background-size: 800% 800%;
-        border-radius: 10px;
+        border-radius: 15px;
     }
+
+    .En.proceso .status {
+        padding-inline: 10px;
+    }
+
+    .En.proceso .content {
+        background: white;
+        margin: 4px;
+        border-radius: 10px;
+        padding: 7px;
+        min-height: 95%;
+    }
+
     .Exitoso {
+        outline: 3px dashed limegreen;
+        outline-offset: -7px;
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .Exitoso .status {
         background: limegreen;
-        border-radius: 10px;
+        border-radius: 15px;
+        padding-inline: 10px;
     }
+
     .Error {
-        background: red;
-        border-radius: 10px;
+        outline: 3px dashed red;
+        outline-offset: -7px;
+        padding: 15px;
+        border-radius: 20px;
     }
+
+    .Error .status {
+        background: red;
+        border-radius: 15px;
+        padding-inline: 10px;
+    }
+
     .None {
+        outline: 3px dashed lightgray;
+        outline-offset: -7px;
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .None .status {
         background: lightgray;
-        border-radius: 10px;
+        border-radius: 15px;
+        padding-inline: 10px;
+    }
+
+    #time {
+        font-size: 25px;
+        font-weight: 200;
+    }
+
+    @keyframes pulse {
+        10% {
+            font-size:26px;
+        }
+    }
+
+    #time.timeout {
+        cursor: wait;
+        animation: pulse 1s infinite;
     }
 </style>
 {% endblock content %}
