@@ -27,6 +27,7 @@ class Product(ModelBase):
     approved = models.BooleanField(default=False)
     national = models.BooleanField(default=False)
     trend = models.BooleanField(default=False)
+    meta = models.TextField(editable=False, default='{}')
 
     def __str__(self):
         return self.name

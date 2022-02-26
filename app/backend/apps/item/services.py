@@ -58,7 +58,7 @@ def create_or_update_item(item, fields, session, optional_images='', all_images=
                                       subcategory=fields['subcategory'], national=fields['national'],
                                       original_subcategory=fields['original_subcategory'], gender='m',
                                       active=fields['active'], sale=bool(fields['discount']),
-                                      trend=fields.get('trend', False))
+                                      trend=fields.get('trend', False), meta=fields.get('meta', '{}'))
     return item
 
 
@@ -169,87 +169,113 @@ def get_category(brand, name, original_category):
 
 
 def get_colors_src(colors: list):
-    def get_color_src(color):
-        color = color.lower()
+    def get_src(color):
+        color, image = color.lower(), ''
         if "blanco" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2020/I/0/1/p/2593/560/003/2593560003_3_1_5.jpg" \
-                   "?t=1591603662373"
+            color = 'Blanco'
+            image = "https://static.e-stradivarius.net/5/photos3/2020/I/0/1/p/2593/560/003/2593560003_3_1_5.jpg?t=1591603662373"
         elif "negro" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2020/I/0/1/p/2520/446/001/2520446001_3_1_5.jpg" \
-                   "?t=1578650688731"
+            color = 'Negro'
+            image = "https://static.e-stradivarius.net/5/photos3/2020/I/0/1/p/2520/446/001/2520446001_3_1_5.jpg" \
+                    "?t=1578650688731"
         elif any(c in color for c in ['khaki oscuro']):
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/1809/189/550/1809188550_3_1_5.jpg" \
-                   "?t=1584638546032"
+            color = 'Khaki'
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/1809/189/550/1809188550_3_1_5.jpg" \
+                    "?t=1584638546032"
         elif any(c in color for c in ['crudo', 'natural']):
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/5806/616/004/5806616004_3_1_5.jpg" \
-                   "?t=1606239230009"
+            color = 'Crudo'
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/5806/616/004/5806616004_3_1_5.jpg" \
+                    "?t=1606239230009"
         elif any(c in color for c in ['verde caqui', 'verdoso']):
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2532/688/550/2532688550_3_1_5.jpg" \
-                   "?t=1612276973740"
+            color = "Verde"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2532/688/550/2532688550_3_1_5.jpg" \
+                    "?t=1612276973740"
         elif any(c in color for c in ['gris claro', 'gris vigor']):
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/5800/128/201/5800128201_3_1_5.jpg" \
-                   "?t=1614169933321"
+            color = "Gris"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/5800/128/201/5800128201_3_1_5.jpg" \
+                    "?t=1614169933321"
         elif "marrón" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2020/I/0/1/p/5005/476/415/5005476415_3_1_5.jpg" \
-                   "?t=1602670087866"
+            color = "Marrón"
+            image = "https://static.e-stradivarius.net/5/photos3/2020/I/0/1/p/5005/476/415/5005476415_3_1_5.jpg" \
+                    "?t=1602670087866"
         elif "azul claro" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/5800/128/040/5800128040_3_1_5.jpg" \
-                   "?t=1614169933139"
+            color = "Azul"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/5800/128/040/5800128040_3_1_5.jpg" \
+                    "?t=1614169933139"
         elif any(c in color for c in ['camel', 'tostao']):
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/1/1/p/9200/770/102/02/9200770102_3_1_5.jpg" \
-                   "?t=1614267634783"
+            color = "Camel"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/1/1/p/9200/770/102/02/9200770102_3_1_5.jpg" \
+                    "?t=1614267634783"
         elif "rosa" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2617/490/146/2617490146_3_1_5.jpg" \
-                   "?t=1613480445018"
+            color = "Rosa"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2617/490/146/2617490146_3_1_5.jpg" \
+                    "?t=1613480445018"
         elif "fucsia" in color:
-            return "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/GEF/ES-CO/Imagenes/Swatches/swatches_genericos/Rojo-3002.png"
+            color = "Fucsia"
+            image = "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/GEF/ES-CO/Imagenes/Swatches/swatches_genericos/Rojo-3002.png"
         elif "verde claro" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2530/151/505/2530151505_3_1_5.jpg" \
-                   "?t=1611059016110"
+            color = "Verde claro"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2530/151/505/2530151505_3_1_5.jpg" \
+                    "?t=1611059016110"
         elif any(c in color for c in ['verde', '131']):
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/860/508/2545860508_3_1_5.jpg" \
-                   "?t=1612868332925"
+            color = "Verde"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/860/508/2545860508_3_1_5.jpg" \
+                    "?t=1612868332925"
         elif "celeste" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2530/151/045/2530151045_3_1_5.jpg" \
-                   "?t=1611052287184"
+            color = "Celeste"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2530/151/045/2530151045_3_1_5.jpg" \
+                    "?t=1611052287184"
         elif "dorado" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/0783/006/300/0783006300_3_1_5.jpg" \
-                   "?t=1607013413999"
+            color = "Dorado"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/0783/006/300/0783006300_3_1_5.jpg" \
+                    "?t=1607013413999"
         elif "lila" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/860/601/2545860601_3_1_5.jpg" \
-                   "?t=1612868333047"
+            color = "Lila"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/860/601/2545860601_3_1_5.jpg" \
+                    "?t=1612868333047"
         elif "beige" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2020/I/0/1/p/6540/888/430/6540888430_3_1_5.jpg" \
-                   "?t=1602063024098"
+            color = "Beige"
+            image = "https://static.e-stradivarius.net/5/photos3/2020/I/0/1/p/6540/888/430/6540888430_3_1_5.jpg" \
+                    "?t=1602063024098"
         elif "gris" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/8061/294/210/8061294210_3_1_5.jpg" \
-                   "?t=1613663030327"
+            color = "Gris"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/8061/294/210/8061294210_3_1_5.jpg" \
+                    "?t=1613663030327"
         elif "rojo" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/5902/235/101/5902235101_3_1_5.jpg" \
-                   "?t=1599738732391"
+            color = "Rojo"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/5902/235/101/5902235101_3_1_5.jpg" \
+                    "?t=1599738732391"
         elif "azul" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2502/423/045/2502423045_3_1_5.jpg" \
-                   "?t=1606757897269"
+            color = "Azul"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2502/423/045/2502423045_3_1_5.jpg" \
+                    "?t=1606757897269"
         elif any(c in color for c in ['amarillo', 'mostaza']):
-            return "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/2020/GEF/ES-CO/Imagenes/Swatches" \
-                   "/swatches_genericos/Amarillo-11048.png"
+            color = "Mostaza"
+            image = "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/2020/GEF/ES-CO/Imagenes/Swatches" \
+                    "/swatches_genericos/Amarillo-11048.png"
         elif "naranja" in color:
-            return "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/2020/GEF/ES-CO/Imagenes/Swatches" \
-                   "/swatches_genericos/Naranja-38836.png"
+            color = "Naranja"
+            image = "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/2020/GEF/ES-CO/Imagenes/Swatches" \
+                    "/swatches_genericos/Naranja-38836.png"
         elif "lima" in color:
-            return "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/GEF/ES-CO/Imagenes/Swatches" \
-                   "/swatches_genericos/VERDE_NEON_6654.PNG"
+            color = "Lima"
+            image = "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/GEF/ES-CO/Imagenes/Swatches" \
+                    "/swatches_genericos/VERDE_NEON_6654.PNG"
         elif "verde" in color:
-            return "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/GEF/ES-CO/Imagenes/Swatches" \
-                   "/swatches_genericos/Verde-15849.png"
+            color = "Verde"
+            image = "https://www.gef.com.co/wcsstore/CrystalCo_CAT_AS/GEF/ES-CO/Imagenes/Swatches" \
+                    "/swatches_genericos/Verde-15849.png"
         elif "az" in color:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2512/446/010/2512446010_3_1_5.jpg" \
-                   "?t=1606152337393"
+            color = "Azul oscuro"
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2512/446/010/2512446010_3_1_5.jpg" \
+                    "?t=1606152337393"
         else:
-            return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/990/001/2545990001_3_1_5.jpg" \
-                   "?t=1613467824691"
+            color = 'Undefined'
+            image = "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/990/001/2545990001_3_1_5.jpg?" \
+                    "t=1613467824691"
+        return {'color': color, 'image': image}
 
-    return [get_color_src(color) for color in colors]
+    return [get_src(color) for color in colors]
 
 
 def get_subcategory(brand, name, category, original_subcategory):
@@ -434,7 +460,7 @@ def get_subcategory(brand, name, category, original_subcategory):
     return category
 
 
-def normalize_url(url):
+def normalize_url(url: str):
     """
     @param url: Url to be cropped
     @return: Url cleaned
@@ -500,7 +526,7 @@ def read_from_excel(excel, user):
 def read_s3_to_compress(start=0, end=0):
     def tinify_img(origin, path, to, output):
         """
-        @param origin: 's3' or 'file'
+        @param origin: str 's3' or 'file'
         @param path: url/path to image
         @param to: where image should be sent, 's3' of 'file'
         @param output: output file path

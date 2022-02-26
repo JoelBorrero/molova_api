@@ -18,7 +18,7 @@ from ..utils.constants import BASE_HOST, SETTINGS, TIMEZONE
 
 
 # Subcategoría: Vestidos
-# Color: azul, verde
+# Color: azul, verde - FORMAT: [{'name':'Rojo', 'image': 'https://example.com/color.jpg'}, {...}]
 # Estampado: liso, lunares, flores, lentejuelas
 # Ocasión: Fiesta, Playa
 # Material: Seda, Lino, licra
@@ -54,10 +54,10 @@ def crawl_bershka():
             response = session.get(endpoint[1]).json()['productIds']
             self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(response)} productos  -  {endpoint[0]}\n'
             self.save()
-            for page in range(len(response) // page_size):
+            for page in range(len(response) // page_size + 1):
                 ids = [prod_id for prod_id in response[page * page_size: (page + 1) * page_size]]
                 page_endpoint = f'https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/productsArray?categoryId={category_id}&productIds={str(ids)[1:-1].replace(", ", "%2C")}&languageId=-5'
-                products = session.get(page_endpoint).json()['products']
+                products = session.get(page_endpoint).json().get('products', [])
                 for product in products:
                     name = product['name']
                     if name:
@@ -65,6 +65,7 @@ def crawl_bershka():
                             prod_id = product['id']
                             original_category = product['relatedCategories'][0]['name']
                             category = get_category(brand, name, original_category)
+                            attributes = [attribute['name'] for attribute in product['attributes']]
                             if product['bundleProductSummaries']:
                                 product = product['bundleProductSummaries'][0]['detail']
                             else:
@@ -81,7 +82,7 @@ def crawl_bershka():
                             for color in product['colors']:
                                 colors.append(
                                     {'name': color['name'],
-                                     'picture': f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}'})
+                                     'image': f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}'})
                                 if color['image']['style']:
                                     color_styles.append(f'{color["image"]["style"][0]}/')
                                 else:
@@ -113,14 +114,12 @@ def crawl_bershka():
                             item = find_product(url, optional_images)
                             active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
                             fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description,
-                                      'url': url,
-                                      'id_producto': url, 'price': price_now, 'price_before': price_before,
-                                      'discount': discount,
-                                      'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                                      'category': category, 'original_category': original_category,
-                                      'subcategory': subcategory,
-                                      'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
-                                      'national': False}
+                                      'url': url, 'id_producto': url, 'price': price_now, 'price_before': price_before,
+                                      'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
+                                      'colors': colors, 'category': category, 'original_category': original_category,
+                                      'subcategory': subcategory, 'original_subcategory': original_subcategory,
+                                      'gender': 'm', 'active': active, 'national': False,
+                                      'meta': {'attributes': attributes}}
                             item = create_or_update_item(item, fields, session, optional_images=optional_images)
                             if item.active:
                                 # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
@@ -218,7 +217,7 @@ def crawl_mango():
         'user-agent': get_random_agent()}
     session.headers.update(headers)
     try:
-        for endpoint in SETTINGS[brand]['endpoints']:
+        for endpoint in SETTINGS[brand]['endpoints'][:1]:
             page_num = 1
             while page_num:
                 response = session.get(endpoint[1] + str(page_num))
@@ -231,7 +230,7 @@ def crawl_mango():
                     garments = response['groups'][0]['garments']
                     self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(garments)} productos  -  {endpoint[0]}\n'
                     self.save()
-                    for item in garments:
+                    for item in garments[:1]:
                         it = garments[item]
                         name = it['shortDescription']
                         original_category = response['titleh1']
@@ -268,22 +267,17 @@ def crawl_mango():
                         item = create_or_update_item(item, fields, session, all_images=all_images)
                         # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                         if item.active:
-                            post_item(item)
-                        # else:
-                        #     Debug.objects.create(name='no_stock', text=item)
-                        del item, it, name, original_category, category, subcategory, all_images, all_sizes, colors, color, images, sizes, ref, price_before, price_now, discount, url, active, fields
+                            # post_item(item)
+                            pass
                     self.save()
                     headers = session.headers
                     # sleep(randint(30, 120) / 1)
                     session = requests.session()
                     session.headers.update(headers)
-                    # del response, garments
                 else:
                     page_num = 0
                     self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {endpoint[0]} ({response.status_code})\n'
                     self.save()
-            # del page_num, endpoint
-        # del brand, self, session, headers
         self.status = 's'
         self.save()
         check_inactive_items(brand, self.started)

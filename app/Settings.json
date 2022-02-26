@@ -2,143 +2,483 @@
   "Bershka": {
     "endpoints": [
       [
-        "https://www.bershka.com/co/mujer/rebajas/favoritos-rebajas-c1010236032.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010236032/product?showProducts=false&languageId=-5"
+        "Todas las ofertas en ropa de mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010473002/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/pantalones-c1010194037.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194037/product?showProducts=false&languageId=-5"
+        "Ofertas en Camisas de Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010263542/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/jeans-c1010194036.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194036/product?showProducts=false&languageId=-5"
+        "Ofertas en Zapatos de Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010419517/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/cazadoras-y-abrigos-c1010194033.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194033/product?showProducts=false&languageId=-5"
+        "Ofertas de Faldas y Shorts de Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010419514/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/sudaderas-y-jers%C3%A9is-c1010194043.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194043/product?showProducts=false&languageId=-5"
+        "Ofertas de Camisetas de Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010419512/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/vestidos-y-monos-c1010194034.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194034/product?showProducts=false&languageId=-5"
+        "Ofertas en Pantalones de Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010419510/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/camisetas-y-tops-c1010194038.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194038/product?showProducts=false&languageId=-5"
+        "Ofertas en Buzos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010419509/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/camisas-c1010194041.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194041/product?showProducts=false&languageId=-5"
+        "Ofertas de Chaquetas de Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010419508/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/zapatos-c1010193352.html",
+        "Rebajas en Zapatos para Mujer",
         "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193352/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/rebajas/accesorios-c1010194020.html",
+        "Punto de Mujer en Rebajas",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194043/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones Leggins para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010305676/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Rebajas en Pantalones para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194037/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Rebajas en Jeans para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194036/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Rebajas en Chaquetas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194033/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Rebajas en Camisetas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194038/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Rebajas en Camisas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194041/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Rebajas en Accesorios para Mujer",
         "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194020/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/lo-m%C3%A1s-vendido-c1010261502.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010261502/product?showProducts=false&languageId=-5"
+        "Rebajas en Ropa de Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010236032/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/varsity-c1010508188.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010508188/product?showProducts=false&languageId=-5"
+        "Tenis para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010205525/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/efecto-piel-c1010446008.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010446008/product?showProducts=false&languageId=-5"
+        "Zapatos en Oferta para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010372580/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/bombers-c1010512004.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010512004/product?showProducts=false&languageId=-5"
+        "Sandalias de Tacón para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010205529/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/blazers-c1010205537.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010205537/product?showProducts=false&languageId=-5"
+        "Sandalias Planas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010205533/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/cazadoras-y-abrigos-c1010193212.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193212/product?showProducts=false&languageId=-5"
+        "Zapatos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010391508/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/chalecos-c1010469010.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010469010/product?showProducts=false&languageId=-5"
+        "Botas y Botines para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010205534/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/sudaderas-c1010193222.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193222/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/ropa/jers%C3%A9is-y-c%C3%A1rdigans-c1010193223.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193223/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/ropa/camisetas-y-tops-c1010193217.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193217/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/ropa/camisas-c1010193221.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193221/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/ropa/vestidos-c1010193213.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193213/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/ropa/pantalones-c1010193216.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193216/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/ropa/jeans-c1010276029.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010276029/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/ropa/faldas-c1010193224.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193224/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/ropa/shorts-y-bermudas-c1010194517.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194517/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/zapatos/colaboraciones%C2%AE-c1010442006.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010442006/product?showProducts=false&languageId=-5"
-      ],
-      [
-        "https://www.bershka.com/co/mujer/zapatos-c1010193192.html",
+        "Zapatos para Mujer",
         "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193192/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/accesorios-c1010193134.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193134/product?showProducts=false&languageId=-5"
+        "Enterizos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010287020/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/colaboraciones%C2%AE-c1010310507.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010310507/product?showProducts=false&languageId=-5"
+        "Vestidos Midi para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193338/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/new-c1010378020.html",
+        "Vestidos Lisos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193340/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Vestidos de Fiesta para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010343084/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Vestidos Estampados para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193341/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Vestidos Cortos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193337/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Vestidos Casuales para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193335/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Vestidos Ajustados para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010434002/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Vestidos de Mujer Largos y Cortos",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193213/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Ropa para Mujer",
         "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010378020/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/lo-m%C3%A1s-vendido-c1010261502.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010261502/product?showProducts=false&languageId=-5"
+        "Tops y Bralettes para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193220/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/efecto-piel-c1010446008.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010446008/product?showProducts=false&languageId=-5"
+        "Buzos sin Capucha para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010216010/product?showProducts=false&languageId=-5"
       ],
       [
-        "https://www.bershka.com/co/mujer/ropa/join-life-c1010343062.html",
-        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010343062/product?showProducts=false&languageId=-5"
+        "Buzos Oversized para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010251531/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Buzos Estampados para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010251515/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Buzos Cropped para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010314510/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Buzos con Capucha para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010216009/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Buzos Básicos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010251530/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Buzos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193222/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Skort para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010417003/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Shorts Paperbag para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010290008/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Shorts de Felpa para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010418536/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Shorts Denim para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010236055/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Bicicleteros para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010358045/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Bermudas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010418537/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Shorts y bermudas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194517/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Sacos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193330/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Sacos y Ropa de tejido de punto para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193223/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Ropa de fiesta para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010401003/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones Skinny para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193322/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones Leggins para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193325/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones Sudadera para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193326/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones Bota Campana para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010251501/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones de Chándal para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010414196/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones Cargo para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010392001/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193216/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Jeans Skinny para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010295514/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Jeans Pushup para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193300/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Jeans Sudadera para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010352002/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Jeans Bota Campana para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010295516/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Jeans Balloon para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010415518/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Jeans para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010276029/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Faldas Elegantes para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010391503/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Faldas Skort para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010391505/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Faldas Mini para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193297/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Faldas Midi para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193298/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Faldas Estampadas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010251522/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Faldas Denim para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010251520/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Faldas de Mujer Largas y Cortas",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193224/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Shorts para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193294/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Jeans para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193293/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Faldas Denim para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193295/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaquetas Denim para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193288/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pantalones, Faldas y Chaquetas Denim para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193229/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Ropa universitaria para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010508188/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaquetas efecto piel para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010398008/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaquetas bomber para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010512004/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaquetas Puffy para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010313020/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaqueta de Nylon para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010205550/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaquetas efecto piel para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010398008/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaquetas Denim para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010212502/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaquetas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193261/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Blazers y americanas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010205537/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Abrigos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193260/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Chaquetas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193212/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Tops para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193283/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Polos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010286001/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisetas de manga corta para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193280/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisetas de manga corta para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193279/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisetas con dibujos para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010229511/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisetas estampadas para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193281/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Bodies para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193284/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisetas básicas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193282/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisetas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193217/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisas oversize para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010414004/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisas lisas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010281537/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisas estampadas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010281538/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193274/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Blusas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193275/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Camisas y Blusas para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193221/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Morrales para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193159/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Bolsos y morrales para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193138/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Bodies para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193219/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pulseras para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193153/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Aretes para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193154/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Collares para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193152/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Anillos para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193155/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Bisutería para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193140/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Pañuelos y bufandas para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193145/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Gorros para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193144/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Gafas para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193149/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Forros iPhone para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193148/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Cinturones para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193146/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Medias para mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010194004/product?showProducts=false&languageId=-5"
+      ],
+      [
+        "Accesorios y Complementos para Mujer",
+        "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010193134/product?showProducts=false&languageId=-5"
       ]
     ],
-    "endpoint": "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010236032/product?showProducts=false&languageId=-5"
+    "endpoint": "https://www.bershka.com/itxrest/3/catalog/store/45109565/40259535/category/1010473002/product?showProducts=false&languageId=-5"
   },
   "Mango": {
     "endpoints": [

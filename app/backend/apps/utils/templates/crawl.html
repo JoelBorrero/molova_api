@@ -85,19 +85,26 @@
         </div>
     </div>
 </div>
-<div class="d-flex justify-content-around None next_process">
-    <div>
+<div class="d-flex justify-content-around None">
+    <div class="col-3 br1">
         <form action="javascript:post('/api/v1/crawler/process/sync/', 'Sync')">
             <h3>Sincronizar</h3><br>
-            <input type="text" placeholder="Marca" id="brand_to_sync">
+            <input class="mb-2" type="text" placeholder="Marca" id="brand_to_sync">
             <input type="submit" value="Iniciar">
         </form>
     </div>
-    <div>
+    <div class="col-6 br1">
         <h3>Próximo proceso</h3>
         <h4>{{next.name}}</h4>
         <p>{{next.description}}</p>
-        <p>Se ejecutará dentro de <span id="time">3</span></p>
+        <p>Se ejecutará dentro de <span id="next_time">{{next.estimated}}</span></p>
+    </div>
+    <div class="col-3">
+        <h3>Último proceso</h3>
+        <h4>{{last.name}}</h4>
+        <p>{{last.description}}</p>
+        <p>Terminó hace <span id="last_time">{{last.estimated}}</span></p>
+        <p>Su resultado fue <span class="{{last.result}}">{{last.result}}</span></p>
     </div>
 </div>
 
@@ -120,30 +127,39 @@
             });
     }
 
-    function startTimer(duration, display) {
-        let timer = duration, hours, minutes, seconds;
+    function startTimers(next_time, last_time) {
+        let next_timer = parseInt(next_time.textContent), last_timer = parseInt(last_time.textContent)
+        let hours, minutes, seconds;
         setInterval(function () {
-            hours = parseInt(timer / 3600, 10);
-            minutes = parseInt(timer % 3600 / 60, 10);
-            seconds = parseInt(timer % 60, 10);
+            next_hours = parseInt(next_timer / 3600, 10);
+            next_minutes = parseInt(next_timer % 3600 / 60, 10);
+            next_seconds = parseInt(next_timer % 60, 10);
+            next_hours = next_hours < 10 ? "0" + next_hours : next_hours;
+            next_minutes = next_minutes < 10 ? "0" + next_minutes : next_minutes;
+            next_seconds = next_seconds < 10 ? "0" + next_seconds : next_seconds;
+            next_time.textContent = next_hours + ":" + next_minutes + ":" + next_seconds;
 
-            hours = hours < 10 ? "0" + hours : hours;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
+            last_hours = parseInt(last_timer / 3600, 10);
+            last_minutes = parseInt(last_timer % 3600 / 60, 10);
+            last_seconds = parseInt(last_timer % 60, 10);
+            last_hours = last_hours < 10 ? "0" + last_hours : last_hours;
+            last_minutes = last_minutes < 10 ? "0" + last_minutes : last_minutes;
+            last_seconds = last_seconds < 10 ? "0" + last_seconds : last_seconds;
+            last_time.textContent = last_hours + ":" + last_minutes + ":" + last_seconds;
 
-            display.textContent = hours + ":" + minutes + ":" + seconds;
-
-            if (timer <= 0) {
-                display.className = 'timeout';
+            if (next_timer <= 0) {
+                next_time.className = 'timeout';
             } else {
-                timer--;
+                next_timer--;
+                last_timer++;
             }
         }, 1000);
     }
 
     window.onload = function () {
-        var time = document.querySelector('#time');
-        startTimer(parseInt(time.textContent), time);
+        var next_time = document.querySelector('#next_time');
+        var last_time = document.querySelector('#last_time');
+        startTimers(next_time, last_time);
     };
 </script>
 
@@ -225,18 +241,22 @@
         padding-inline: 10px;
     }
 
-    #time {
+    div.col-3.br1, div.col-6.br1{
+        border-right: 1px solid lightgray;
+    }
+
+    #next_time, #last_time {
         font-size: 25px;
         font-weight: 200;
     }
 
     @keyframes pulse {
         10% {
-            font-size:26px;
+            font-size: 26px;
         }
     }
 
-    #time.timeout {
+    #next_time.timeout {
         cursor: wait;
         animation: pulse 1s infinite;
     }

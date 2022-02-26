@@ -3,16 +3,16 @@ from datetime import datetime, timedelta
 from random import randint
 
 import ast
-import os
 import requests
 from django.db.models import Q
-from django_celery_beat.models import PeriodicTask
 from urllib.parse import quote
+
+from django_celery_beat.models import PeriodicTask
+from django_celery_results.models import TaskResult
 
 from .models import Debug
 from ..item.models import Product
-from ..item.serializers import ProductSerializer, ProductToPostSerializer
-from ..user.models import Brand
+from ..item.serializers import ProductToPostSerializer
 from ..utils.constants import BASE_HOST, IMAGE_FORMATS, TIMEZONE, USER_AGENTS
 
 
@@ -46,6 +46,17 @@ def delete_from_remote(to_delete: list):
         to_delete = [to_delete]
     return requests.post(f'{BASE_HOST}/delete',
                          f'{{"data": {to_delete}}}'.replace("'", '"')).json()
+
+
+def get_last_process():
+    """Returns info about last crawling process executed"""
+    result = TaskResult.objects.exclude(task='celery.backend_cleanup').last()
+    if result:
+        task = PeriodicTask.objects.get(task=result.task)
+        status = 'Exitoso' if result.get_status_display() == 'SUCCESS' else 'Error'
+        return {'description': task.description, 'name': task.name, 'result': status,
+                'estimated': (datetime.now() - result.date_done.replace(tzinfo=None)).seconds}
+    return {}
 
 
 def get_next_process():
@@ -120,7 +131,7 @@ def post_item(item):
     return False
 
 
-def update_brand_links(brand):
+def update_brand_links(brand: str):
     """Function to scrap categories and generate urls and endpoints for specific brand"""
     urls = []
     session = requests.session()
@@ -131,13 +142,11 @@ def update_brand_links(brand):
             'accept': 'application/json, text/plain, */*',
             'accept-encoding': 'gzip, deflate, br',
             'accept-language': 'en-US,en;q=0.9',
-            'cookie': 'ITXSESSIONID=3ee14ba34dfc995d70db354ab8080761; BSKSESSION=978fe558a1d558033c5ca231238f8bca; AKA_A2=A; bm_sz=7638EA7910C89DA7119EB6D817AFD079~YAAQtqpLaDKLFnF+AQAA5vxedA4mr9yHZTRY8+QkTBtYqIvmVYOgevGRAK3l6uzPOoivM5DNvYtAQ5hiMmrD4iNUdhnVs9QnX8ddPtPR/kHILHWqaG16pRWBczAl5bJ3gSn5cZorioF7lkexiN6bxlLhWTAtLAa8QySBAg6IEjMLIxW4MEe7+NMb0XvwIFJqHPI2YOuWdIELWBrknJRF+r+I7dgB9WGQZdu2FeK0UhJrfcRrYU4mUkipGj2gjiU9LXcYKuSUK3O7QgpXczRTSvAI8mePBSVxHZhwCrXn3s8rxe+b~4538677~3488049; _abck=E3CA12B51EA31D4931269A3B9CBF6479~0~YAAQtqpLaLaLFnF+AQAASgRfdAfMSetcUwuLid+BWUyLmKkG3+65ZdtTC5NdHPPUMzOD+dJ+1Hex8mcmgM4AEV2dUuIseZKi2wLtiRTfj09Pu6ucr9eP3gbLDXSeNren5j75eiwrJ2g15tl7V5isX58qezMclw3GulVdadqD7QWzo8BqAuCRQhN7CesREQwk5y4KIQbDT793IPLd0UJDR8/xeSuxL35+8D+LOOuORgdWxy/7atr2mPnkcYNbraz4z/90spYpIOp5xRIACWEnxexnOQP6MThxZKItKFM5oFm5EgSDRhW4RKONFghIEpb7bD+Wquf/iBgfranSB/cJTc8QwIeh8dIL5K6B+63zTZGq6U46m+yKAEg1GdikWpZXFQTDzCtpor55Jl3Hq4APrj8pCn8NfhrDaQ==~-1~-1~-1; ak_bmsc=C9E13B72C3BB3F83107B139FA7A5FD30~000000000000000000000000000000~YAAQtqpLaOCLFnF+AQAALQdfdA6bK8hfLeKAHZG79vyEJrDU8EbvM+FfVY/S+5+8Xa9F8H2oc0eguQ0iloJeSLxBHCzAOvXqn/E5Sj2BhA1z/hsxJHoNPYj4J/hGuiQ18iN2epB6lPycJJU4FFtSJD2mB4Aow/l4Gm0JRCmsg9J51GPbFohxDhMrmbTZp8dOMZ7BSlt6ByRvbyZSyEoXkHGA13EuyQiPRI0ZB9Z7GmfE8ewO5HwjEFZX0Mq+/Gd/xTo79JQlAuZZJq5DdOYo1jWO6BtnSSN+JV3WSomwwpuS5JsQgj6sCvbndqNJ5DvcMk6ZJc7nI/ELxqrcn3Glnmj3vU7SQZWOH2AcSmua1aCWVwVBLLwEBhCneQFfedbC8ynQWJk8jxsVQEnYXSbZFeqkHwKmH4WUhZig5cgBt7/Hebp4hyD0jy7Ia+i7sdhf7j9gEcegMU8Cxyn/6HofhwM8GsjVk6c+H2IGOfXrCh6mYFuXy3Bdo94=; JSESSIONID=0000p-aooDS7zImjpP9lRM6PCLt:2bb5bu1sx; 13d5823230c8607ca960f5962192c9e2=50e00281f36d1947da8664796a34091f; OptanonConsent=isIABGlobal=false&datestamp=Wed+Jan+19+2022+17:08:16+GMT-0500+(Colombia+Standard+Time)&version=6.8.0&hosts=&consentId=575fe5a6-ee00-403f-8b32-ae2c810ae690&interactionCount=1&landingPath=NotLandingPage&groups=C0001:1,C0003:1,C0002:1,C0004:1&geolocation=CO;BOL&AwaitingReconsent=false; OptanonAlertBoxClosed=2022-01-19T22:08:16.149Z',
-            'content-type': 'application/json',
             'referer': 'https://www.bershka.com/',
+            'sec-ch-ua-mobile': '?0',
             'sec-fetch-dest': 'empty',
             'sec-fetch-mode': 'cors',
             'sec-fetch-site': 'same-origin',
-            'sec-gpc': '1',
             'user-agent': get_random_agent()}
         session.headers.update(headers)
         response = session.get(base_url).json()['spots'][4]['value'].split('ItxCategoryPage.')
@@ -146,6 +155,7 @@ def update_brand_links(brand):
             if '.title' in category and 'Home.title' not in category and 'mujer' in category.lower():
                 category_id = category[:category.index('.')]
                 if category_id not in str(categories) and ' |' in category:
+                    # In this case, the url is not obtained, so a category name is saved instead.
                     name = category[category.index('.title=') + 7: category.index(' |')]
                     endpoint = f'{host}/itxrest/3/catalog/store/45109565/40259535/category/{category_id}/product?showProducts=false&languageId=-5'
                     if bool(session.get(endpoint).json()['productIds']):
