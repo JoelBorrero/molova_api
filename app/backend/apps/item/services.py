@@ -4,7 +4,6 @@ import os
 import boto3
 import numpy as np
 import pandas as pd
-from zipfile import ZipFile
 
 import ast
 import requests
@@ -12,7 +11,7 @@ import tinify
 from urllib.parse import quote
 
 from ..crawler.models import Debug
-from ..crawler.services import check_images_urls, delete_from_remote, parse_url, url_is_image
+from ..crawler.services import check_images_urls, delete_from_remote, parse_url, url_is_image, get_session
 from ..item.models import Product
 from ..user.models import Brand
 from ..utils.constants import CATEGORIES, SETTINGS
@@ -121,6 +120,9 @@ def generate_s3_url(upload_key, tinifying=False, retry=False):
 
 
 def generate_url(brand, ref='') -> str:
+    """
+    Returns a whatsapp url used in Molova.co buttons
+    """
     return f'whatsapp_57{brand.phone}{ref}'
 
 
@@ -276,6 +278,33 @@ def get_colors_src(colors: list):
         return {'color': color, 'image': image}
 
     return [get_src(color) for color in colors]
+
+
+def get_product_meta(url: str) -> dict:
+    """
+    Request the meta data about a specific product in original brand page.
+    Actually is only needed in Mango
+    """
+    product = Product.objects.get(url=url)
+    meta = ast.literal_eval(product.meta)
+    garment_id = meta['garment_id']
+    url = f'https://shop.mango.com/services/garments/{garment_id}'
+    session = get_session('Mango')
+    headers = {'stock-id': '480.ES.0.true.false.v4'}
+    session.headers.update(headers)
+    res = session.get(url).json()
+    raw_composition = res['details']['composition']['composition'].replace('Composición: ', '')
+    raw_composition = raw_composition[:raw_composition.index('.')].split(',')
+    composition = []
+    for comp in raw_composition:
+        material = comp[comp.index('%') + 3:]
+        percentage = comp[:comp.index('%')]
+        composition.append({'material': material, 'percentage': percentage})
+    # Ignored data: Sizes, complete composition
+    meta['composition'] = composition
+    product.meta = meta
+    product.save()
+    return meta
 
 
 def get_subcategory(brand, name, category, original_subcategory):
@@ -460,7 +489,7 @@ def get_subcategory(brand, name, category, original_subcategory):
     return category
 
 
-def normalize_url(url: str):
+def normalize_url(url: str) -> str:
     """
     @param url: Url to be cropped
     @return: Url cleaned

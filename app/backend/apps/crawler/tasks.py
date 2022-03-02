@@ -9,7 +9,7 @@ from celery import shared_task
 
 from .models import Process, Debug
 from .services import get_random_agent, post_item, check_images_urls, check_inactive_items, delete_from_remote, \
-    parse_url
+    parse_url, get_session
 from ..item.models import Product
 from ..item.services import find_product, get_category, get_subcategory, get_colors_src, create_or_update_item, \
     to_int, calculate_discount
@@ -35,18 +35,7 @@ def crawl_bershka():
         'started': datetime.now(TIMEZONE),
         'status': 'x',
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
-    session = requests.session()
-    headers = {
-        'accept': 'application/json, text/plain, */*',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'en-US,en;q=0.9',
-        'referer': 'https://www.bershka.com/',
-        'sec-ch-ua-mobile': '?0',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'user-agent': get_random_agent()}
-    session.headers.update(headers)
+    session = get_session(brand)
     page_size = 25
     try:
         for endpoint in SETTINGS[brand]['endpoints']:
@@ -66,10 +55,16 @@ def crawl_bershka():
                             original_category = product['relatedCategories'][0]['name']
                             category = get_category(brand, name, original_category)
                             attributes = [attribute['name'] for attribute in product['attributes']]
+                            related_categories = list(dict.fromkeys(
+                                [category['name'] for category in product['relatedCategories']]))  # Ignore duplicated
                             if product['bundleProductSummaries']:
                                 product = product['bundleProductSummaries'][0]['detail']
                             else:
                                 product = product['detail']
+                            composition = [{'name': material['composition'][0]['name'],
+                                            'percentage': material['composition'][0]['percentage']} for material in
+                                           product['composition']]
+                            care = [care['description'] for care in product['care']]
                             description = product['description'] if product['description'] else product[
                                 'longDescription']
                             ref = product['displayReference']
@@ -113,13 +108,15 @@ def crawl_bershka():
                                 optional_images.append(color)
                             item = find_product(url, optional_images)
                             active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                            meta = {'attributes': attributes, 'care': care, 'composition': composition,
+                                    'related_categories': related_categories}
                             fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description,
                                       'url': url, 'id_producto': url, 'price': price_now, 'price_before': price_before,
                                       'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
                                       'colors': colors, 'category': category, 'original_category': original_category,
                                       'subcategory': subcategory, 'original_subcategory': original_subcategory,
                                       'gender': 'm', 'active': active, 'national': False,
-                                      'meta': {'attributes': attributes}}
+                                      'meta': meta}
                             item = create_or_update_item(item, fields, session, optional_images=optional_images)
                             if item.active:
                                 # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
@@ -149,8 +146,7 @@ def crawl_blunua():
         'started': datetime.now(TIMEZONE),
         'status': 'x'
     })[0]
-    session = requests.session()
-    session.headers = {'X-Shopify-Access-Token': os.environ.get('SHOPIFY_BLUNUA')}
+    session = get_session(brand)
     url = 'https://blunua-jewelry.myshopify.com/admin/api/2021-10/products.json?limit=250&fields=id,title,variants,' \
           'images,product_type,body_html,status,handle'
     try:
@@ -204,20 +200,9 @@ def crawl_mango():
         'started': datetime.now(TIMEZONE),
         'status': 'x',
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
-    session = requests.session()
-    headers = {
-        'accept': 'application/json, text/plain, */*',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'en-US,en;q=0.9',
-        'referer': 'https://www.shop.mango.com/',
-        'sec-ch-ua-mobile': '?0',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'user-agent': get_random_agent()}
-    session.headers.update(headers)
+    session = get_session(brand)
     try:
-        for endpoint in SETTINGS[brand]['endpoints'][:1]:
+        for endpoint in SETTINGS[brand]['endpoints']:
             page_num = 1
             while page_num:
                 response = session.get(endpoint[1] + str(page_num))
@@ -230,15 +215,15 @@ def crawl_mango():
                     garments = response['groups'][0]['garments']
                     self.logs += f'{datetime.now().hour}:{datetime.now().minute}  -  {len(garments)} productos  -  {endpoint[0]}\n'
                     self.save()
-                    for item in garments[:1]:
-                        it = garments[item]
-                        name = it['shortDescription']
+                    for garment_id in garments:
+                        item = garments[garment_id]
+                        name = item['shortDescription']
                         original_category = response['titleh1']
                         category = get_category(brand, name, original_category)
                         # original_subcategory = category
                         subcategory = get_subcategory(brand, name, category, category)
                         all_images, all_sizes, colors = [], [], []
-                        for color in it['colors']:
+                        for color in item['colors']:
                             images = []
                             sizes = []
                             for image in color['images']:
@@ -247,28 +232,28 @@ def crawl_mango():
                                 sizes.append(size['label'] + ('(AGOTADO)' if size['stock'] == 0 else ''))
                             all_images.append(images)
                             all_sizes.append(sizes)
-                            colors.append(color['iconUrl'].replace(' ', ''))
+                            colors.append({'name': color['label'], 'image': color['iconUrl'].replace(' ', '')})
                         all_images.reverse()  # I don't know why
-                        ref = it['garmentId']
-                        price_before = to_int(it['price']['crossedOutPrices'][0])
-                        price_now = to_int(it['price']['salePrice'])
-                        discount = it['price']['discountRate']
-                        url = 'https://shop.mango.com' + it['colors'][0]['linkAnchor']
+                        ref = item['garmentId']
+                        price_before = to_int(item['price']['crossedOutPrices'][0])
+                        price_now = to_int(item['price']['salePrice'])
+                        discount = item['price']['discountRate']
+                        url = 'https://shop.mango.com' + item['colors'][0]['linkAnchor']
                         # self.logs += url+'\n'
                         item = find_product(url, all_images)
                         active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                        meta = {'garment_id': garment_id}
                         fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name, 'url': url,
                                   'id_producto': url, 'price': price_now, 'price_before': price_before,
                                   'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
-                                  'colors': get_colors_src(colors), 'category': category,
+                                  'colors': colors, 'category': category,
                                   'original_category': original_category, 'subcategory': subcategory,
                                   'original_subcategory': category, 'gender': 'm', 'active': active,
-                                  'national': False}
+                                  'national': False, 'meta': meta}
                         item = create_or_update_item(item, fields, session, all_images=all_images)
                         # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                         if item.active:
-                            # post_item(item)
-                            pass
+                            post_item(item)
                     self.save()
                     headers = session.headers
                     # sleep(randint(30, 120) / 1)
@@ -357,20 +342,7 @@ def crawl_pull():
         'started': datetime.now(TIMEZONE),
         'status': 'x',
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
-    session = requests.session()
-    headers = {
-        'accept': '*/*',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'en-US,en;q=0.9,es-US;q=0.8,es;q=0.7',
-        'content-type': 'application/json',
-        'referer': 'https://www.pullandbear.com/',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"macOS"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'user-agent': get_random_agent()}
-    session.headers.update(headers)
+    session = get_session(brand)
     page_size = 25
     try:
         for endpoint in SETTINGS[brand]['endpoints']:
@@ -462,12 +434,11 @@ def crawl_pull():
 
 @shared_task
 def crawl_solua():
-    session = requests.session()
-    session.headers = {'X-Shopify-Access-Token': os.environ.get('SHOPIFY_SOLUA')}
+    brand = 'Solúa'
+    session = get_session(brand)
     url = 'https://solua-accesorios.myshopify.com/admin/api/2021-10/products.json?limit=250&fields=id,title,variants,' \
           'images,product_type,body_html,status,handle'
     products = session.get(url).json()['products']
-    brand = 'Solúa'
     now = datetime.now()
     self = Process.objects.update_or_create(name=brand, defaults={
         'started': datetime.now(TIMEZONE),
@@ -521,19 +492,7 @@ def crawl_stradivarius():
         'started': datetime.now(TIMEZONE),
         'status': 'x',
         'logs': f'··········{datetime.now().month} - {datetime.now().day}··········\n'})[0]
-    session = requests.session()
-    headers = {
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'en-US,en;q=0.9',
-        'sec-fetch-dest': 'document',
-        'sec-fetch-mode': 'navigate',
-        'sec-fetch-site': 'none',
-        'sec-fetch-user': '?1',
-        'sec-gpc': '1',
-        'upgrade-insecure-requests': '1',
-        'user-agent': get_random_agent()}
-    session.headers.update(headers)
+    session = get_session(brand)
     try:
         for endpoint in SETTINGS[brand]['endpoints']:
             products = session.get(endpoint[1]).json()['products']
@@ -617,19 +576,7 @@ def crawl_zara():
         'started': datetime.now(TIMEZONE),
         'status': 'x',
         'logs': f'··········{now.month} - {now.day}··········\n'})[0]
-    session = requests.session()
-    headers = {
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'en-US,en;q=0.9',
-        'sec-fetch-dest': 'document',
-        'sec-fetch-mode': 'navigate',
-        'sec-fetch-site': 'none',
-        'sec-fetch-user': '?1',
-        'sec-gpc': '1',
-        'upgrade-insecure-requests': '1',
-        'user-agent': get_random_agent()}
-    session.headers.update(headers)
+    session = get_session(brand)
     try:
         for endpoint in SETTINGS[brand]['endpoints']:
             now = datetime.now()

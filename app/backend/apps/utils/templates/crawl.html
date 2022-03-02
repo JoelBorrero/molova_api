@@ -3,22 +3,26 @@
 <h1>Crawling</h1>
 <div class="row brands">
     <div class="col-4 {{bershka.status}}">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Bershka')">
-            <label><h4>Bershka</h4></label>
-            <label class="status">{{bershka.status}}</label>
-            <label>Iniciado: {{bershka.started}}</label><br>
-            <label>Actualizado: {{bershka.updated}}</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
+        <div class="content">
+            <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Bershka')">
+                <label><h4>Bershka</h4></label>
+                <label class="status">{{bershka.status}}</label>
+                <label>Iniciado: {{bershka.started}}</label><br>
+                <label>Actualizado: {{bershka.updated}}</label><br>
+                <input type="submit" value="Iniciar">
+            </form>
+        </div>
     </div>
     <div class="col-4 {{blunua.status}}">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Blunua')">
-            <label><h4>Blunua</h4></label>
-            <label class="status">{{blunua.status}}</label>
-            <label>Iniciado: {{blunua.started}}</label><br>
-            <label>Actualizado: {{blunua.updated}}</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
+        <div class="content">
+            <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Blunua')">
+                <label><h4>Blunua</h4></label>
+                <label class="status">{{blunua.status}}</label>
+                <label>Iniciado: {{blunua.started}}</label><br>
+                <label>Actualizado: {{blunua.updated}}</label><br>
+                <input type="submit" value="Iniciar">
+            </form>
+        </div>
     </div>
     <div class="col-4 {{mango.status}}">
         <div class="content">
@@ -32,13 +36,15 @@
         </div>
     </div>
     <div class="col-4 {{mercedes.status}}">
-        <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Mercedes Campuzano')">
-            <label><h4>Mercedes Campuzano</h4></label>
-            <label class="status">{{mercedes.status}}</label>
-            <label>Iniciado: {{mercedes.started}}</label><br>
-            <label>Actualizado: {{mercedes.updated}}</label><br>
-            <input type="submit" value="Iniciar">
-        </form>
+        <div class="content">
+            <form action="javascript:post('/api/v1/crawler/process/start_crawling/', 'Mercedes Campuzano')">
+                <label><h4>Mercedes Campuzano</h4></label>
+                <label class="status">{{mercedes.status}}</label>
+                <label>Iniciado: {{mercedes.started}}</label><br>
+                <label>Actualizado: {{mercedes.updated}}</label><br>
+                <input type="submit" value="Iniciar">
+            </form>
+        </div>
     </div>
     <div class="col-4 {{pull.status}}">
         <div class="content">
@@ -241,7 +247,7 @@
         padding-inline: 10px;
     }
 
-    div.col-3.br1, div.col-6.br1{
+    div.col-3.br1, div.col-6.br1 {
         border-right: 1px solid lightgray;
     }
 

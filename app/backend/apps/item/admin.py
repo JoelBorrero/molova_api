@@ -9,4 +9,4 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('brand', 'sale', 'category', 'active')
     ordering = ('-updated', )
     readonly_fields = ('updated', 'meta')
-    search_fields = ('name', )
+    search_fields = ('name', 'url')

@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime, timedelta
 from random import randint
 
@@ -48,7 +49,7 @@ def delete_from_remote(to_delete: list):
                          f'{{"data": {to_delete}}}'.replace("'", '"')).json()
 
 
-def get_last_process():
+def get_last_process() -> dict:
     """Returns info about last crawling process executed"""
     result = TaskResult.objects.exclude(task='celery.backend_cleanup').last()
     if result:
@@ -59,7 +60,7 @@ def get_last_process():
     return {}
 
 
-def get_next_process():
+def get_next_process() -> dict:
     """Returns info about next crawling process to be executed"""
     next_task = {}
     tasks = PeriodicTask.objects.all().exclude(name='celery.backend_cleanup')
@@ -72,11 +73,57 @@ def get_next_process():
     return next_task
 
 
-def get_random_agent():
+def get_random_agent() -> str:
     return USER_AGENTS[randint(0, len(USER_AGENTS)) - 1]
 
 
-def get_statistics():
+def get_session(brand='') -> requests.Session:
+    """
+    Returns a :class:`Session` for context-management, prepared with headers according to a specific brand.
+
+    :rtype: Sessions
+    """
+    session = requests.session()
+    headers = {
+        'accept': 'application/json, text/plain, */*',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en;q=0.9',
+        'sec-ch-ua-mobile': '?0',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': get_random_agent()
+    }
+    if brand == 'Bershka':
+        headers.update({
+            'referer': 'https://www.bershka.com/',})
+    elif brand == 'Blunua' or brand == 'Solúa':
+        brand = brand.replace('ú', 'u').upper()
+        headers.update({'X-Shopify-Access-Token': os.environ.get(f'SHOPIFY_{brand}')})
+    elif brand == 'Mango':
+        headers.update({
+            'referer': 'https://www.shop.mango.com/'})
+    elif brand == 'Pull & Bear':
+        headers.update({
+            'accept-language': 'en-US,en;q=0.9,es-US;q=0.8,es;q=0.7',
+            'content-type': 'application/json',
+            'referer': 'https://www.pullandbear.com/',
+            'sec-ch-ua-platform': '"macOS"'})
+    elif brand == 'Stradivarius' or brand == 'Zara':
+        headers.update({
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            'accept-language': 'en-US,en;q=0.9',
+            'sec-fetch-dest': 'document',
+            'sec-fetch-mode': 'navigate',
+            'sec-fetch-site': 'none',
+            'sec-fetch-user': '?1',
+            'sec-gpc': '1',
+            'upgrade-insecure-requests': '1'})
+    session.headers.update(headers)
+    return session
+
+
+def get_statistics() -> dict:
     output = {}
     keys = ['Camisas y Camisetas', 'Pantalones y Jeans', 'Vestidos y Enterizos', 'Faldas y Shorts', 'Abrigos y Blazers',
             'Ropa deportiva', 'Zapatos', 'Bolsos', 'Accesorios']
@@ -100,7 +147,7 @@ def get_statistics():
     return output
 
 
-def parse_url(url):
+def parse_url(url) -> str:
     return quote(url.lower(), safe=':/?=')
 
 
@@ -134,21 +181,10 @@ def post_item(item):
 def update_brand_links(brand: str):
     """Function to scrap categories and generate urls and endpoints for specific brand"""
     urls = []
-    session = requests.session()
+    session = get_session(brand)
     if brand == 'Bershka':
         host = 'https://www.bershka.com'
         base_url = f'{host}/itxrest/2/marketing/store/45109565/40259535/spot?languageId=-5&spot=BK3_ESpot_I18N&appId=1'
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-encoding': 'gzip, deflate, br',
-            'accept-language': 'en-US,en;q=0.9',
-            'referer': 'https://www.bershka.com/',
-            'sec-ch-ua-mobile': '?0',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-origin',
-            'user-agent': get_random_agent()}
-        session.headers.update(headers)
         response = session.get(base_url).json()['spots'][4]['value'].split('ItxCategoryPage.')
         categories = []
         for i, category in enumerate(response):
@@ -184,19 +220,6 @@ def update_brand_links(brand: str):
     elif brand == 'Pull & Bear':
         host = 'https://www.pullandbear.com'
         base_url = f'{host}/itxrest/2/catalog/store/25009465/20309430/category?languageId=-5&typeCatalog=1&appId=1'
-        headers = {
-            'accept': '*/*',
-            'accept-encoding': 'gzip, deflate, br',
-            'accept-language': 'en-US,en;q=0.9,es-US;q=0.8,es;q=0.7',
-            'content-type': 'application/json',
-            'referer': 'https://www.pullandbear.com/',
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"macOS"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-origin',
-            'user-agent': get_random_agent()}
-        session.headers.update(headers)
         res = session.get(base_url).json()['categories'][0]['subcategories']
         for category in res:
             for cat in category['subcategories']:
@@ -213,28 +236,6 @@ def update_brand_links(brand: str):
                         urls.append([url, endpoint])
     elif brand == 'Stradivarius':
         url = 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category?languageId=-48&typeCatalog=1&appId=1'
-        headers = {
-            'accept': '*/*',
-            'accept-encoding': 'gzip, deflate, br',
-            'accept-language': 'es-US,es;q=0.9',
-            'content-type': 'application/json',
-            'cookie': 'ITXSESSIONID=182592649f55aa1d98689723945fba3c; _abck=98D0A42A991781EA9192E81AB1B3DA3F~-1~YAAQT/1Vvs+'
-                      '4hLh6AQAAeqNzSgaJEW8ixKACFBQiOORFishd5S4Qz7WkGyAvA0LNo/wTMQ4S6a5NkeaLagHp/t9Zbk9B6ga2UTgMBMhrC0rtyMi'
-                      'rxcWjDCX8+hXQRF5Eex8lXYCu4V7H7HyTvSBPuK29LvIW3aFHvmqxw17hbJBndu67nAhdmxNNZ7r7wuqF861oo9dVhzLHYbhiBjP'
-                      'UmuOr5x22PV8HNtU3a15bH/pTOp/86mPMTWdWmmsO40hy/cFHprjRPILbrZqtt5zsZ46U6d+ODU2pGvwyvOXyIwQ4rSrPcBKcgmU'
-                      'w6Dtq/GBqlVzS9wfKc5RsbjAvn2anQyRSLhdS2ClIRGBc7knewLNuoBXxNrPFq3lPzdt5uXs=~-1~-1~-1; ak_bmsc=DD61DFF3'
-                      'B5C9D1B3E4463FEA8F6BDEC3~000000000000000000000000000000~YAAQT/1VvtC4hLh6AQAAeqNzSgzQJDKMApzD4ibQ2yO5'
-                      'D+QCMRHgTZRmSgabRaqtAeQTyqfPc0D1k3m0S66Jr5kvkwDl1rr1NNCyBLA+jZ83hwbE3Oq2KmOponQVKwsCHqbtQVS7W9Ne7/8k'
-                      'mLznO6z2fbKXtMG8Zntc+aeqY4eJ46PIzSdQPjrIoFu5zqPAOEbnSa99LDEcuJpIErezw5E+EDrbrh8n0OnL5xHzyiyTMYrq9uPK'
-                      'MfzzpM4NDUovIBvvN0TwGcDU0b6Ju+UlF9cqiMUhMaoLZCXw+RcFF/4aAhpstC8h5gJa4BCk/P7EIeBpOFJg9nKgWeqiP6Hkhh46'
-                      'mn3XN67SPHCt4/3iyVYumSCtiKryOQktUcVzkEO9V30=; bm_sz=972FA142E752B8D15050CD920326B68B~YAAQT/1VvtG4hLh'
-                      '6AQAAeqNzSgzXXX/95f+VvKgIwgtfU2OQW+ZMBBTicVhdB7msgrQ1jZ+P5pI1kwmpg3hmAD/29FxFdJTtw6yQTmmoLL8J2d2ZJj6'
-                      'JryxZIjM1uqDkZ7gy1mIP8kKwn61leSzqsZvRD+Zc5wYav5rroxMeNcFT0InjGA+juZx8ZtWfZ1PI5fD2iK1fDhUoZxcLAHJc5AL'
-                      'WycjN/fqV8WpnA+YJKNJVr7ePQncd0aNN3tLJGptKK49ts8dEtjYh2GbwUhuRRO5NQJCGvdpcpdjhTtruOEjQgrgevMA7naI=~34'
-                      '91394~3425845',
-            'referer': 'https://www.stradivarius.com/',
-            'user-agent': get_random_agent()}
-        session.headers.update(headers)
         res = session.get(url).json()['categories'][0]
         p1 = 'https://www.stradivarius.com'
         p2 = res['name']
@@ -256,18 +257,6 @@ def update_brand_links(brand: str):
                                     endpoint = f'{p1}/itxrest/2/catalog/store/55009615/50331093/category/{subcategory["id"]}/product?languageId=-48&appId=1'
                                     urls.append([parse_url(url), endpoint])
     elif brand == 'Zara':
-        headers = {
-            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            'accept-encoding': 'gzip, deflate, br',
-            'accept-language': 'en-US,en;q=0.9',
-            'sec-fetch-dest': 'document',
-            'sec-fetch-mode': 'navigate',
-            'sec-fetch-site': 'none',
-            'sec-fetch-user': '?1',
-            'sec-gpc': '1',
-            'upgrade-insecure-requests': '1',
-            'user-agent': get_random_agent()}
-        session.headers.update(headers)
         host = 'https://www.zara.com/co/es'
         res = session.get(f'{host}/categories?ajax=true').json()['categories'][0]['subcategories']
         for category in res:
@@ -301,8 +290,8 @@ def bershka_endpoint_maker(urls, save=True):
         output.append([url, endpoint])
     if save:
         settings = ast.literal_eval(open('Settings.json', 'r').read())
-        settings[brand]['endpoint'] = urls[0][1]
-        settings[brand]['endpoints'] = urls
+        settings['Bershka']['endpoint'] = urls[0][1]
+        settings['Bershka']['endpoints'] = urls
         with open('Settings.json', 'w') as s:
             s.write(str(settings).replace("'", '"'))
     return output
