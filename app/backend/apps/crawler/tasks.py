@@ -27,6 +27,7 @@ from ..utils.constants import BASE_HOST, SETTINGS, TIMEZONE
 # Marca: Zara, Molú, Mango
 # Valores: hecho en Colombia, moda lenta, moda consciente
 # Precio: menos de 50.000, rango
+# Meta: {'attributes': [], 'care': [], 'composition': [{name, percentage}], 'related_categories': []}
 
 @shared_task
 def crawl_bershka():
@@ -115,8 +116,7 @@ def crawl_bershka():
                                       'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
                                       'colors': colors, 'category': category, 'original_category': original_category,
                                       'subcategory': subcategory, 'original_subcategory': original_subcategory,
-                                      'gender': 'm', 'active': active, 'national': False,
-                                      'meta': meta}
+                                      'gender': 'm', 'active': active, 'national': False, 'meta': meta}
                             item = create_or_update_item(item, fields, session, optional_images=optional_images)
                             if item.active:
                                 # self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
@@ -242,7 +242,7 @@ def crawl_mango():
                         # self.logs += url+'\n'
                         item = find_product(url, all_images)
                         active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
-                        meta = {'garment_id': garment_id}
+                        meta = {'garment_id': garment_id[1:]}
                         fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name, 'url': url,
                                   'id_producto': url, 'price': price_now, 'price_before': price_before,
                                   'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
@@ -304,6 +304,8 @@ def crawl_mercedes():
                     colors = [product['Params']['Color']]
                     item = find_product(url, all_images)
                     active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                    attributes = list(product['Params']['clusters'].values())
+                    meta = {'attributes': attributes, 'group_id': product['GroupId']}
                     fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
                               'id_producto': url, 'price': price_now, 'price_before': price_before,
                               'discount': discount,
@@ -311,7 +313,7 @@ def crawl_mercedes():
                               'category': category, 'original_category': original_subcategory,
                               'subcategory': subcategory,
                               'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
-                              'national': False}
+                              'national': False, 'meta': meta}
                     item = create_or_update_item(item, fields, session, all_images=all_images)
                     if item.active:
                         post_item(item)

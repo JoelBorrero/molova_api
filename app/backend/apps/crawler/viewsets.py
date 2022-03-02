@@ -3,9 +3,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .serializers import ProcessSerializer
+from .services import update_brand_links
 from .tasks import *
 from ..item.models import Product
 from ..item.serializers import ProductSerializer
+from ..item.services import get_product_meta
 
 
 class ProcessViewSet(viewsets.ModelViewSet):
@@ -57,6 +59,11 @@ class ProcessViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['POST'])
     def update_links(self, request):
         """Update links to search in crawl process"""
-        update_brand_links(request.data.get('brand', ''))
+        brand = request.data['brand', '']
+        update_brand_links(brand)
         return Response({'status': brand + ' started'}, status=status.HTTP_200_OK)
 
+    @action(detail=False, methods=['POST'])
+    def update_product_meta(self, request):
+        meta = get_product_meta(request.data['brand'])  # Should be url instead of brand
+        return Response(meta, status=status.HTTP_200_OK)

@@ -80,8 +80,6 @@ def get_random_agent() -> str:
 def get_session(brand='') -> requests.Session:
     """
     Returns a :class:`Session` for context-management, prepared with headers according to a specific brand.
-
-    :rtype: Sessions
     """
     session = requests.session()
     headers = {
@@ -239,7 +237,6 @@ def update_brand_links(brand: str):
         res = session.get(url).json()['categories'][0]
         p1 = 'https://www.stradivarius.com'
         p2 = res['name']
-        id = res['id']
         res = res['subcategories']
         for category in res:
             for cat in category['subcategories']:

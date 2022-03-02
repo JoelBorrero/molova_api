@@ -283,25 +283,49 @@ def get_colors_src(colors: list):
 def get_product_meta(url: str) -> dict:
     """
     Request the meta data about a specific product in original brand page.
-    Actually is only needed in Mango
+    Actually is needed in Mango and Mercedes Campuzano.
     """
     product = Product.objects.get(url=url)
     meta = ast.literal_eval(product.meta)
-    garment_id = meta['garment_id']
-    url = f'https://shop.mango.com/services/garments/{garment_id}'
-    session = get_session('Mango')
-    headers = {'stock-id': '480.ES.0.true.false.v4'}
-    session.headers.update(headers)
-    res = session.get(url).json()
-    raw_composition = res['details']['composition']['composition'].replace('Composición: ', '')
-    raw_composition = raw_composition[:raw_composition.index('.')].split(',')
-    composition = []
-    for comp in raw_composition:
-        material = comp[comp.index('%') + 3:]
-        percentage = comp[:comp.index('%')]
-        composition.append({'material': material, 'percentage': percentage})
-    # Ignored data: Sizes, complete composition
-    meta['composition'] = composition
+    session = get_session(product.brand)
+    if all(key in meta for key in ['attributes', 'care', 'composition']):
+        return meta  # TODO Verify last updated time
+    if product.brand == 'Mango':
+        garment_id = meta['garment_id']
+        endpoint = f'https://shop.mango.com/services/garments/{garment_id}'
+        headers = {'stock-id': '480.ES.0.true.false.v4'}
+        session.headers.update(headers)
+        res = session.get(endpoint).json()['details']
+        attributes = res['descriptions']['bullets']
+        care = [rule['text'] for rule in res['composition']['washingRules']]
+        raw_composition = res['composition']['composition'].replace('Composición: ', '')
+        if '.' in raw_composition:
+            raw_composition = raw_composition[:raw_composition.index('.')]
+        raw_composition = raw_composition.split(',')
+        composition = []
+        for comp in raw_composition:
+            material = comp[comp.index('%') + 3:]
+            percentage = comp[:comp.index('%')]
+            composition.append({'material': material, 'percentage': percentage})
+        # TODO update available sizes
+        # Ignored data: Sizes, detailed composition, importer, measures
+        meta.update({'attributes': attributes, 'care': care, 'composition': composition})
+    elif product.brand == 'Mercedes Campuzano':
+        group_id = meta['group_id']
+        endpoint = f'https://www.mercedescampuzano.com/api/catalog_system/pub/products/search?fq=productId:{group_id}'
+        res = session.get(endpoint).json()[0]
+        meta['composition']: []
+        for specification in res['Especificaciones']:
+            meta['attributes'].append(f'{specification}: {res[specification]}')
+            if 'Material' in specification:
+                meta['composition'].append({'name': res[specification], 'percentage': specification})
+        sizes = []
+        for size in res['items']:
+            availability = '' if size['sellers'][0]['commertialOffer']['IsAvailable'] else '(AGOTADO)'
+            sizes.append(size['Talla'][0] + availability)
+        product.description = res['description']
+        product.sizes = sizes
+        # Ignored data: Available quantity
     product.meta = meta
     product.save()
     return meta
