@@ -66,8 +66,8 @@ def crawl_bershka():
                                             'percentage': material['composition'][0]['percentage']} for material in
                                            product['composition']]
                             care = [care['description'] for care in product['care']]
-                            description = product['description'] if product['description'] else product[
-                                'longDescription']
+                            description = product['longDescription'] if product['longDescription'] else product[
+                                'description']
                             ref = product['displayReference']
                             original_subcategory = product['subfamilyInfo']['subFamilyName']
                             if not original_subcategory:
@@ -242,7 +242,7 @@ def crawl_mango():
                         # self.logs += url+'\n'
                         item = find_product(url, all_images)
                         active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
-                        meta = {'garment_id': garment_id[1:]}
+                        meta = {'garment_id': garment_id.replace('g', '')}
                         fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name, 'url': url,
                                   'id_producto': url, 'price': price_now, 'price_before': price_before,
                                   'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
@@ -364,12 +364,14 @@ def crawl_pull():
                                 if product['bundleProductSummaries'] and 'productUrlParam' in \
                                    product['bundleProductSummaries'][0] else ''
                             url = f'https://www.pullandbear.com/co/{product["productUrl"]}?cS={product["mainColorid"]}{param}'
+                            attributes = [attribute['name'] for attribute in product['attributes']]
                             if product['bundleProductSummaries']:
-                                product = product['bundleProductSummaries'][0]['detail']
-                            else:
-                                product = product['detail']
-                            description = product['description'] if product['description'] else product[
-                                'longDescription']
+                                product = product['bundleProductSummaries'][0]
+                            related_categories = list(
+                                dict.fromkeys([category['name'] for category in product['relatedCategories']]))
+                            product = product['detail']
+                            description = product['longDescription'] if product['longDescription'] else product[
+                                'description']
                             ref = product['displayReference']
                             original_category = product['familyInfo']['familyName']
                             category = get_category(brand, name, original_category)
@@ -377,8 +379,8 @@ def crawl_pull():
                             subcategory = get_subcategory(brand, name, category, original_subcategory)
                             colors, all_images, all_sizes = [], [], []
                             for color in product['colors']:
-                                colors.append(
-                                    f'https://static.pullandbear.net/2/photos/{color["image"]["url"]}_1_1_8.jpg?t={color["image"]["timestamp"]}&imwidth=90')
+                                colors.append({'name': color['name'],
+                                               'image': f'https://static.pullandbear.net/2/photos/{color["image"]["url"]}_1_1_8.jpg?t={color["image"]["timestamp"]}&imwidth=90'})
                                 sizes = []
                                 for size in color['sizes']:
                                     stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
@@ -400,20 +402,23 @@ def crawl_pull():
                                     all_images.append(images)
                                 item = find_product(url, all_images)
                                 active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
-                                fields = {'brand': brand, 'name': name, 'reference': ref, 'description': name,
-                                          'url': url,
-                                          'id_producto': url, 'price': price_now, 'price_before': price_before,
-                                          'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
-                                          'colors': get_colors_src(colors), 'category': category,
+                                care = [care['description'] for care in product['care']]
+                                composition = [{'name': material['composition'][0]['name'],
+                                                'percentage': material['composition'][0]['percentage']} for material in
+                                               product['composition']]
+                                meta = {'attributes': attributes, 'care': care, 'composition': composition,
+                                        'related_categories': related_categories}
+                                fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description,
+                                          'url': url, 'id_producto': url, 'price': price_now,
+                                          'price_before': price_before, 'discount': discount, 'sale': bool(discount),
+                                          'sizes': all_sizes, 'colors': get_colors_src(colors), 'category': category,
                                           'original_category': original_category, 'subcategory': subcategory,
                                           'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
-                                          'national': False}
+                                          'national': False, 'meta': meta}
                                 item = create_or_update_item(item, fields, session, all_images=all_images)
                                 self.logs += f'    + {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}  -  {name}\n'
                                 if item.active:
                                     post_item(item)
-                                    # Debug.objects.create(name='Post it', text=item.url)
-                                    # pass
                                 else:
                                     Debug.objects.create(name='no_stock', text=item.url)
                     except Exception as e:
@@ -502,6 +507,7 @@ def crawl_stradivarius():
             for product in products:
                 try:
                     ref = f'{product["detail"]["displayReference"]}'
+                    meta = {'product_id': product['id']}
                     original_category = str(product['detail']['familyInfo']['familyName'])
                     original_subcategory = str(product['detail']['subfamilyInfo']['subFamilyName'])
                     prod_id = product['id']
@@ -511,7 +517,8 @@ def crawl_stradivarius():
                     category = get_category(brand, name, original_category)
                     subcategory = get_subcategory(brand, name, category, original_subcategory)
                     product = product['detail']
-                    description = product['description']
+                    description = product['longDescription'] if product['longDescription'] else product[
+                        'description']
                     price_now = int(product['colors'][0]['sizes'][0]['price']) / 100
                     try:
                         price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
@@ -526,11 +533,18 @@ def crawl_stradivarius():
                             image = f'https://static.e-stradivarius.net/5/photos3{color["image"]["url"]}_3_1_5.jpg' \
                                     f'?t={color["image"]["timestamp"]}'
                             colors.append(image)
+                        tags = {}
                         for size in color['sizes']:
-                            stock = ''
+                            out_of_stock = False
                             if 'visibilityValue' in size and not size['visibilityValue'] == 'SHOW':
-                                stock = '(AGOTADO)'
-                            sizes.append(f'{size["name"]} {stock}')
+                                out_of_stock = True
+                            if size['name'] in tags:
+                                tags[size['name']].append(out_of_stock)
+                            else:
+                                tags[size['name']] = [out_of_stock]
+                        for size in tags:
+                            stock = '(AGOTADO)' if all(tags[size]) else ''
+                            sizes.append(size + stock)
                         all_sizes.append(sizes)
                     optional_images = []
                     for media in product['xmedia']:
@@ -548,7 +562,7 @@ def crawl_stradivarius():
                               'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
                               'category': category, 'original_category': original_category, 'subcategory': subcategory,
                               'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
-                              'national': False}
+                              'national': False, 'meta': meta}
                     item = create_or_update_item(item, fields, session, optional_images=optional_images)
                     if item.active:
                         post_item(item)

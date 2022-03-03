@@ -52,12 +52,16 @@ def delete_from_remote(to_delete: list):
 def get_last_process() -> dict:
     """Returns info about last crawling process executed"""
     result = TaskResult.objects.exclude(task='celery.backend_cleanup').last()
-    if result:
-        task = PeriodicTask.objects.get(task=result.task)
-        status = 'Exitoso' if result.get_status_display() == 'SUCCESS' else 'Error'
-        return {'description': task.description, 'name': task.name, 'result': status,
-                'estimated': (datetime.now() - result.date_done.replace(tzinfo=None)).seconds}
-    return {}
+    status = 'Exitoso' if result.get_status_display() == 'SUCCESS' else 'Error'
+    task = PeriodicTask.objects.filter(task=result.task).first()
+    if task:
+        name = task.name
+        description = task.description
+    else:
+        name = 'Error'
+        description = f'Task {result.task} not found'
+    estimated = (datetime.now() - result.date_done.replace(tzinfo=None)).seconds
+    return {'description': description, 'estimated': estimated, 'name': name, 'result': status}
 
 
 def get_next_process() -> dict:
@@ -97,7 +101,7 @@ def get_session(brand='') -> requests.Session:
             'referer': 'https://www.bershka.com/',})
     elif brand == 'Blunua' or brand == 'Solúa':
         brand = brand.replace('ú', 'u').upper()
-        headers.update({'X-Shopify-Access-Token': os.environ.get(f'SHOPIFY_{brand}')})
+        headers = {'X-Shopify-Access-Token': os.environ.get(f'SHOPIFY_{brand}')}
     elif brand == 'Mango':
         headers.update({
             'referer': 'https://www.shop.mango.com/'})

@@ -314,7 +314,7 @@ def get_product_meta(url: str) -> dict:
         group_id = meta['group_id']
         endpoint = f'https://www.mercedescampuzano.com/api/catalog_system/pub/products/search?fq=productId:{group_id}'
         res = session.get(endpoint).json()[0]
-        meta['composition']: []
+        meta['composition'] = []
         for specification in res['Especificaciones']:
             meta['attributes'].append(f'{specification}: {res[specification]}')
             if 'Material' in specification:
@@ -326,6 +326,9 @@ def get_product_meta(url: str) -> dict:
         product.description = res['description']
         product.sizes = sizes
         # Ignored data: Available quantity
+    elif product.brand == 'Stradivarius':
+        product_id = meta['product_id']
+        endpoint = f'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/0/product/{product_id}/detail?languageId=-48&appId=1'
     product.meta = meta
     product.save()
     return meta
@@ -525,6 +528,8 @@ def normalize_url(url: str) -> str:
             return url[:url.index('?ts=')]
         elif any(u in url for u in ['static.e-stradivarius.net', 'static.pullandbear.net']):
             return url[:url.index('?t=')]
+        elif 'mercedescampuzano.com' in url:
+            return url[:url.index('/p?') + 2]
         elif 'mercedescampuzano.vtexassets.com' in url:
             return url[:url.index('?width=')]
         return url[:url.index('.html') + 5]
