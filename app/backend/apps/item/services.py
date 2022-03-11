@@ -288,6 +288,7 @@ def get_product_meta(url: str) -> dict:
     product = Product.objects.get(url=url)
     meta = ast.literal_eval(product.meta)
     session = get_session(product.brand)
+    attributes, care, composition = [], [], []
     if all(key in meta for key in ['attributes', 'care', 'composition']):
         return meta  # TODO Verify last updated time
     if product.brand == 'Mango':
@@ -302,23 +303,20 @@ def get_product_meta(url: str) -> dict:
         if '.' in raw_composition:
             raw_composition = raw_composition[:raw_composition.index('.')]
         raw_composition = raw_composition.split(',')
-        composition = []
         for comp in raw_composition:
             material = comp[comp.index('%') + 3:]
             percentage = comp[:comp.index('%')]
-            composition.append({'material': material, 'percentage': percentage})
+            composition.append({'name': material, 'percentage': percentage})
         # TODO update available sizes
         # Ignored data: Sizes, detailed composition, importer, measures
-        meta.update({'attributes': attributes, 'care': care, 'composition': composition})
     elif product.brand == 'Mercedes Campuzano':
         group_id = meta['group_id']
         endpoint = f'https://www.mercedescampuzano.com/api/catalog_system/pub/products/search?fq=productId:{group_id}'
         res = session.get(endpoint).json()[0]
-        meta['composition'] = []
         for specification in res['Especificaciones']:
-            meta['attributes'].append(f'{specification}: {res[specification]}')
+            attributes.append(f'{specification}: {res[specification]}')
             if 'Material' in specification:
-                meta['composition'].append({'name': res[specification], 'percentage': specification})
+                composition.append({'name': res[specification], 'percentage': specification})
         sizes = []
         for size in res['items']:
             availability = '' if size['sellers'][0]['commertialOffer']['IsAvailable'] else '(AGOTADO)'
@@ -329,6 +327,44 @@ def get_product_meta(url: str) -> dict:
     elif product.brand == 'Stradivarius':
         product_id = meta['product_id']
         endpoint = f'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331093/category/0/product/{product_id}/detail?languageId=-48&appId=1'
+        res = session.get(endpoint).json()
+        attributes = [attribute['value'] for attribute in res['attributes'] if attribute['value']]
+        meta['related_categories'] = [category['name'] for category in res['relatedCategories']]
+        res = res['bundleProductSummaries'][0]['detail']
+        composition = [{key: material['composition'][0][key] for key in ['name', 'percentage']} for material in res['composition']]
+        care = [care['description'] for care in res['care']]
+        all_sizes = []
+        for color in res['colors']:
+            sizes = []
+            for size in color['sizes']:
+                availability = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
+                sizes.append(size['name'] + availability)
+            all_sizes.append(sizes)
+        product.sizes = all_sizes
+    elif product.brand == 'Zara':
+        product_id = meta['product_id']
+        endpoint = f'https://www.zara.com/co/es/product/{product_id}/extra-detail?ajax=true'
+        res = session.get(endpoint).json()
+        for section in res:
+            if section['sectionType'] == 'care':
+                for component in section['components']:
+                    if component['datatype'] == 'iconList':
+                        for item in component['items']:
+                            care.append(item['description']['value'])
+            elif "'value': 'MATERIALES'" in str(section):
+                material_found = False
+                for component in section['components']:
+                    if component.get('text', {}).get('value', '') == 'MATERIALES':
+                        material_found = True
+                    if material_found and '%' in component.get('text', {}).get('value', ''):
+                        raw_composition = component['text']['value'].split('·')
+                        for comp in raw_composition:
+                            comp = comp.strip()
+                            name = comp[comp.index('%') + 2:]
+                            percentage = comp[:comp.index('%')]
+                            composition.append({'name': name, 'percentage': percentage})
+                        break
+    meta.update({'attributes': attributes, 'care': care, 'composition': composition})
     product.meta = meta
     product.save()
     return meta

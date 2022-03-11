@@ -1,5 +1,4 @@
-import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from random import randint
 from time import sleep
 
@@ -8,17 +7,16 @@ import requests
 from celery import shared_task
 
 from .models import Process, Debug
-from .services import get_random_agent, post_item, check_images_urls, check_inactive_items, delete_from_remote, \
-    parse_url, get_session
+from .services import post_item, check_inactive_items, delete_from_remote, parse_url, get_session
 from ..item.models import Product
-from ..item.services import find_product, get_category, get_subcategory, get_colors_src, create_or_update_item, \
+from ..item.services import find_product, get_category, get_subcategory, create_or_update_item, \
     to_int, calculate_discount
 from ..user.models import Brand
 from ..utils.constants import BASE_HOST, SETTINGS, TIMEZONE
 
 
 # Subcategoría: Vestidos
-# Color: azul, verde - FORMAT: [{'name':'Rojo', 'image': 'https://example.com/color.jpg'}, {...}]
+# Color: azul, verde - FORMAT: [Rojo]
 # Estampado: liso, lunares, flores, lentejuelas
 # Ocasión: Fiesta, Playa
 # Material: Seda, Lino, licra
@@ -76,9 +74,8 @@ def crawl_bershka():
                             url = f'https://www.bershka.com/co/{name.lower().replace(" ", "-")}-c0p{prod_id}.html'
                             all_images, all_sizes, colors, color_styles = [], [], [], []
                             for color in product['colors']:
-                                colors.append(
-                                    {'name': color['name'],
-                                     'image': f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}'})
+                                colors.append(color[
+                                                  'name'])  # f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}'
                                 if color['image']['style']:
                                     color_styles.append(f'{color["image"]["style"][0]}/')
                                 else:
@@ -232,7 +229,7 @@ def crawl_mango():
                                 sizes.append(size['label'] + ('(AGOTADO)' if size['stock'] == 0 else ''))
                             all_images.append(images)
                             all_sizes.append(sizes)
-                            colors.append({'name': color['label'], 'image': color['iconUrl'].replace(' ', '')})
+                            colors.append(color['label'])  # color['iconUrl'].replace(' ', '')
                         all_images.reverse()  # I don't know why
                         ref = item['garmentId']
                         price_before = to_int(item['price']['crossedOutPrices'][0])
@@ -308,10 +305,9 @@ def crawl_mercedes():
                     meta = {'attributes': attributes, 'group_id': product['GroupId']}
                     fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
                               'id_producto': url, 'price': price_now, 'price_before': price_before,
-                              'discount': discount,
-                              'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                              'category': category, 'original_category': original_subcategory,
-                              'subcategory': subcategory,
+                              'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
+                              'colors': colors, 'category': category,
+                              'original_category': original_subcategory, 'subcategory': subcategory,
                               'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
                               'national': False, 'meta': meta}
                     item = create_or_update_item(item, fields, session, all_images=all_images)
@@ -379,8 +375,7 @@ def crawl_pull():
                             subcategory = get_subcategory(brand, name, category, original_subcategory)
                             colors, all_images, all_sizes = [], [], []
                             for color in product['colors']:
-                                colors.append({'name': color['name'],
-                                               'image': f'https://static.pullandbear.net/2/photos/{color["image"]["url"]}_1_1_8.jpg?t={color["image"]["timestamp"]}&imwidth=90'})
+                                colors.append(color['name'])  # f'https://static.pullandbear.net/2/photos/{color["image"]["url"]}_1_1_8.jpg?t={color["image"]["timestamp"]}&imwidth=90'
                                 sizes = []
                                 for size in color['sizes']:
                                     stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
@@ -411,7 +406,7 @@ def crawl_pull():
                                 fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description,
                                           'url': url, 'id_producto': url, 'price': price_now,
                                           'price_before': price_before, 'discount': discount, 'sale': bool(discount),
-                                          'sizes': all_sizes, 'colors': get_colors_src(colors), 'category': category,
+                                          'sizes': all_sizes, 'colors': colors, 'category': category,
                                           'original_category': original_category, 'subcategory': subcategory,
                                           'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
                                           'national': False, 'meta': meta}
@@ -559,7 +554,7 @@ def crawl_stradivarius():
                     fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description, 'url': url,
                               'id_producto': url, 'price': price_now, 'price_before': price_before,
                               'discount': discount,
-                              'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
+                              'sale': bool(discount), 'sizes': all_sizes, 'colors': colors,
                               'category': category, 'original_category': original_category, 'subcategory': subcategory,
                               'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
                               'national': False, 'meta': meta}
@@ -615,6 +610,7 @@ def crawl_zara():
                     try:
                         name = product['name']
                         if name:
+                            product_id = product['id']
                             description = product['description']
                             price_now = product['price'] / 100
                             price_before = product['oldPrice'] / 100 if 'oldPrice' in product else price_now
@@ -636,15 +632,14 @@ def crawl_zara():
                                 all_images.append(images)
                             item = find_product(url, all_images)
                             active = not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes])
+                            meta = {'product_id': product_id}
                             fields = {'brand': brand, 'name': name, 'reference': ref, 'description': description,
-                                      'url': url,
-                                      'id_producto': url, 'price': price_now, 'price_before': price_before,
-                                      'discount': discount,
-                                      'sale': bool(discount), 'sizes': all_sizes, 'colors': get_colors_src(colors),
-                                      'category': category, 'original_category': original_category,
-                                      'subcategory': subcategory,
+                                      'url': url, 'id_producto': url, 'price': price_now, 'price_before': price_before,
+                                      'discount': discount, 'sale': bool(discount), 'sizes': all_sizes,
+                                      'colors': colors, 'category': category,
+                                      'original_category': original_category, 'subcategory': subcategory,
                                       'original_subcategory': original_subcategory, 'gender': 'm', 'active': active,
-                                      'national': False}
+                                      'national': False, 'meta': meta}
                             item = create_or_update_item(item, fields, session, all_images=all_images)
                             if item.active:
                                 post_item(item)
