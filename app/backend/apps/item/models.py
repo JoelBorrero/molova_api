@@ -1,6 +1,6 @@
 from django.db import models
 
-from ..utils.constants import GENDERS
+from ..utils.constants import CATEGORIES, GENDERS, SUBCATEGORIES
 from ..utils.models import ModelBase
 
 
@@ -18,9 +18,11 @@ class Product(ModelBase):
     images = models.TextField()
     sizes = models.TextField()
     colors = models.TextField()
-    category = models.CharField(max_length=50)
+    # category = models.CharField(max_length=50)
+    category = models.CharField(max_length=2, choices=CATEGORIES)
     original_category = models.CharField(max_length=50)
-    subcategory = models.CharField(max_length=50)
+    # subcategory = models.CharField(max_length=50)
+    subcategory = models.CharField(max_length=2, choices=SUBCATEGORIES)
     original_subcategory = models.CharField(max_length=50)
     gender = models.CharField(max_length=1, choices=GENDERS)
     active = models.BooleanField(default=False)

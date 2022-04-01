@@ -454,7 +454,7 @@ def crawl_solua():
                 name = p['title']
                 price_now = to_int(p['variants'][0]['price']) / 100
                 price_before = to_int(p['variants'][0]['compare_at_price']) / 100
-                if not price_before:
+                if not price_before or price_before < price_now:
                     price_before = price_now
                 discount = calculate_discount(price_before, price_now)
                 images = str([i['src'] for i in p['images']])

@@ -14,7 +14,7 @@ from ..crawler.models import Debug
 from ..crawler.services import check_images_urls, delete_from_remote, parse_url, url_is_image, get_session
 from ..item.models import Product
 from ..user.models import Brand
-from ..utils.constants import CATEGORIES, SETTINGS
+from ..utils.constants import CATEGORIES, SETTINGS, SUBCATEGORIES
 
 
 def calculate_discount(price_before, price_now):
@@ -127,6 +127,11 @@ def generate_url(brand, ref='') -> str:
 
 
 def get_category(brand, name, original_category):
+    def find_category(key='', value=''):
+        if key:
+            return [s for s in CATEGORIES if key == s[0]][0]
+        elif value:
+            return [s for s in CATEGORIES if value == s[1]][0]
     brands_categories = SETTINGS['brands_categories']
     brands_subcategories = SETTINGS['brands_subcategories']
     categories_exceptions = SETTINGS['categories_exceptions']
@@ -167,7 +172,7 @@ def get_category(brand, name, original_category):
                     category = CATEGORIES[i]
     if not category:
         category = CATEGORIES[-1]
-    return category
+    return category[0]
 
 
 def get_colors_src(colors: list):
@@ -371,7 +376,13 @@ def get_product_meta(url: str) -> dict:
 
 
 def get_subcategory(brand, name, category, original_subcategory):
-    index = CATEGORIES.index(category)
+    def find_subcategory(key='', value=''):
+        if key:
+            return [s for s in SUBCATEGORIES if key == s[0]][0]
+        elif value:
+            return [s for s in SUBCATEGORIES if value == s[1]][0]
+
+    index = [category == c[0] for c in CATEGORIES].index(True)
     brands_subcategories = SETTINGS['brands_subcategories']
     try:
         sub = original_subcategory.lower().split(' ')
@@ -382,173 +393,173 @@ def get_subcategory(brand, name, category, original_subcategory):
     subs = subcategories_list[index] if index < 10 else ''
     if index == 0:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1] + subs[2] + subs[3]):
-            return 'Camisas'
+            return 'ca'  # Camisas
         elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2] + subs[3]):
-            return 'Camisetas'
+            return 'cm'  # Camisetas
         elif any(s in sub for s in subs[2]) and not any(s in sub for s in subs[3]):
-            return 'Tops'
+            return 'to'  # Tops
         elif any(s in sub for s in subs[3]):
-            return 'Bodies'
+            return 'bo'  # Bodies
         elif any(s in name for s in subs[0]):
-            return 'Camisas'
+            return 'ca'  # Camisas
         elif any(s in name for s in subs[1]):
-            return 'Camisetas'
+            return 'cm'  # Camisetas
         elif any(s in name for s in subs[2]):
-            return 'Tops'
+            return 'to'  # Tops
     elif index == 1:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]):
-            return 'Pantalones'
+            return 'pa'  # Pantalones
         elif any(s in sub for s in subs[1]):
-            return 'Jeans'
+            return 'je'  # Jeans
         elif any(s in name for s in subs[0]):
-            return 'Pantalones'
+            return 'pa'  # Pantalones
         elif any(s in name for s in subs[1]):
-            return 'Jeans'
+            return 'je'  # Jeans
     elif index == 2:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]):
-            return 'Vestidos'
+            return 've'  # Vestidos
         elif any(s in sub for s in subs[1]):
-            return 'Enterizos'
+            return 'en'  # Enterizos
         elif any(s in name for s in subs[0]):
-            return 'Vestidos'
+            return 've'  # Vestidos
         elif any(s in name for s in subs[1]):
-            return 'Enterizos'
+            return 'en'  # Enterizos
     elif index == 3:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]):
-            return 'Faldas'
+            return 'fa'  # Faldas
         elif any(s in sub for s in subs[1]):
-            return 'Shorts'
+            return 'sh'  # Shorts
         elif any(s in name for s in subs[0]):
-            return 'Faldas'
+            return 'fa'  # Faldas
         elif any(s in name for s in subs[1]):
-            return 'Shorts'
+            return 'sh'  # Shorts
     elif index == 4:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]):
-            return 'Abrigos'
+            return 'ab'  # Abrigos
         elif any(s in sub for s in subs[1]):
-            return 'Blazers'
+            return 'bl'  # Blazers
         elif any(s in name for s in subs[0]):
-            return 'Abrigos'
+            return 'ab'  # Abrigos
         elif any(s in name for s in subs[1]):
-            return 'Blazers'
+            return 'bl'  # Blazers
     elif index == 5:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1] + subs[2]):
-            return 'Sudaderas'
+            return 'su'  # Sudaderas
         elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2]):
-            return 'Licras'
+            return 'li'  # Licras
         elif any(s in sub for s in subs[2]):
-            return 'Tops'
+            return 'to'  # Tops
         elif any(s in name for s in subs[0]):
-            return 'Sudaderas'
+            return 'su'  # Sudaderas
         elif any(s in name for s in subs[1]):
-            return 'Licras'
+            return 'li'  # Licras
         elif any(s in name for s in subs[2]):
-            return 'Tops'
+            return 'to'  # Tops
     elif index == 6:
         if any(s in sub for s in subs[0]) and not any(
                 s in sub for s in subs[1] + subs[2] + subs[3] + subs[4] + subs[5]):
-            return 'Tenis'
+            return 'te'  # Tenis
         elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2] + subs[3] + subs[4] + subs[5]):
-            return 'Clásicos'
+            return 'cl'  # Clásicos
         elif any(s in sub for s in subs[3]) and not any(s in sub for s in subs[2] + subs[4] + subs[5]):
-            return 'Baletas'
+            return 'ba'  # Baletas
         elif any(s in sub for s in subs[5]) and not any(s in sub for s in subs[2] + subs[4]):
-            return 'Botas'
+            return 'bo'  # Botas
         elif any(s in sub for s in subs[4]) and not any(s in sub for s in subs[2]):
-            return 'Tacones'
+            return 'ta'  # Tacones
         elif any(s in sub for s in subs[2]):
-            return 'Sandalias'
+            return 'sa'  # Sandalias
         elif any(s in name for s in subs[0]):
-            return 'Tenis'
+            return 'te'  # Tenis
         elif any(s in name for s in subs[1]):
-            return 'Clásicos'
+            return 'cl'  # Clásicos
         elif any(s in name for s in subs[3]):
-            return 'Baletas'
+            return 'ba'  # Baletas
         elif any(s in name for s in subs[5]):
-            return 'Botas'
+            return 'bo'  # Botas
         elif any(s in name for s in subs[4]):
-            return 'Tacones'
+            return 'ta'  # Tacones
         elif any(s in name for s in subs[2]):
-            return 'Sandalias'
+            return 'sa'  # Sandalias
     elif index == 7:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1] + subs[2] + subs[3]):
-            return 'Bolsos'
+            return 'bs'  # Bolsos
         elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2] + subs[3]):
-            return 'Morrales'
+            return 'mo'  # Morrales
         elif any(s in sub for s in subs[2]) and not any(s in sub for s in subs[3]):
-            return 'Totes'
+            return 'tt'  # Totes
         elif any(s in sub for s in subs[3]):
-            return 'Monederos'
+            return 'mn'  # Monederos
         elif any(s in name for s in subs[0]):
-            return 'Bolsos'
+            return 'bs'  # Bolsos
         elif any(s in name for s in subs[1]):
-            return 'Morrales'
+            return 'mo'  # Morrales
         elif any(s in name for s in subs[2]):
-            return 'Totes'
+            return 'tt'  # Totes
         elif any(s in name for s in subs[3]):
-            return 'Monederos'
+            return 'mn'  # Monederos
     elif index == 8:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in
                                                       subs[1] + subs[2] + subs[3] + subs[4] + subs[5] + subs[6] + subs[
                                                           7] + subs[8] + subs[9]):
-            return 'Collares'
+            return 'co'  # Collares
         elif any(s in sub for s in subs[1]) and not any(
                 s in sub for s in subs[2] + subs[3] + subs[4] + subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
-            return 'Pulseras'
+            return 'pu'  # Pulseras
         elif any(s in sub for s in subs[2]) and not any(
                 s in sub for s in subs[3] + subs[4] + subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
-            return 'Aretes'
+            return 'ar'  # Aretes
         elif any(s in sub for s in subs[3]) and not any(
                 s in sub for s in subs[4] + subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
-            return 'Anillos'
+            return 'an'  # Anillos
         elif any(s in sub for s in subs[4]) and not any(
                 s in sub for s in subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
-            return 'Cabeza'
+            return 'cb'  # Cabeza
         elif any(s in sub for s in subs[5]) and not any(s in sub for s in subs[6] + subs[7] + subs[8] + subs[9]):
-            return 'Gafas'
+            return 'ga'  # Gafas
         elif any(s in sub for s in subs[6]) and not any(s in sub for s in subs[7] + subs[8] + subs[9]):
-            return 'Cuello'
+            return 'cu'  # Cuello
         elif any(s in sub for s in subs[7]) and not any(s in sub for s in subs[8] + subs[9]):
-            return 'Interiores'
+            return 'in'  # Interiores
         elif any(s in sub for s in subs[8]) and not any(s in sub for s in subs[9]):
-            return 'Medias'
+            return 'me'  # Medias
         elif any(s in sub for s in subs[9]):
-            return 'Cinturones'
+            return 'ci'  # Cinturones
         elif any(s in name for s in subs[0]):
-            return 'Collares'
+            return 'co'  # Collares
         elif any(s in name for s in subs[1]):
-            return 'Pulseras'
+            return 'pu'  # Pulseras
         elif any(s in name for s in subs[2]):
-            return 'Aretes'
+            return 'ar'  # Aretes
         elif any(s in name for s in subs[3]):
-            return 'Anillos'
+            return 'an'  # Anillos
         elif any(s in name for s in subs[4]):
-            return 'Cabeza'
+            return 'cb'  # Cabeza
         elif any(s in name for s in subs[5]):
-            return 'Gafas'
+            return 'ga'  # Gafas
         elif any(s in name for s in subs[6]):
-            return 'Cuello'
+            return 'cu'  # Cuello
         elif any(s in name for s in subs[7]):
-            return 'Interiores'
+            return 'in'  # Interiores
         elif any(s in name for s in subs[8]):
-            return 'Medias'
+            return 'me'  # Medias
         elif any(s in name for s in subs[9]):
-            return 'Cinturones'
+            return 'ci'  # Cinturones
     elif index == 9:
         if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1] + subs[2] + subs[3]):
-            return 'Bikini'
+            return 'bi'  # Bikini
         elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2] + subs[3]):
-            return 'Trikini'
+            return 'tr'  # Trikini
         elif any(s in sub for s in subs[2]) and not any(s in sub for s in subs[3]):
-            return 'Bañadores'
+            return 'bd'  # Bañadores
         elif any(s in sub for s in subs[3]):
-            return 'Cover Ups'
+            return 'cv'  # Cover Ups
         elif any(s in sub for s in subs[0]):
-            return 'Bikini'
+            return 'bi'  # Bikini
         elif any(s in sub for s in subs[1]):
-            return 'Trikini'
+            return 'tr'  # Trikini
         elif any(s in sub for s in subs[2]):
-            return 'Bañadores'
+            return 'bd'  # Bañadores
     return category
 
 

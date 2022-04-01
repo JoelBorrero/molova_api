@@ -6,7 +6,6 @@ from .serializers import ProcessSerializer
 from .services import update_brand_links
 from .tasks import *
 from ..item.models import Product
-from ..item.serializers import ProductSerializer
 from ..item.services import get_product_meta
 
 

@@ -52,16 +52,19 @@ def delete_from_remote(to_delete: list):
 def get_last_process() -> dict:
     """Returns info about last crawling process executed"""
     result = TaskResult.objects.exclude(task='celery.backend_cleanup').last()
-    status = 'Exitoso' if result.get_status_display() == 'SUCCESS' else 'Error'
-    task = PeriodicTask.objects.filter(task=result.task).first()
-    if task:
-        name = task.name
-        description = task.description
-    else:
-        name = 'Error'
-        description = f'Task {result.task} not found'
-    estimated = (datetime.now() - result.date_done.replace(tzinfo=None)).seconds
-    return {'description': description, 'estimated': estimated, 'name': name, 'result': status}
+    if result:
+        status = 'Exitoso' if result.get_status_display() == 'SUCCESS' else 'Error'
+        task = PeriodicTask.objects.filter(task=result.task).first()
+        if task:
+            name = task.name
+            description = task.description
+        else:
+            name = 'Error'
+            description = f'Task {result.task} not found'
+        estimated = (datetime.now() - result.date_done.replace(tzinfo=None)).seconds
+        return {'description': description, 'estimated': estimated, 'name': name, 'result': status}
+    return {'description': 'No hemos encontrado ningún resultado de procesos anteriores.', 'estimated': 0,
+            'name': 'No hay resultados', 'result': 'None'}
 
 
 def get_next_process() -> dict:
@@ -75,6 +78,16 @@ def get_next_process() -> dict:
         if 'estimated' not in next_task or estimated < next_task['estimated']:
             next_task = {'description': description, 'estimated': estimated, 'name': name}
     return next_task
+
+
+def get_process_info(brand):
+    """
+    Returns detailed info about a specific process
+    @param brand: The process brand.
+    """
+    task = PeriodicTask.objects.filter(name=brand.title()).first()
+    # result = TaskResult.objects.filter(task=task.task).first()
+    return {'brand': brand, 'runs': task.total_run_count}
 
 
 def get_random_agent() -> str:
